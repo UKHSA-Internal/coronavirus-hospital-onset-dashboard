@@ -2,6 +2,8 @@
 
 > __NOTE: Dashboard currently in development__
 
+> THIS IS SYNTHETIC DATA, AND IS NOT REFLECTIVE OF ACTUAL RESULTS
+
 This dashboard shows the location at where a patient was when they had their first COVID-19 positive PCR test, in relation to a hospital attendance in A&E or inpatient admission.
 
 This therefore, does not always reflect where a patient has ultimately recieved inpatient care.

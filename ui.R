@@ -30,9 +30,17 @@ ui <- fluidPage(
           ),
           # Show a plot of the generated distribution
           mainPanel(
-            plotOutput("distPlot")
+            tabsetPanel(
+              tabPanel(title = "Dashboard",
+                h1("Dashboard"),
+                plotOutput("distPlot")
+              ),
+              tabPanel(title = "Data table",
+                h1("Data table")
+              )
+            )
           )
-        ),
+        )
       ),
       tabPanel(title = "Information",
         includeMarkdown("content/information.md")

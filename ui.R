@@ -9,12 +9,24 @@ ui <- fluidPage(
         includeMarkdown("content/home.md"),
         plotOutput("norm"),
         actionButton("renorm", "Resample")
-        ),
+      ),
       tabPanel(title = "Dashboard",
-        sliderInput(inputId = "num",
-          label = "Choose a number",
-          value = 25, min = 1, max = 100),
-        plotOutput("hist")),
+        sidebarLayout(
+          # Sidebar with a slider input
+          sidebarPanel(
+            sliderInput("obs",
+              "Number of observations:",
+              min = 0,
+              max = 1000,
+              value = 500
+            )
+          ),
+          # Show a plot of the generated distribution
+          mainPanel(
+            plotOutput("distPlot")
+          )
+        ),
+      ),
       tabPanel(title = "Information",
         includeMarkdown("content/information.md")
       )

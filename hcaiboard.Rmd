@@ -16,9 +16,7 @@ library(flexdashboard)
 library(plotly)
 library(shiny)
 library(DT)
-library(readxl)
-library(govdown)
-library(shinyGovstyle)
+
 
 hcai <- read_csv("./hcai.csv") 
 trust_names <- read_csv("./lookup/trust_names.csv")

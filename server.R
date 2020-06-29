@@ -43,6 +43,61 @@ server <- function(input, output) {
       linkset=if_else(hcai_group=="Unlinked","SGSS",linkset)
     )
 
+  # SETUP INPUTS ON TYPE, GEOGRPAHY, CODE & NAME
+  output$nhs_region= renderUI({
+    shinyGovstyle::select_Input("nhs_region",
+      label = "NHS Region",
+      select_value = c("ALL",levels(droplevels(factor(hcai$nhs_region),
+        exclude="Unknown"))),
+      select_text = c("ALL")
+    )
+  })
+
+  output$trust_type= renderUI({
+    shinyGovstyle::select_Input("trust_type",
+      label = "Trust type",
+      select_value = c("ALL",levels(droplevels(factor(hcai$trust_type),
+        exclude="Unknown"))),
+      select_text = c("ALL")
+    )
+  })
+
+  output$trust_code= renderUI({
+    shinyGovstyle::select_Input("trust_code",
+      label = "Trust code",
+      select_value = c("ALL",levels(droplevels(factor(hcai$provider_code),
+        exclude="Unknown"))),
+      select_text = c("ALL")
+    )
+  })
+
+  output$trust_name= renderUI({
+    shinyGovstyle::select_Input("trust_name",
+      label = "Trust name",
+      select_value = c("ALL",levels(droplevels(factor(hcai$trust_name),
+        exclude="Unknown"))),
+      select_text = c("ALL")
+    )
+  })
+
+  # linked cases
+  output$linked_cases= renderUI({
+    shinyGovstyle::select_Input("linked_cases",
+      label = "Case inclusion",
+      select_value = c(1,0),
+      select_text = c("Include unlinked cases","Linked cases only")
+    )
+  })
+
+  # DATE FILTERS
+  output$filterdate = renderUI({
+    shinyGovstyle::date_Input("filterdate",
+      label="Filter dates before",
+      hint_label = "For example, 31 3 1980"
+    )
+  })
+
+  # Rubbish
   output$distPlot <- renderPlot({
     hist(rnorm(input$obs))
   })

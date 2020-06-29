@@ -14,6 +14,13 @@ ui <- fluidPage(
         sidebarLayout(
           # Sidebar with a slider input
           sidebarPanel(
+            uiOutput('nhs_region'),
+            uiOutput('trust_type'),
+            uiOutput('trust_code'),
+            uiOutput('trust_name'),
+            uiOutput('linked_cases'),
+            uiOutput('filterdate'),
+            includeMarkdown("content/filter.md"),
             sliderInput("obs",
               "Number of observations:",
               min = 0,

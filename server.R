@@ -2,13 +2,10 @@
 server <- function(input, output) {
 
   # SASS
-  compiled_css <- reactive({
-    sass(sass_file("styles/main.scss"))
-  })
-
-  output$sass <- renderUI({
-    tags$head(tags$style(compiled_css()))
-  })
+  sass(
+    sass_file("styles/main.scss"),
+    output = "www/main.css"
+  )
 
   # Load data
   hcai <- read_csv("./hcai.csv")

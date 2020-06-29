@@ -33,6 +33,12 @@ ui <- fluidPage(
             tabsetPanel(
               tabPanel(title = "Dashboard",
                 h1("Dashboard"),
+                div(style = "display: flex; flex-wrap: wrap;",
+                  uiOutput('valuebox01', class="valuebox"),
+                  uiOutput('valuebox02', class="valuebox"),
+                  uiOutput('valuebox03', class="valuebox"),
+                  uiOutput('valuebox04', class="valuebox"),
+                ),
                 plotOutput("distPlot")
               ),
               tabPanel(title = "Data table",

@@ -97,6 +97,34 @@ server <- function(input, output) {
     )
   })
 
+  output$valuebox01 = renderUI({
+    div(style="padding: 10px",
+      h2("12345"),
+      p("This is a paragraph")
+    )
+  })
+
+  output$valuebox02 = renderUI({
+    div(style="padding: 10px",
+      h2("12345"),
+      p("This is a paragraph")
+    )
+  })
+
+  output$valuebox03 = renderUI({
+    div(style="padding: 10px",
+      h2("12345"),
+      p("This is a paragraph")
+    )
+  })
+
+  output$valuebox04 = renderUI({
+    div(style="padding: 10px",
+      h2("12345"),
+      p("This is a paragraph")
+    )
+  })
+
   # Rubbish
   output$distPlot <- renderPlot({
     hist(rnorm(input$obs))

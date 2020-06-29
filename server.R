@@ -1,6 +1,15 @@
 # Define server logic required to draw a histogram
 server <- function(input, output) {
 
+  # SASS
+  compiled_css <- reactive({
+    sass(sass_file("styles/main.scss"))
+  })
+
+  output$sass <- renderUI({
+    tags$head(tags$style(compiled_css()))
+  })
+
   # Load data
   hcai <- read_csv("./hcai.csv")
   trust_names <- read_csv("./lookup/trust_names.csv")
@@ -124,6 +133,7 @@ server <- function(input, output) {
       p("This is a paragraph")
     )
   })
+
 
   # Rubbish
   output$distPlot <- renderPlot({

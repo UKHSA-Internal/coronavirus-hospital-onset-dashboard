@@ -1,6 +1,7 @@
 # Define UI for application that draws a histogram
 ui <- fluidPage(
   title = "HCAI Dashboard",
+  uiOutput('sass'),
   font(),
   shinyGovstyle::header("PHE", "HCAI Dashboard", logo="shinyGovstyle/images/moj_logo.png"),
   gov_layout(size = "full",

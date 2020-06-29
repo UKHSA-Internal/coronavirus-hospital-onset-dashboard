@@ -9,6 +9,7 @@
 
 library(shiny)
 library(shinyGovstyle)
+library(tidyverse)
 
 source('ui.R', local = TRUE)
 source('server.R')

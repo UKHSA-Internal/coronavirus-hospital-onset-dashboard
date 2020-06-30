@@ -8,6 +8,11 @@ function(input, output, session) {
     output = "www/govuk.css"
   )
 
+  sass::sass(
+    sass::sass_file("styles/main.scss"),
+    output = "www/main.css"
+  )
+
   #### UI ELEMENTS ##############################################################
   # SETUP INPUTS ON TYPE, GEOGRPAHY, CODE & NAME
   output$nhs_region <- renderUI({

@@ -16,7 +16,7 @@ tags$div(
                                  plotOutput("norm"),
                                  actionButton("renorm", "Resample")
                         ),
-                        tabPanel(title = "Dashboard",
+                        tabPanel(title = "HCAI by week",
                                  sidebarLayout(
                                    sidebarPanel(
                                      shinyGovukFrontend::select_Input(
@@ -110,7 +110,8 @@ tags$div(
                                                     uiOutput('valuebox_hopha', class="valuebox"),
                                                     uiOutput('valuebox_hoha', class="valuebox"),
                                                 ),
-                                                plotly::plotlyOutput("plot_count")
+                                                plotly::plotlyOutput("plot_count"),
+                                                plotly::plotlyOutput("plot_proportion")
                                        ),
                                        tabPanel(title = "Data table",
                                                 h1("Data table"),

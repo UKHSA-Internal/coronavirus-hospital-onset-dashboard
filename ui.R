@@ -55,5 +55,5 @@ tags$div(
       )
     )
   ),
-  footer(TRUE)
+  shinyGovstyle::footer(TRUE)
 )

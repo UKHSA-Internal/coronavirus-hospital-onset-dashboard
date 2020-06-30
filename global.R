@@ -1,9 +1,12 @@
 library(shiny)
-library(shinyGovstyle)
+library(shinyGovukFrontend)
 library(tidyverse)
 library(lubridate)
 library(sass)
 library(plotly)
+library(DT)
+library(markdown)
+library(knitr)
 
 
 ## font stylings for plotlys
@@ -14,10 +17,8 @@ font_style <- list(
 )
 
 #### SOURCE DATA ##############################################################
-# Load and join data
-hcai <- left_join(read_csv("./hcai.csv"),
-                  read_csv("./lookup/trust_names.csv"),
-                  by=c("provider_code"="trust_code"))
+
+hcai <- readr::read_csv("./hcai.csv")
 
 # Transform and prep
 hcai <- hcai %>%

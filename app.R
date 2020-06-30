@@ -9,7 +9,7 @@
 
 
 library(shiny)
-library(shinyGovstyle)
+library(shinyGovukFrontend)
 library(tidyverse)
 library(lubridate)
 library(sass)

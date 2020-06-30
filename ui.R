@@ -16,7 +16,19 @@ fluidPage(
       tabPanel(title = "Dashboard",
         sidebarLayout(
           sidebarPanel(
-            uiOutput('nhs_region'),
+            shinyGovstyle::select_Input(
+              "nhs_region",
+              label = "NHS Region",
+              select_value = c("ALL",
+                               levels(droplevels(factor(hcai$nhs_region),
+                                                 exclude = "Unknown")
+                               )),
+              select_text = c("ALL",
+                              levels(droplevels(factor(hcai$nhs_region),
+                                                exclude = "Unknown")
+                              ))
+            ),
+            # uiOutput('nhs_region'),
             uiOutput('trust_type'),
             uiOutput('trust_code'),
             uiOutput('trust_name'),

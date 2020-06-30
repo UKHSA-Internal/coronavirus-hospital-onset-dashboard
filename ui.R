@@ -1,5 +1,5 @@
 # Define UI for application that draws a histogram
-ui <- fluidPage(
+fluidPage(
   tags$html(lang="en"),
   tags$head(
     tags$link(href = "main.css", rel = "stylesheet", type = "text/css")
@@ -15,21 +15,15 @@ ui <- fluidPage(
       ),
       tabPanel(title = "Dashboard",
         sidebarLayout(
-          # Sidebar with a slider input
           sidebarPanel(
             uiOutput('nhs_region'),
             uiOutput('trust_type'),
             uiOutput('trust_code'),
             uiOutput('trust_name'),
-            uiOutput('linked_cases'),
-            uiOutput('filterdate'),
-            includeMarkdown("content/filter.md"),
-            sliderInput("obs",
-              "Number of observations:",
-              min = 0,
-              max = 1000,
-              value = 500
-            )
+            uiOutput('link'),
+            uiOutput('filter_date'),
+          # text for sidebar
+            includeMarkdown("content/filter.md")
           ),
           # Show a plot of the generated distribution
           mainPanel(
@@ -42,10 +36,11 @@ ui <- fluidPage(
                   uiOutput('valuebox03', class="valuebox"),
                   uiOutput('valuebox04', class="valuebox"),
                 ),
-                plotOutput("distPlot")
+                plotly::plotlyOutput("plot_count")
               ),
               tabPanel(title = "Data table",
-                h1("Data table")
+                h1("Data table"),
+                DT::dataTableOutput("data_table")
               )
             )
           )

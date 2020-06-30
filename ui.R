@@ -5,7 +5,7 @@ fluidPage(
     tags$link(href = "main.css", rel = "stylesheet", type = "text/css")
   ),
   font(),
-  shinyGovstyle::header("PHE", "HCAI Dashboard", logo="shinyGovstyle/images/moj_logo.png"),
+  shinyGovukFrontend::header("PHE", "HCAI Dashboard", logo="shinyGovukFrontend/images/moj_logo.png"),
   gov_layout(size = "full",
     navbarPage("HCAI Dashboard",
       tabPanel(title = "Home",

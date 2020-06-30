@@ -53,8 +53,8 @@ function(input, output, session) {
   #### UI ELEMENTS ##############################################################
   # SETUP INPUTS ON TYPE, GEOGRPAHY, CODE & NAME
   output$nhs_region <- renderUI({
-    shinyGovstyle::select_Input(
-      "nhs_region",
+    shinyGovukFrontend::select_Input(
+      "filter_nhs_region",
       label = "NHS Region",
       select_value = c("ALL",
                        levels(droplevels(factor(hcai$nhs_region),
@@ -68,8 +68,8 @@ function(input, output, session) {
   })
 
   output$trust_type <- renderUI({
-    shinyGovstyle::select_Input(
-      "trust_type",
+    shinyGovukFrontend::select_Input(
+      "filter_trust_type",
       label = "Trust type",
       select_value = c("ALL",
                        levels(droplevels(factor(hcai$trust_type),
@@ -83,8 +83,8 @@ function(input, output, session) {
   })
 
   output$trust_code <- renderUI({
-    shinyGovstyle::select_Input(
-      "trust_code",
+    shinyGovukFrontend::select_Input(
+      "filter_trust_code",
       label = "Trust code",
       select_value = c("ALL",
                        levels(droplevels(factor(hcai$provider_code),
@@ -98,8 +98,8 @@ function(input, output, session) {
   })
 
   output$trust_name <- renderUI({
-    shinyGovstyle::select_Input(
-      "trust_name",
+    shinyGovukFrontend::select_Input(
+      "filter_trust_name",
       label = "Trust name",
       select_value = c("ALL",
                        levels(droplevels(factor(hcai$trust_name),
@@ -114,8 +114,8 @@ function(input, output, session) {
 
   # linked cases
   output$link <- renderUI({
-    shinyGovstyle::select_Input(
-      "linked_cases",
+    shinyGovukFrontend::select_Input(
+      "filter_linked_cases",
       label = "Case inclusion",
       select_text = c("Include unlinked cases", "Linked cases only"),
       select_value = c(1, 0)

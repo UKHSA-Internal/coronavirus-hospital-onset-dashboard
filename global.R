@@ -5,6 +5,14 @@ library(lubridate)
 library(sass)
 library(plotly)
 
+
+## font stylings for plotlys
+font_style <- list(
+  family = "Arial",
+  size = 14,
+  color = "black"
+)
+
 #### SOURCE DATA ##############################################################
 # Load and join data
 hcai <- left_join(read_csv("./hcai.csv"),

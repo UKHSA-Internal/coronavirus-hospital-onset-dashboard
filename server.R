@@ -309,7 +309,7 @@ function(input, output, session) {
 
       ggplotly(hcai_week) %>%
         layout(hovermode = "x unified",
-               font=font_style) %>%
+               font = font_style) %>%
         config(displaylogo = FALSE,
                modeBarButtons = list(list("toImage"))) %>%
         layout(legend = list(orientation = 'h',

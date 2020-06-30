@@ -2,7 +2,8 @@
 fluidPage(
   tags$html(lang="en"),
   tags$head(
-    tags$link(href = "main.css", rel = "stylesheet", type = "text/css")
+    tags$link(href = "main.css", rel = "stylesheet", type = "text/css"),
+    tags$link(href = "govuk.css", rel = "stylesheet", type = "text/css")
   ),
   font(),
   shinyGovukFrontend::header("PHE", "HCAI Dashboard", logo="shinyGovukFrontend/images/moj_logo.png"),

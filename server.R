@@ -7,6 +7,11 @@ function(input, output, session) {
     output = "www/main.css"
   )
 
+  sass(
+    sass_file("styles/govuk/all.scss"),
+    output = "www/govuk.css"
+  )
+
   #### SOURCE DATA ##############################################################
   # Load and join data
   hcai <- left_join(read_csv("./hcai.csv"),

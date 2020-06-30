@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkboxes nested dependant components passes through fieldset params without breaking 1`] = `
+<fieldset class="govuk-fieldset app-fieldset--custom-modifier"
+          aria-describedby="example-hint example-error"
+          data-attribute="value"
+          data-second-attribute="second-value"
+>
+  <legend class="govuk-fieldset__legend">
+    What is your nationality?
+  </legend>
+</fieldset>
+`;
+
+exports[`Checkboxes nested dependant components passes through html fieldset params without breaking 1`] = `
+<fieldset class="govuk-fieldset">
+  <legend class="govuk-fieldset__legend">
+    What is your
+    <b>
+      nationality
+    </b>
+    ?
+  </legend>
+</fieldset>
+`;
+
+exports[`Checkboxes nested dependant components passes through label params without breaking 1`] = `
+<label class="govuk-label govuk-checkboxes__label"
+       data-attribute="value"
+       data-second-attribute="second-value"
+       for="example-name"
+>
+  <b>
+    Option 1
+  </b>
+</label>
+<label class="govuk-label govuk-checkboxes__label"
+       for="example-name-2"
+>
+  &lt;b&gt;Option 2&lt;/b&gt;
+</label>
+`;
+
+exports[`Checkboxes when they include a hint renders the hint 1`] = `
+<span id="example-hint"
+      class="govuk-hint"
+>
+  If you have dual nationality, select all options that are relevant to you.
+</span>
+<span id="example-item-hint"
+      class="govuk-hint govuk-checkboxes__hint"
+>
+  Hint for british option here
+</span>
+<span id="example-3-item-hint"
+      class="govuk-hint govuk-checkboxes__hint app-checkboxes__hint-other"
+      data-test-attribute="true"
+>
+  Hint for other option here
+</span>
+`;
+
+exports[`Checkboxes when they include an error message renders the error message 1`] = `
+<span id="example-error"
+      class="govuk-error-message"
+>
+  Please select an option
+</span>
+`;

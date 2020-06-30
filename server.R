@@ -8,78 +8,83 @@ function(input, output, session) {
     output = "www/govuk.css"
   )
 
+  sass::sass(
+    sass::sass_file("styles/main.scss"),
+    output = "www/main.css"
+  )
+
   #### UI ELEMENTS ##############################################################
   # SETUP INPUTS ON TYPE, GEOGRPAHY, CODE & NAME
-  output$nhs_region <- renderUI({
-    shinyGovukFrontend::select_Input(
-      "filter_nhs_region",
-      label = "NHS Region",
-      select_value = c("ALL",
-                       levels(droplevels(factor(hcai$nhs_region),
-                                         exclude = "Unknown")
-                       )),
-      select_text = c("ALL",
-                      levels(droplevels(factor(hcai$nhs_region),
-                                        exclude = "Unknown")
-                      ))
-    )
-  })
-
-  output$trust_type <- renderUI({
-    shinyGovukFrontend::select_Input(
-      "filter_trust_type",
-      label = "Trust type",
-      select_value = c("ALL",
-                       levels(droplevels(factor(hcai$trust_type),
-                                         exclude = "Unknown")
-                              )),
-      select_text = c("ALL",
-                      levels(droplevels(factor(hcai$trust_type),
-                                        exclude = "Unknown")
-                      ))
-    )
-  })
-
-  output$trust_code <- renderUI({
-    shinyGovukFrontend::select_Input(
-      "filter_trust_code",
-      label = "Trust code",
-      select_value = c("ALL",
-                       levels(droplevels(factor(hcai$provider_code),
-                                         exclude = "Unknown")
-                              )),
-      select_text = c("ALL",
-                      levels(droplevels(factor(hcai$provider_code),
-                                        exclude = "Unknown")
-                      ))
-    )
-  })
-
-  output$trust_name <- renderUI({
-    shinyGovukFrontend::select_Input(
-      "filter_trust_name",
-      label = "Trust name",
-      select_value = c("ALL",
-                       levels(droplevels(factor(hcai$trust_name),
-                                         exclude = "Unknown")
-                              )),
-      select_text = c("ALL",
-                      levels(droplevels(factor(hcai$trust_name),
-                                        exclude = "Unknown")
-                      ))
-    )
-  })
-
-  # linked cases
-  output$link <- renderUI({
-    shinyGovukFrontend::select_Input(
-      "filter_linked_cases",
-      label = "Case inclusion",
-      select_text = c("Include unlinked cases", "Linked cases only"),
-      select_value = c(1, 0)
-    )
-  })
-
+  # output$nhs_region <- renderUI({
+  #   shinyGovukFrontend::select_Input(
+  #     "filter_nhs_region",
+  #     label = "NHS Region",
+  #     select_value = c("ALL",
+  #                      levels(droplevels(factor(hcai$nhs_region),
+  #                                        exclude = "Unknown")
+  #                      )),
+  #     select_text = c("ALL",
+  #                     levels(droplevels(factor(hcai$nhs_region),
+  #                                       exclude = "Unknown")
+  #                     ))
+  #   )
+  # })
+  #
+  # output$trust_type <- renderUI({
+  #   shinyGovukFrontend::select_Input(
+  #     "filter_trust_type",
+  #     label = "Trust type",
+  #     select_value = c("ALL",
+  #                      levels(droplevels(factor(hcai$trust_type),
+  #                                        exclude = "Unknown")
+  #                      )),
+  #     select_text = c("ALL",
+  #                     levels(droplevels(factor(hcai$trust_type),
+  #                                       exclude = "Unknown")
+  #                     ))
+  #   )
+  # })
+  #
+  # output$trust_code <- renderUI({
+  #   shinyGovukFrontend::select_Input(
+  #     "filter_trust_code",
+  #     label = "Trust code",
+  #     select_value = c("ALL",
+  #                      levels(droplevels(factor(hcai$provider_code),
+  #                                        exclude = "Unknown")
+  #                      )),
+  #     select_text = c("ALL",
+  #                     levels(droplevels(factor(hcai$provider_code),
+  #                                       exclude = "Unknown")
+  #                     ))
+  #   )
+  # })
+  #
+  # output$trust_name <- renderUI({
+  #   shinyGovukFrontend::select_Input(
+  #     "filter_trust_name",
+  #     label = "Trust name",
+  #     select_value = c("ALL",
+  #                      levels(droplevels(factor(hcai$trust_name),
+  #                                        exclude = "Unknown")
+  #                      )),
+  #     select_text = c("ALL",
+  #                     levels(droplevels(factor(hcai$trust_name),
+  #                                       exclude = "Unknown")
+  #                     ))
+  #   )
+  # })
+  #
+  # # linked cases
+  # output$link <- renderUI({
+  #   shinyGovukFrontend::select_Input(
+  #     "filter_linked_cases",
+  #     label = "Case inclusion",
+  #     select_text = c("Include unlinked cases", "Linked cases only"),
+  #     select_value = c(1, 0)
+  #   )
+  # })
+  #
   #### DASHBOARD DATA ###########################################################
   unfiltered <- reactive({
     ## filter dates always
@@ -203,29 +208,29 @@ function(input, output, session) {
   #### VALUE BOXES FOR DATA INDICATORS ##########################################
   output$valuebox01 <- renderUI({
     div(style="padding: 10px",
-      h2("12345"),
-      p("This is a paragraph")
+        h2("12345"),
+        p("This is a paragraph")
     )
   })
 
   output$valuebox02 <- renderUI({
     div(style="padding: 10px",
-      h2("12345"),
-      p("This is a paragraph")
+        h2("12345"),
+        p("This is a paragraph")
     )
   })
 
   output$valuebox03 <- renderUI({
     div(style="padding: 10px",
-      h2("12345"),
-      p("This is a paragraph")
+        h2("12345"),
+        p("This is a paragraph")
     )
   })
 
   output$valuebox04 <- renderUI({
     div(style="padding: 10px",
-      h2("12345"),
-      p("This is a paragraph")
+        h2("12345"),
+        p("This is a paragraph")
     )
   })
 

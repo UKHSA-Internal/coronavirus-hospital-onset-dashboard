@@ -1,5 +1,10 @@
 @import 'partials/variables';
 
+html {
+    // Overriding bootstrap default of 10px
+    font-size: 16px;
+}
+
 body {
     background-color: $colour !important;
 }

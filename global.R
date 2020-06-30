@@ -25,7 +25,6 @@ hcai <- hcai %>%
   mutate(wk_start=ymd(wk_start),
          ecds_last_update=ymd(ecds_last_update),
          sus_last_update=ymd(sus_last_update),
-         hcai_group=if_else(grepl("CO",hcai_group),"CO",hcai_group),
          hcai_group=factor(hcai_group,
                            levels = c("Unlinked",
                                       "CO",

@@ -2,20 +2,22 @@
 function(input, output, session) {
 
   # SASS
-  sass(
-    sass_file("styles/main.scss"),
+  sass::sass(
+    sass::sass_file("styles/main.scss"),
     output = "www/main.css"
   )
 
-  #### SOURCE DATA ##############################################################
-  # Load and join data
-  hcai <- left_join(read_csv("./hcai.csv"),
-                    read_csv("./lookup/trust_names.csv"),
-                    by=c("provider_code"="trust_code"))
 
-  # Transform and prep
+  # Load data
+  hcai <- readr::read_csv("./hcai.csv")
+  trust_names <- readr::read_csv("./lookup/trust_names.csv")
+
+  # Join data
+  hcai <- dplyr::left_join(hcai,trust_names,by=c("provider_code"="trust_code"))
+
+  # Mutate
   hcai <- hcai %>%
-    mutate(wk_start=ymd(wk_start),
+    dplyr::mutate(wk_start=ymd(wk_start),
       ecds_last_update=ymd(ecds_last_update),
       sus_last_update=ymd(sus_last_update),
       hcai_group=if_else(grepl("CO",hcai_group),"CO",hcai_group),
@@ -28,7 +30,7 @@ function(input, output, session) {
         )
       )
     ) %>%
-    mutate(nhs_region=factor(nhs_region,
+    dplyr::mutate(nhs_region=factor(nhs_region,
       levels=c(
         "LONDON",
         "SOUTH EAST",

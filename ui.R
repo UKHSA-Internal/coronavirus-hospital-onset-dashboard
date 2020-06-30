@@ -1,4 +1,13 @@
-# Define UI for application that draws a histogram
+## PHE COVID19 HCAI Dashboard
+# Define UI for application
+#   Current layout:
+#     + top navigation (3 panels; home, dashboard, info/methods)
+#     + sidebar with filters
+#     + three rows of information on main dashboard panel
+#       + data indicators
+#       + counts graph
+#       + proportions graph
+
 tags$div(
   tags$html(lang="en", class="govuk-template"),
   tags$head(

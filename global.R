@@ -1,3 +1,10 @@
+## PHE COVID19 HCAI Dashboard
+##  on pull, to get package dependencies, run
+#   renv::init()
+#   future updates can be run with renv::restore()
+
+renv::restore()
+
 library(shiny)
 library(shinyGovukFrontend)
 library(tidyverse)

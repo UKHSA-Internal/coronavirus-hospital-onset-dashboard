@@ -255,14 +255,14 @@ function(input, output, session) {
 
 
   #### VALUE BOXES FOR DATA INDICATORS ##########################################
-  output$valuebox01 <- renderUI({
+  output$valuebox_total <- renderUI({
     div(style="padding: 10px",
         h2(paste(sum(vb_data()$n))),
         p("Total cases")
     )
   })
 
-  output$valuebox02 <- renderUI({
+  output$valuebox_prop <- renderUI({
     div(style="padding: 10px",
         h2(paste0(sum(vb_data()$p[vb_data()$linkgrp]),
                   "%")),
@@ -270,17 +270,50 @@ function(input, output, session) {
     )
   })
 
-  output$valuebox03 <- renderUI({
+  output$valuebox_co <- renderUI({
     div(style="padding: 10px",
-        h2("12345"),
-        p("This is a paragraph")
+        h2(paste0(ifelse(
+          any(vb_data()$hcai_group == "CO"),
+          vb_data()$link_p[vb_data()$hcai_group == "CO"],
+          0
+        ),
+        "%")),
+        p("CO")
     )
   })
 
-  output$valuebox04 <- renderUI({
+  output$valuebox_hoiha <- renderUI({
     div(style="padding: 10px",
-        h2("12345"),
-        p("This is a paragraph")
+        h2(paste0(ifelse(
+          any(vb_data()$hcai_group == "HO.iHA"),
+          vb_data()$link_p[vb_data()$hcai_group == "HO.iHA"],
+          0
+        ),
+        "%")),
+        p("HO.iHA")
+    )
+  })
+
+  output$valuebox_hopha <- renderUI({
+    div(style="padding: 10px",
+        h2(paste0(ifelse(
+          any(vb_data()$hcai_group == "HO.pHA"),
+          vb_data()$link_p[vb_data()$hcai_group == "HO.pHA"],
+          0
+        ),
+        "%")),
+        p("HO.pHA")
+    )
+  })
+  output$valuebox_hoha <- renderUI({
+    div(style="padding: 10px",
+        h2(paste0(ifelse(
+          any(vb_data()$hcai_group == "HO.HA"),
+          vb_data()$link_p[vb_data()$hcai_group == "HO.HA"],
+          0
+        ),
+        "%")),
+        p("HO.HA")
     )
   })
 

@@ -203,20 +203,70 @@ function(input, output, session) {
   #   }
   # })
 
+  #### VALUE BOX REACTIVE DATA ##################################################
+  vb_data <- reactive({
+
+
+    ## NHS region
+    if(input$nhs_region=="ALL"){
+      vb <- hcai %>%
+        ungroup()
+
+    } else {
+      vb <- hcai %>%
+        ungroup() %>%
+        filter(nhs_region == as.character(input$nhs_region))
+
+    }
+
+    ## trust type
+    if (input$trust_type == "ALL") {
+      vb <- vb %>%
+        ungroup()
+
+    } else {
+      vb <- vb %>%
+        ungroup() %>%
+        filter(trust_type == as.character(input$trust_type))
+
+    }
+
+    ## trust code
+    if (input$trust_code == "ALL") {
+      vb <- vb
+
+    } else {
+      vb <- vb %>%
+        filter(provider_code == as.character(input$trust_code))
+    }
+
+    ## group up data
+    vb <- vb %>%
+      mutate(linkgrp = hcai_group != "Unlinked") %>%
+      group_by(linkgrp, hcai_group) %>%
+      summarise(n = sum(n),.groups="drop") %>%
+      group_by(linkgrp) %>%
+      mutate(link_t = sum(n),
+             link_p = round(n / link_t * 100, 1)) %>%
+      ungroup() %>%
+      mutate(t = sum(n),
+             p = round(n / t * 100, 1))
+  })
 
 
   #### VALUE BOXES FOR DATA INDICATORS ##########################################
   output$valuebox01 <- renderUI({
     div(style="padding: 10px",
-        h2("12345"),
-        p("This is a paragraph")
+        h2(paste(sum(vb_data()$n))),
+        p("Total cases")
     )
   })
 
   output$valuebox02 <- renderUI({
     div(style="padding: 10px",
-        h2("12345"),
-        p("This is a paragraph")
+        h2(paste0(sum(vb_data()$p[vb_data()$linkgrp]),
+                  "%")),
+        p("Cases linked")
     )
   })
 

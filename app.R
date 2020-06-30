@@ -6,13 +6,6 @@
 #
 #    http://shiny.rstudio.com/
 #
-
-library(shiny)
-library(shinyGovstyle)
-library(tidyverse)
-library(lubridate)
-library(sass)
-
 source('ui.R', local = TRUE)
 source('server.R')
 

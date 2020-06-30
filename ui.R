@@ -4,9 +4,9 @@ ui <- fluidPage(
   tags$head(
     tags$link(href = "main.css", rel = "stylesheet", type = "text/css")
   ),
-  font(),
+  shinyGovstyle::font(),
   shinyGovstyle::header("PHE", "HCAI Dashboard", logo="shinyGovstyle/images/moj_logo.png"),
-  gov_layout(size = "full",
+  shinyGovstyle::gov_layout(size = "full",
     navbarPage("HCAI Dashboard",
       tabPanel(title = "Home",
         includeMarkdown("content/home.md"),
@@ -56,5 +56,5 @@ ui <- fluidPage(
       )
     )
   ),
-  footer(TRUE)
+  shinyGovstyle::footer(TRUE)
 )

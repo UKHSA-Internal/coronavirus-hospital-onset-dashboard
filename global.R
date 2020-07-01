@@ -18,7 +18,7 @@ library(DT)
 ## font stylings for plotlys
 font_style <- list(
   family = c("GDS Transport","Arial","sans-serif"),
-  size = 14,
+  size = 16,
   color = "black"
 )
 

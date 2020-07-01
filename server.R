@@ -12,12 +12,12 @@ function(input, output, session) {
 
   sass::sass(
     sass::sass_file("styles/govuk/all.scss"),
-    output = "www/css/govuk.css"
+    output = "www/govuk.css"
   )
 
   sass::sass(
     sass::sass_file("styles/main.scss"),
-    output = "www/css/main.css"
+    output = "www/main.css"
   )
 
   #### DASHBOARD DATA ###########################################################

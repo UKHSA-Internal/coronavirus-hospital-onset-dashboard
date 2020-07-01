@@ -11,8 +11,8 @@
 tags$div(
   tags$html(lang="en", class="govuk-template"),
   tags$head(
-    tags$link(href = "css/main.css", rel = "stylesheet", type = "text/css"),
-    tags$link(href = "css/govuk.css", rel = "stylesheet", type = "text/css")
+    tags$link(href = "main.css", rel = "stylesheet", type = "text/css"),
+    tags$link(href = "govuk.css", rel = "stylesheet", type = "text/css")
   ),
   tags$body(class="govuk-template__body"),
   shinyGovukFrontend::font(),

@@ -19,13 +19,13 @@ tags$div(
   shinyGovukFrontend::header("PHE", "HCAI Dashboard", logo="shinyGovukFrontend/images/moj_logo.png"),
   tags$div(class="govuk-width-container",
            shinyGovukFrontend::gov_layout(
-             navbarPage("HCAI Dashboard",
+             navbarPage("COVID-19 HCAI Dashboard",
                         tabPanel(title = "Home",
                                  includeMarkdown("content/home.md"),
                                  plotOutput("norm"),
                                  actionButton("renorm", "Resample")
                         ),
-                        tabPanel(title = "HCAI by week",
+                        tabPanel(title = "Dashboard",
                                  sidebarLayout(
                                    sidebarPanel(
                                      shinyGovukFrontend::select_Input(
@@ -99,26 +99,33 @@ tags$div(
                                                        "Linked cases only"),
                                        select_value = c(1, 0)
                                      ),
-                                     shinyGovukFrontend::date_Input(
-                                       inputId = "filter_date",
-                                       label = "Filter dates before"
+                                     shiny::dateInput(
+                                       "date_filter",
+                                       label = "Filter dates before",
+                                       min = min(hcai$wk_start),
+                                       max = max(hcai$wk_start),
+                                       value = "2020-03-01",
+                                       format = "dd MM yyyy"
                                      ),
+                                     # shinyGovukFrontend::date_Input(
+                                     #   inputId = "filter_date",
+                                     #   label = "Filter dates before"
+                                     # ),
                                      # text for sidebar
                                      includeMarkdown("content/filter.md")
                                    ),
                                    # Show a plot of the generated distribution
                                    mainPanel(
-                                     tabsetPanel(
-                                       tabPanel(title = "Dashboard",
-                                                h1("Dashboard"),
-                                                div(style = "display: flex; flex-wrap: wrap;",
-                                                    uiOutput('valuebox_total', class="valuebox"),
-                                                    uiOutput('valuebox_prop', class="valuebox"),
-                                                    uiOutput('valuebox_co', class="valuebox"),
-                                                    uiOutput('valuebox_hoiha', class="valuebox"),
-                                                    uiOutput('valuebox_hopha', class="valuebox"),
-                                                    uiOutput('valuebox_hoha', class="valuebox"),
-                                                ),
+                                     div(
+                                       style = "display: flex; flex-wrap: wrap;",
+                                       uiOutput('valuebox_total', class = "valuebox"),
+                                       uiOutput('valuebox_prop', class = "valuebox"),
+                                       uiOutput('valuebox_co', class = "valuebox"),
+                                       uiOutput('valuebox_hoiha', class = "valuebox"),
+                                       uiOutput('valuebox_hopha', class = "valuebox"),
+                                       uiOutput('valuebox_hoha', class = "valuebox"),
+                                     ),
+                                     tabsetPanel(tabPanel(title = "Dashboard",
                                                 plotly::plotlyOutput("plot_count"),
                                                 plotly::plotlyOutput("plot_proportion")
                                        ),

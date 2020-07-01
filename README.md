@@ -4,6 +4,8 @@
 
 > THIS IS SYNTHETIC DATA, AND IS NOT REFLECTIVE OF ACTUAL RESULTS
 
+Once you clone this repo, run `renv::restore()` on your first instance in R Studio to load up the managed package list.
+
 This dashboard shows the location at where a patient was when they had their first COVID-19 positive PCR test, in relation to a hospital attendance in A&E or inpatient admission.
 
 This therefore, does not always reflect where a patient has ultimately recieved inpatient care.

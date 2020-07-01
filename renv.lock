@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.0.0",
+    "Version": "4.0.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -319,10 +319,15 @@
     },
     "htmlwidgets": {
       "Package": "htmlwidgets",
-      "Version": "1.5.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "41bace23583fbc25089edae324de2dc3"
+      "Version": "1.5.1.9001",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "ramnathv",
+      "RemoteRepo": "htmlwidgets",
+      "RemoteRef": "master",
+      "RemoteSha": "6fcc4b03ed3fc42be76d4e43d863db3d85c8babb",
+      "Hash": "43198daf611c2422a3969bf1f02213b4"
     },
     "httpuv": {
       "Package": "httpuv",
@@ -487,10 +492,15 @@
     },
     "plotly": {
       "Package": "plotly",
-      "Version": "4.9.2.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "b08edf378e0e38959a6983e3d5902795"
+      "Version": "4.9.2.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "ropensci",
+      "RemoteRepo": "plotly",
+      "RemoteRef": "master",
+      "RemoteSha": "1d1eddda377685cf900ed4a7b16e7796a24b8fe4",
+      "Hash": "5439cf74346b8a86b179d3f4610a469a"
     },
     "plyr": {
       "Package": "plyr",

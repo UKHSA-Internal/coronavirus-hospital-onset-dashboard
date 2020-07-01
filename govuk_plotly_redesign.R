@@ -17,14 +17,14 @@ for(col in c("CO","HO.iHA","HO.pHA","HO.HA","Unlinked")) {
       add_trace(x=pd$wk_start,
                 y=pd[[col]],
                 name=col,
-                text = case_when(
-                  col=="CO" ~ "Community onset",
-                  col=="HO.iHA" ~ "Hospital onset indeterminate healthcare associated",
-                  col=="HO.pHA" ~ "Hospital onset probable healthcare associated",
-                  col=="HO.HA" ~ "Hospital onset healthcare associated",
-                  TRUE ~ "No hospital record"
-                ),
-                hovertemplate = '%{text}: %{y}',
+                # text = case_when(
+                #   col=="CO" ~ "Community onset",
+                #   col=="HO.iHA" ~ "Hospital onset indeterminate healthcare associated",
+                #   col=="HO.pHA" ~ "Hospital onset probable healthcare associated",
+                #   col=="HO.HA" ~ "Hospital onset healthcare associated",
+                #   TRUE ~ "No hospital record"
+                # ),
+                # hovertemplate = '%{text}: %{y}',
                 marker = list(
                   color = case_when(
                     col=="CO" ~ "#5694ca",
@@ -38,9 +38,12 @@ for(col in c("CO","HO.iHA","HO.pHA","HO.HA","Unlinked")) {
 }
 p1 <- p1 %>%
   layout(
-    yaxis = list(title = "Total number of cases",
+    title = list(text = "<b>Patients positive test, by HCAI category</b>",
+                 xref="container",
+                 x=0.01),
+    yaxis = list(#title = "Total number of cases",
                  tickformat = ",digit"),
-    xaxis = list(title = "COVID19 Positive Test (Week commencing)"),
+    # xaxis = list(title = "COVID19 Positive Test (Week commencing)"),
     barmode = 'stack',
     hovermode = 'x unified',
     font = font_style,
@@ -48,11 +51,31 @@ p1 <- p1 %>%
                   y = '-0.2',
                   title=list(text="HCAI category")),
     plot_bgcolor = '#E7E7E7',
-    paper_bgcolor = '#E7E7E7'
+    paper_bgcolor = '#E7E7E7',
+    margin = list(l = 60,
+                  r = 25,
+                  b = 40,
+                  t = 20,
+                  pad = 5)
     ) %>%
   config(displaylogo = FALSE,
          modeBarButtons = list(list("toImage")))
 p1
+
+
+## OUTPUT: PROPORTION GRAPH #####################################################
+pd_prop <- hcai %>%
+  group_by(wk_start,hcai_group) %>%
+  summarise(n=sum(n)) %>%
+  ungroup(hcai_group) %>%
+  mutate(p=n/sum(n)) %>%
+  pivot_wider(
+    id_cols = c(wk_start),
+    names_from = hcai_group,
+    values_from = p,
+    values_fill = 0,
+    values_fn = sum
+  )
 
 p2 <- plot_ly()
 
@@ -75,21 +98,6 @@ for(col in c("CO","HO.iHA","HO.pHA","HO.HA","Unlinked")) {
                 ))
   }
 }
-
-## OUTPUT: PROPORTION GRAPH #####################################################
-pd_prop <- hcai %>%
-  group_by(wk_start,hcai_group) %>%
-  summarise(n=sum(n)) %>%
-  ungroup(hcai_group) %>%
-  mutate(p=n/sum(n)) %>%
-  pivot_wider(
-    id_cols = c(wk_start),
-    names_from = hcai_group,
-    values_from = p,
-    values_fill = 0,
-    values_fn = sum
-  )
-
 
 p2 <- p2 %>%
   layout(

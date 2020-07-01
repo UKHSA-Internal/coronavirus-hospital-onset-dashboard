@@ -12,18 +12,17 @@ library(lubridate)
 library(sass)
 library(plotly)
 library(DT)
-library(markdown)
-library(knitr)
+
 
 
 ## font stylings for plotlys
 font_style <- list(
-  family = "Arial",
+  family = c("GDS Transport","Arial","sans-serif"),
   size = 14,
   color = "black"
 )
 
-#### SOURCE DATA ##############################################################
+#### SOURCE DATA #c(#############################################################
 
 hcai <- readr::read_csv("./hcai.csv")
 
@@ -59,4 +58,5 @@ hcai <- hcai %>%
          nhs_region=fct_explicit_na(factor(nhs_region),"Unknown"),
          hcai_group=fct_explicit_na(hcai_group,"Unlinked"),
          linkset=if_else(hcai_group=="Unlinked","SGSS",linkset)
-  )
+  ) %>%
+  ungroup()

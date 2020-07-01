@@ -7,8 +7,6 @@
 #    http://shiny.rstudio.com/
 #
 
-
-
 source('ui.R', local = TRUE)
 source('server.R')
 

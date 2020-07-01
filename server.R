@@ -115,8 +115,8 @@ function(input, output, session) {
 
     } else {
       updateSelectInput(session = session,
-                        inputId = "trust_name",
-                        selected = c("ALL"))
+        inputId = "trust_name",
+        selected = c("ALL"))
     }
   }
   )
@@ -133,8 +133,8 @@ function(input, output, session) {
 
     } else {
       updateSelectInput(session = session,
-                        inputId = "trust_name",
-                        selected = c("ALL"))
+        inputId = "trust_name",
+        selected = c("ALL"))
 
     }
   })
@@ -183,74 +183,74 @@ function(input, output, session) {
       summarise(n = sum(n),.groups="drop") %>%
       group_by(linkgrp) %>%
       mutate(link_t = sum(n),
-             link_p = round(n / link_t * 100, 1)) %>%
+        link_p = round(n / link_t * 100, 1)) %>%
       ungroup() %>%
       mutate(t = sum(n),
-             p = round(n / t * 100, 1))
+        p = round(n / t * 100, 1))
   })
 
 
   #### VALUE BOXES FOR DATA INDICATORS ##########################################
   output$valuebox_total <- renderUI({
     div(style="padding: 10px",
-        h2(paste(sum(vb_data()$n))),
-        p("Total cases")
+      h2(paste(sum(vb_data()$n))),
+      p("Total cases")
     )
   })
 
   output$valuebox_prop <- renderUI({
     div(style="padding: 10px",
-        h2(paste0(sum(vb_data()$p[vb_data()$linkgrp]),
-                  "%")),
-        p("Cases linked")
+      h2(paste0(sum(vb_data()$p[vb_data()$linkgrp]),
+        "%")),
+      p("Cases linked")
     )
   })
 
   output$valuebox_co <- renderUI({
     div(style="padding: 10px",
-        h2(paste0(ifelse(
-          any(vb_data()$hcai_group == "CO"),
-          vb_data()$link_p[vb_data()$hcai_group == "CO"],
-          0
-        ),
+      h2(paste0(ifelse(
+        any(vb_data()$hcai_group == "CO"),
+        vb_data()$link_p[vb_data()$hcai_group == "CO"],
+        0
+      ),
         "%")),
-        p("CO")
+      p("CO")
     )
   })
 
   output$valuebox_hoiha <- renderUI({
     div(style="padding: 10px",
-        h2(paste0(ifelse(
-          any(vb_data()$hcai_group == "HO.iHA"),
-          vb_data()$link_p[vb_data()$hcai_group == "HO.iHA"],
-          0
-        ),
+      h2(paste0(ifelse(
+        any(vb_data()$hcai_group == "HO.iHA"),
+        vb_data()$link_p[vb_data()$hcai_group == "HO.iHA"],
+        0
+      ),
         "%")),
-        p("HO.iHA")
+      p("HO.iHA")
     )
   })
 
   output$valuebox_hopha <- renderUI({
     div(style="padding: 10px",
-        h2(paste0(ifelse(
-          any(vb_data()$hcai_group == "HO.pHA"),
-          vb_data()$link_p[vb_data()$hcai_group == "HO.pHA"],
-          0
-        ),
+      h2(paste0(ifelse(
+        any(vb_data()$hcai_group == "HO.pHA"),
+        vb_data()$link_p[vb_data()$hcai_group == "HO.pHA"],
+        0
+      ),
         "%")),
-        p("HO.pHA")
+      p("HO.pHA")
     )
   })
 
   output$valuebox_hoha <- renderUI({
     div(style="padding: 10px",
-        h2(paste0(ifelse(
-          any(vb_data()$hcai_group == "HO.HA"),
-          vb_data()$link_p[vb_data()$hcai_group == "HO.HA"],
-          0
-        ),
+      h2(paste0(ifelse(
+        any(vb_data()$hcai_group == "HO.HA"),
+        vb_data()$link_p[vb_data()$hcai_group == "HO.HA"],
+        0
+      ),
         "%")),
-        p("HO.HA")
+      p("HO.HA")
     )
   })
 
@@ -266,10 +266,10 @@ function(input, output, session) {
         group_by(wk_start, hcai_group, provider_code) %>%
         summarise(n = sum(n),.groups = "keep")  %>%
         ggplot(aes(x = wk_start,
-                   y = n,
-                   fill = hcai_group)) +
+          y = n,
+          fill = hcai_group)) +
         geom_bar(stat = "identity",
-                 width=6) +
+          width=6) +
         scale_fill_manual(
           values = c(
             "Unlinked" = "#b1b4b6",
@@ -286,23 +286,23 @@ function(input, output, session) {
           expand = expansion(add = 1)
         ) +
         scale_y_continuous("Total number of cases",
-                           breaks = function(x, n = 5) pretty(x, n)[pretty(x, n) %% 1 == 0]) +
+          breaks = function(x, n = 5) pretty(x, n)[pretty(x, n) %% 1 == 0]) +
         theme_classic() +
         guides(fill = guide_legend(nrow = 1)) +
         theme(legend.position = "bottom",
-              panel.background = element_rect(fill="#f8f8f8"),
-              plot.background = element_rect(fill="#f8f8f8"),
-              legend.background = element_rect(fill="#f8f8f8")
-              )
+          panel.background = element_rect(fill="#f8f8f8"),
+          plot.background = element_rect(fill="#f8f8f8"),
+          legend.background = element_rect(fill="#f8f8f8")
+        )
 
       ggplotly(hcai_week) %>%
         layout(hovermode = "x unified",
-               font=font_style) %>%
+          font=font_style) %>%
         config(displaylogo = FALSE,
-               modeBarButtons = list(list("toImage"))) %>%
+          modeBarButtons = list(list("toImage"))) %>%
         layout(legend = list(orientation = 'h',
-                             y = '1.15',
-                             title=list(text="HCAI category")
+          y = '1.15',
+          title=list(text="HCAI category")
         ))
 
     })
@@ -320,12 +320,12 @@ function(input, output, session) {
           summarise(n = sum(n),.groups="drop") %>%
           group_by(wk_start, wk, provider_code) %>%
           mutate(total = sum(n),
-                 p = round(n / total * 100, digits = 1)) %>%
+            p = round(n / total * 100, digits = 1)) %>%
           ggplot(aes(x = wk_start,
-                     y = p,
-                     fill = linkset)) +
+            y = p,
+            fill = linkset)) +
           geom_bar(stat = "identity",
-                   width=6) +
+            width=6) +
           scale_x_date(
             "COVID19 Positive Test (Week Commencing; 2020)",
             breaks = seq(min(data()$wk_start)-7, max(data()$wk_start)+7, 7),
@@ -333,7 +333,7 @@ function(input, output, session) {
             expand = expansion(add = 1)
           ) +
           scale_y_continuous("Proportion of cases (%)",
-                             labels = function(x) paste0(x, "%")) +
+            labels = function(x) paste0(x, "%")) +
           scale_fill_manual(
             values = c(
               "SGSS:SUS:ECDS" = "#002549",
@@ -347,12 +347,12 @@ function(input, output, session) {
 
         ggplotly(link_prop) %>%
           layout(hovermode = "compare",
-                 font=font_style) %>%
+            font=font_style) %>%
           config(displaylogo = FALSE,
-                 modeBarButtons = list(list("toImage"))) %>%
+            modeBarButtons = list(list("toImage"))) %>%
           layout(legend = list(orientation = 'h',
-                               y = '1.15',
-                               title=list(text="Datasets linked")
+            y = '1.15',
+            title=list(text="Datasets linked")
           ))
 
       } else {
@@ -365,10 +365,10 @@ function(input, output, session) {
           group_by(wk_start, provider_code) %>%
           mutate(p = round(n / sum(n) * 100, 1)) %>%
           ggplot(aes(x = wk_start,
-                     y = p,
-                     fill = hcai_group)) +
+            y = p,
+            fill = hcai_group)) +
           geom_bar(stat = "identity",
-                   width = 6) +
+            width = 6) +
           scale_fill_manual(
             values = c(
               "Unlinked" = "#C3C3C3",
@@ -386,19 +386,19 @@ function(input, output, session) {
             expand = expansion(add = 1)
           ) +
           scale_y_continuous("Proportion of cases (%)",
-                             labels = function(x) paste0(x, "%")) +
+            labels = function(x) paste0(x, "%")) +
           theme_classic() +
           guides(fill = guide_legend(nrow = 1)) +
           theme(legend.position = "bottom")
 
         ggplotly(hcai_week_p) %>%
           layout(hovermode = "compare",
-                 font=font_style) %>%
+            font=font_style) %>%
           config(displaylogo = FALSE,
-                 modeBarButtons = list(list("toImage"))) %>%
+            modeBarButtons = list(list("toImage"))) %>%
           layout(legend = list(orientation = 'h',
-                               y = '1.15',
-                               title=list(text="HCAI category")
+            y = '1.15',
+            title=list(text="HCAI category")
           ))
 
 
@@ -415,7 +415,7 @@ function(input, output, session) {
         summarise(n = sum(n),.groups="drop") %>%
         group_by(wk, wk_start) %>%
         mutate(wT = sum(n),
-               p = n / wT) %>%
+          p = n / wT) %>%
         arrange(hcai_group) %>%
         pivot_wider(
           id_cols = c(wk, wk_start, wT),
@@ -444,23 +444,23 @@ function(input, output, session) {
       names(dt) <- sapply(sapply(strsplit(names(dt), "n_"), rev), paste, collapse="_n")
 
       DT::datatable(dt,
-                    extensions = 'Buttons',
-                    options=list(pageLength=25,
-                                 dom = 'Bfrtip',
-                                 buttons=c('copy','csv')),
-                    caption = paste(
-                      "Data for",
-                      case_when(
-                        input$trust_name == "ALL" &
-                          input$trust_type == "ALL" ~ "all Providers",
-                        input$trust_name == "ALL" &
-                          input$trust_type != "ALL" ~ paste("all",
-                                                            input$trust_type,
-                                                            "Providers"),
-                        TRUE ~ input$trust_name
-                      )),
+        extensions = 'Buttons',
+        options=list(pageLength=25,
+          dom = 'Bfrtip',
+          buttons=c('copy','csv')),
+        caption = paste(
+          "Data for",
+          case_when(
+            input$trust_name == "ALL" &
+              input$trust_type == "ALL" ~ "all Providers",
+            input$trust_name == "ALL" &
+              input$trust_type != "ALL" ~ paste("all",
+                input$trust_type,
+                "Providers"),
+            TRUE ~ input$trust_name
+          )),
 
-                    rownames = FALSE) %>%
+        rownames = FALSE) %>%
         DT::formatPercentage(grep("%",names(dt)),1)
 
     })

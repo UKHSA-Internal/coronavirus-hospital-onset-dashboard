@@ -17,6 +17,7 @@ tags$div(
   tags$body(class="govuk-template__body"),
   shinyGovukFrontend::font(),
   shinyGovukFrontend::header("PHE", "HCAI Dashboard", logo="shinyGovukFrontend/images/moj_logo.png"),
+  shinyGovukFrontend::banner("banner", "beta", 'This is a new service – your <a class="govuk-link" href="mailto:coronavirus-hcai@phe.gov.uk">feedback</a> will help us to improve it.'),
   tags$div(class="govuk-width-container",
     shinyGovukFrontend::gov_layout(
       navbarPage("COVID-19 HCAI Dashboard",

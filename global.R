@@ -25,7 +25,7 @@ font_style <- list(
 
 #### SOURCE DATA ##############################################################
 
-hcai <- readr::read_csv("./hcai.csv")
+hcai <- readr::read_csv("data/hcai.csv")
 
 # Transform and prep
 hcai <- hcai %>%

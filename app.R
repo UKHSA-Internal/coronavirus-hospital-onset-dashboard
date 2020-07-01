@@ -1,4 +1,4 @@
-#
+## PHE COVID19 HCAI Dashboard
 # This is a Shiny web application. You can run the application by clicking
 # the 'Run App' button above.
 #
@@ -6,8 +6,6 @@
 #
 #    http://shiny.rstudio.com/
 #
-
-
 
 source('ui.R', local = TRUE)
 source('server.R')

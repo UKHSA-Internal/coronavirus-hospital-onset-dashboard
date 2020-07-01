@@ -24,8 +24,9 @@ function(input, output, session) {
   unfiltered <- reactive({
     ## filter dates always
     d <- hcai %>%
-      filter(wk_start >= as.Date("2020-01-30")) %>%
+      filter(wk_start >= input$date_filter) %>%
       ungroup()
+
     ## NHS region
     if (input$nhs_region == "ALL") {
       d <- d
@@ -240,6 +241,7 @@ function(input, output, session) {
         p("HO.pHA")
     )
   })
+
   output$valuebox_hoha <- renderUI({
     div(style="padding: 10px",
         h2(paste0(ifelse(
@@ -251,6 +253,8 @@ function(input, output, session) {
         p("HO.HA")
     )
   })
+
+
 
 
   #### OUTPUT: COUNTS GRAPH #####################################################
@@ -268,12 +272,11 @@ function(input, output, session) {
                  width=6) +
         scale_fill_manual(
           values = c(
-            "Unlinked" = "#C3C3C3",
-            "CO.pHA" = "#003087",
-            "CO" = "#00B092",
-            "HO.iHA" = "#425563",
-            "HO.pHA" = "#EAAB00",
-            "HO.HA" = "#822433"
+            "Unlinked" = "#b1b4b6",
+            "CO" = "#5694ca",
+            "HO.iHA" = "#ffdd00",
+            "HO.pHA" = "#003078",
+            "HO.HA" = "#d4351c"
           )
         ) +
         scale_x_date(
@@ -286,7 +289,11 @@ function(input, output, session) {
                            breaks = function(x, n = 5) pretty(x, n)[pretty(x, n) %% 1 == 0]) +
         theme_classic() +
         guides(fill = guide_legend(nrow = 1)) +
-        theme(legend.position = "bottom")
+        theme(legend.position = "bottom",
+              panel.background = element_rect(fill="#f8f8f8"),
+              plot.background = element_rect(fill="#f8f8f8"),
+              legend.background = element_rect(fill="#f8f8f8")
+              )
 
       ggplotly(hcai_week) %>%
         layout(hovermode = "x unified",

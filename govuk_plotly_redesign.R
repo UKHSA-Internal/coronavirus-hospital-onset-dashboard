@@ -38,9 +38,10 @@ for(col in c("CO","HO.iHA","HO.pHA","HO.HA","Unlinked")) {
 }
 p1 <- p1 %>%
   layout(
-    title = list(text = "<b>Patients positive test, by HCAI category</b>",
+    title = list(text = "<b>Patients first positive test, by HCAI category</b>",
                  xref="container",
-                 x=0.01),
+                 x=0.01,
+                 y=0.9),
     yaxis = list(#title = "Total number of cases",
                  tickformat = ",digit"),
     # xaxis = list(title = "COVID19 Positive Test (Week commencing)"),

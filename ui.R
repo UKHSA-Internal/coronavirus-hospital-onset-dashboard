@@ -25,8 +25,6 @@ tags$div(
       navbarPage("COVID-19 HCAI Dashboard",
         tabPanel(title = "Home",
           includeMarkdown("content/home.md"),
-          plotOutput("norm"),
-          actionButton("renorm", "Resample")
         ),
         tabPanel(title = "Dashboard",
           sidebarLayout(

@@ -11,6 +11,7 @@
 # Setting up modules
 header <- use("modules/header.R")
 banner <- use("modules/banner.R")
+selectInput <- use("modules/selectInput.R")
 
 tags$div(
   tags$html(lang="en", class="govuk-template"),
@@ -35,7 +36,7 @@ tags$div(
         tabPanel(title = "Dashboard",
           sidebarLayout(
             sidebarPanel(
-              shinyGovukFrontend::select_Input(
+              selectInput$ui(
                 "nhs_region",
                 label = "NHS Region",
                 select_value = c("ALL",
@@ -51,7 +52,7 @@ tags$div(
                       exclude = "Unknown"))
                 )
               ),
-              shinyGovukFrontend::select_Input(
+              selectInput$ui(
                 "trust_type",
                 label = "Trust type",
                 select_value = c("ALL",
@@ -67,7 +68,7 @@ tags$div(
                       exclude = "Unknown"))
                 )
               ),
-              shinyGovukFrontend::select_Input(
+              selectInput$ui(
                 "trust_code",
                 label = "Trust code",
                 select_value = c("ALL",
@@ -83,7 +84,7 @@ tags$div(
                       exclude = "Unknown"))
                 )
               ),
-              shinyGovukFrontend::select_Input(
+              selectInput$ui(
                 "trust_name",
                 label = "Trust name",
                 select_value = c("ALL",
@@ -99,7 +100,7 @@ tags$div(
                       exclude = "Unknown"))
                 )
               ),
-              shinyGovukFrontend::select_Input(
+              selectInput$ui(
                 "link",
                 label = "Case inclusion",
                 select_text = c("Include unlinked cases",

@@ -1,7 +1,6 @@
 # selectInput.R
-import("shiny")
-import("modules")
-export("ui")
+modules::import("shiny")
+modules::export("ui")
 
 ui <- function(inputId, label, select_text, select_value) {
   tagList(

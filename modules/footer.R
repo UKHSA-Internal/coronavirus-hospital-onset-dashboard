@@ -1,7 +1,6 @@
 # banner.R
-import("shiny")
-import("modules")
-export("ui")
+modules::import("shiny")
+modules::export("ui")
 
 ui <- function(full = FALSE){
   tags$footer(

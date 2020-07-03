@@ -9,10 +9,10 @@
 #       + proportions graph
 
 # Setting up modules
-header <- use("modules/header.R")
-banner <- use("modules/banner.R")
-footer <- use("modules/footer.R")
-selectInput <- use("modules/selectInput.R")
+header <- modules::use("modules/header.R")
+banner <- modules::use("modules/banner.R")
+footer <- modules::use("modules/footer.R")
+selectInput <- modules::use("modules/selectInput.R")
 
 tags$div(
   tags$html(lang="en", class="govuk-template"),

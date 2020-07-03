@@ -4,7 +4,6 @@
 
 ## load required packages
 library(shiny)
-library(shinyGovukFrontend)
 library(tidyverse)
 library(lubridate)
 library(sass)

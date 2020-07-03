@@ -11,6 +11,7 @@
 # Setting up modules
 header <- use("modules/header.R")
 banner <- use("modules/banner.R")
+footer <- use("modules/footer.R")
 selectInput <- use("modules/selectInput.R")
 
 tags$div(
@@ -145,5 +146,5 @@ tags$div(
       )
     )
   ),
-  shinyGovukFrontend::footer(TRUE)
+  footer$ui(TRUE)
 )

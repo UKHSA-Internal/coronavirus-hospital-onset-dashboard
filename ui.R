@@ -22,7 +22,10 @@ tags$div(
   header$ui(serviceName="COVID19 Weekly Trust Reporting"),
   banner$ui("banner", "beta", 'This is a new service – your <a class="govuk-link" href="mailto:coronavirus-hcai@phe.gov.uk">feedback</a> will help us to improve it.'),
   tags$div(class="govuk-width-container",
-    shinyGovukFrontend::gov_layout(
+    tags$main(
+      id="main-content",
+      class="govuk-main-wrapper",
+      role="main",
       navbarPage("COVID-19 HCAI Dashboard",
         tabPanel(title = "Home",
           includeMarkdown("content/home.md"),

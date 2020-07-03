@@ -11,6 +11,11 @@ library(plotly)
 library(DT)
 library(modules)
 
+# Setting up modules
+header <- modules::use("modules/header.R")
+banner <- modules::use("modules/banner.R")
+footer <- modules::use("modules/footer.R")
+selectInput <- modules::use("modules/selectInput.R")
 
 ## font stylings for plotlys
 font_style <- list(

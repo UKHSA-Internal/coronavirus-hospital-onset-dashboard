@@ -1,10 +1,8 @@
 ## PHE COVID19 HCAI Dashboard
 ##  on pull, to get package dependencies, run
-#   renv::init()
-#   future updates can be run with renv::restore()
+#   renv::restore()
 
-renv::restore()
-
+## load required packages
 library(shiny)
 library(shinyGovukFrontend)
 library(tidyverse)
@@ -15,11 +13,10 @@ library(DT)
 library(modules)
 
 
-
 ## font stylings for plotlys
 font_style <- list(
   family = c("GDS Transport","Arial","sans-serif"),
-  size = 16,
+  size = 12,
   color = "black"
 )
 
@@ -62,3 +59,70 @@ hcai <- hcai %>%
     hcai_group=fct_explicit_na(hcai_group,"Unlinked"),
     linkset=if_else(hcai_group=="Unlinked","SGSS",linkset)
   )
+
+
+#### OUTPUT PLOTLY FUNCTION #####################################################
+
+plotly_graph <- function(data) {
+
+  p <- plot_ly(type='bar')
+
+  for(col in c("CO","HO.iHA","HO.pHA","HO.HA","Unlinked")) {
+    if(col %in% names(data)) {
+      p <- p %>%
+        add_trace(x=data$wk_start,
+                  y=data[[col]],
+                  name=col,
+                  # text = case_when(
+                  #   col=="CO" ~ "Community onset",
+                  #   col=="HO.iHA" ~ "Hospital onset indeterminate healthcare associated",
+                  #   col=="HO.pHA" ~ "Hospital onset probable healthcare associated",
+                  #   col=="HO.HA" ~ "Hospital onset healthcare associated",
+                  #   TRUE ~ "No hospital record"
+                  # ),
+                  # hovertemplate = '%{text}: %{y}',
+                  marker = list(
+                    color = case_when(
+                      col=="CO" ~ "#5694ca",
+                      col=="HO.iHA" ~ "#ffdd00",
+                      col=="HO.pHA" ~ "#003078",
+                      col=="HO.HA" ~ "#d4351c",
+                      TRUE ~ "#b1b4b6"
+                    )
+                  ))
+    }
+  }
+
+  if(max(rowSums(data[2:length(names(data))]))==1) {
+    p <- p %>% layout(yaxis = list(tickformat = "%"))
+  } else {
+    p <- p %>% layout(yaxis = list(tickformat = ",digit"))
+
+  }
+
+  p <- p %>%
+    layout(
+      title = list(text = "<b>Patients first positive COVID-19 test, by HCAI category</b>",
+                   xref="container",
+                   x=0.01,
+                   y=0.9),
+      barmode = 'stack',
+      hovermode = 'x unified',
+      font = font_style,
+      legend = list(orientation = 'h',
+                    y = '-0.2'),
+      plot_bgcolor = '#f8f8f8',
+      paper_bgcolor = '#f8f8f8',
+      margin = list(l = 60,
+                    r = 25,
+                    b = 40,
+                    t = 90,
+                    pad = 5)
+    ) %>%
+    config(displaylogo = FALSE,
+           modeBarButtons = list(list("toImage")))
+
+
+  return(p)
+}
+

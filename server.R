@@ -254,157 +254,46 @@ function(input, output, session) {
     )
   })
 
-
-
-
   #### OUTPUT: COUNTS GRAPH #####################################################
-  output$plot_count <-
+
+  output$plotly_count <-
     renderPlotly({
 
-      hcai_week <-
-        data() %>%
-        group_by(wk_start, hcai_group, provider_code) %>%
-        summarise(n = sum(n),.groups = "keep")  %>%
-        ggplot(aes(x = wk_start,
-          y = n,
-          fill = hcai_group)) +
-        geom_bar(stat = "identity",
-          width=6) +
-        scale_fill_manual(
-          values = c(
-            "Unlinked" = "#b1b4b6",
-            "CO" = "#5694ca",
-            "HO.iHA" = "#ffdd00",
-            "HO.pHA" = "#003078",
-            "HO.HA" = "#d4351c"
-          )
-        ) +
-        scale_x_date(
-          "COVID19 Positive Test (Week Commencing; 2020)",
-          breaks = seq(min(data()$wk_start)-7, max(data()$wk_start)+7, 7),
-          date_labels = "%d %b",
-          expand = expansion(add = 1)
-        ) +
-        scale_y_continuous("Total number of cases",
-          breaks = function(x, n = 5) pretty(x, n)[pretty(x, n) %% 1 == 0]) +
-        theme_classic() +
-        guides(fill = guide_legend(nrow = 1)) +
-        theme(legend.position = "bottom",
-          panel.background = element_rect(fill="#f8f8f8"),
-          plot.background = element_rect(fill="#f8f8f8"),
-          legend.background = element_rect(fill="#f8f8f8")
+      plot_count <- data() %>%
+        group_by(wk_start, hcai_group) %>%
+        summarise(n = sum(n),.groups="drop") %>%
+        pivot_wider(
+          id_cols = c(wk_start),
+          names_from = hcai_group,
+          values_from = n,
+          values_fill = 0,
+          values_fn = sum
         )
 
-      ggplotly(hcai_week) %>%
-        layout(hovermode = "x unified",
-          font=font_style) %>%
-        config(displaylogo = FALSE,
-          modeBarButtons = list(list("toImage"))) %>%
-        layout(legend = list(orientation = 'h',
-          y = '1.15',
-          title=list(text="HCAI category")
-        ))
+      plotly_graph(plot_count)
 
     })
 
   #### OUTPUT: PROPORTIONS GRAPH ################################################
-  output$plot_proportion <-
 
+  output$plotly_proportion <-
     renderPlotly({
 
-      if (input$trust_code=="ALL" & input$trust_type == "ALL" & input$link==1) {
+      plot_prop <- data() %>%
+        group_by(wk_start, hcai_group) %>%
+        summarise(n = sum(n),.groups="keep") %>%
+        ungroup(hcai_group) %>%
+        mutate(p=n/sum(n)) %>%
+        pivot_wider(
+          id_cols = c(wk_start),
+          names_from = hcai_group,
+          values_from = p,
+          values_fill = 0,
+          values_fn = sum
+        )
 
-        # give all data as proportion linked
-        link_prop <- data() %>%
-          group_by(linkset, wk_start, wk, provider_code) %>%
-          summarise(n = sum(n),.groups="drop") %>%
-          group_by(wk_start, wk, provider_code) %>%
-          mutate(total = sum(n),
-            p = round(n / total * 100, digits = 1)) %>%
-          ggplot(aes(x = wk_start,
-            y = p,
-            fill = linkset)) +
-          geom_bar(stat = "identity",
-            width=6) +
-          scale_x_date(
-            "COVID19 Positive Test (Week Commencing; 2020)",
-            breaks = seq(min(data()$wk_start)-7, max(data()$wk_start)+7, 7),
-            date_labels = "%d %b",
-            expand = expansion(add = 1)
-          ) +
-          scale_y_continuous("Proportion of cases (%)",
-            labels = function(x) paste0(x, "%")) +
-          scale_fill_manual(
-            values = c(
-              "SGSS:SUS:ECDS" = "#002549",
-              "SGSS:SUS" = "#005EB8",
-              "SGSS:ECDS" = "#4c8ecd",
-              "SGSS" = "#C3C3C3"
-            )
-          ) +
-          theme_classic() +
-          theme(legend.position = "bottom")
+      plotly_graph(plot_prop)
 
-        ggplotly(link_prop) %>%
-          layout(hovermode = "compare",
-            font=font_style) %>%
-          config(displaylogo = FALSE,
-            modeBarButtons = list(list("toImage"))) %>%
-          layout(legend = list(orientation = 'h',
-            y = '1.15',
-            title=list(text="Datasets linked")
-          ))
-
-      } else {
-
-        ## or if one trust breakdown props per day since we cannot attribute unlinked
-        hcai_week_p <-
-          data() %>%
-          group_by(wk_start, hcai_group, provider_code) %>%
-          summarise(n = sum(n),.groups="drop") %>%
-          group_by(wk_start, provider_code) %>%
-          mutate(p = round(n / sum(n) * 100, 1)) %>%
-          ggplot(aes(x = wk_start,
-            y = p,
-            fill = hcai_group)) +
-          geom_bar(stat = "identity",
-            width = 6) +
-          scale_fill_manual(
-            values = c(
-              "Unlinked" = "#C3C3C3",
-              "CO.pHA" = "#003087",
-              "CO" = "#00B092",
-              "HO.iHA" = "#425563",
-              "HO.pHA" = "#EAAB00",
-              "HO.HA" = "#822433"
-            )
-          ) +
-          scale_x_date(
-            "COVID19 Positive Test (Week Commencing; 2020)",
-            breaks = seq(min(data()$wk_start)-7, max(data()$wk_start)+7, 7),
-            date_labels = "%d %b",
-            expand = expansion(add = 1)
-          ) +
-          scale_y_continuous("Proportion of cases (%)",
-            labels = function(x) paste0(x, "%")) +
-          theme_classic() +
-          guides(fill = guide_legend(nrow = 1)) +
-          theme(legend.position = "bottom")
-
-        ggplotly(hcai_week_p) %>%
-          layout(hovermode = "compare",
-            font=font_style) %>%
-          config(displaylogo = FALSE,
-            modeBarButtons = list(list("toImage"))) %>%
-          layout(legend = list(orientation = 'h',
-            y = '1.15',
-            title=list(text="HCAI category")
-          ))
-
-
-
-
-      }
     })
 
   #### OUTPUT: DATA TABLE #######################################################
@@ -412,7 +301,7 @@ function(input, output, session) {
     DT::renderDataTable({
       dt <- data() %>%
         group_by(wk_start, wk, hcai_group, provider_code) %>%
-        summarise(n = sum(n),.groups="drop") %>%
+        summarise(n = sum(n),.groups="keep") %>%
         group_by(wk, wk_start) %>%
         mutate(wT = sum(n),
           p = n / wT) %>%

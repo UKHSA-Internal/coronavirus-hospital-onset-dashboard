@@ -129,8 +129,8 @@ tags$div(
                 uiOutput('valuebox_hoha', class = "valuebox"),
               ),
               tabsetPanel(tabPanel(title = "Dashboard",
-                plotly::plotlyOutput("plot_count"),
-                plotly::plotlyOutput("plot_proportion")
+                plotly::plotlyOutput("plotly_count"),
+                plotly::plotlyOutput("plotly_proportion")
               ),
                 tabPanel(title = "Data table",
                   h1("Data table"),

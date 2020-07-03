@@ -14,7 +14,7 @@ pd
 ## OUTPUT: PROPORTION DATA ######################################################
 pd_prop <- hcai %>%
   group_by(wk_start,hcai_group) %>%
-  summarise(n=sum(n)) %>%
+  summarise(n=sum(n),.groups="keep") %>%
   ungroup(hcai_group) %>%
   mutate(p=n/sum(n)) %>%
   pivot_wider(
@@ -23,21 +23,8 @@ pd_prop <- hcai %>%
     values_from = p,
     values_fill = 0,
     values_fn = sum
-  )
-
-hcai %>%
-  group_by(wk_start, hcai_group) %>%
-  summarise(n = sum(n),.groups="keep") %>%
-  ungroup(hcai_group) %>%
-  mutate(p=n/sum(n)) %>%
-  pivot_wider(
-    id_cols = c(wk_start),
-    names_from = hcai_group,
-    values_from = p,
-    values_fill = 0,
-    values_fn = sum
-  )
-
+  ) %>%
+  relocate(Unlinked,.after=last_col())
 
 ## OUTPUT: GRAPH ################################################################
 
@@ -51,14 +38,14 @@ plotly_graph <- function(data) {
         add_trace(x=data$wk_start,
                   y=data[[col]],
                   name=col,
+                  hoverinfo = "text",
                   text = case_when(
                     col=="CO" ~ "Community onset",
                     col=="HO.iHA" ~ "Hospital onset indeterminate healthcare associated",
                     col=="HO.pHA" ~ "Hospital onset probable healthcare associated",
                     col=="HO.HA" ~ "Hospital onset healthcare associated",
-                    TRUE ~ "No hospital record"
-                  ),
-                  hovertemplate = '%{text}: %{y}',
+                    TRUE ~ "No hospital record"),
+                  # hovertemplate = '%{hovertext}: %{y}',
                   marker = list(
                     color = case_when(
                       col=="CO" ~ "#5694ca",
@@ -104,8 +91,8 @@ plotly_graph <- function(data) {
   return(p)
 }
 
-plotly_graph(pd_prop)
 plotly_graph(pd)
+plotly_graph(pd_prop)
 
 ## OLD STYLE ####################################################################
 
@@ -207,4 +194,3 @@ output$plot_proportion <-
 
     }
   })
-

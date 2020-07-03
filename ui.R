@@ -9,7 +9,11 @@
 #       + proportions graph
 
 
-tags$div(
+
+
+
+tagList(
+  tags$div(
   tags$html(lang="en", class="govuk-template"),
   tags$head(
     tags$link(href = "main.css", rel = "stylesheet", type = "text/css"),
@@ -23,7 +27,9 @@ tags$div(
       id="main-content",
       class="govuk-main-wrapper",
       role="main",
+      router_ui()
     )
   ),
   footer$ui(TRUE)
+)
 )

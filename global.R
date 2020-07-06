@@ -5,7 +5,10 @@
 ## load required packages
 library(shiny)
 library(shiny.router)
-library(tidyverse)
+library(dplyr)
+library(readr)
+library(forcats)
+library(tidyr)
 library(lubridate)
 library(sass)
 library(plotly)
@@ -55,7 +58,7 @@ font_style <- list(
 )
 
 
-#### SOURCE DATA ##############################################################
+#### PREP SOURCE DATA ###########################################################
 
 # Transform and prep
 hcai <- hcai %>%

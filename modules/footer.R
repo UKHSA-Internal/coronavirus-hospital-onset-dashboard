@@ -20,7 +20,7 @@ footer <- function(full = FALSE){
                   class="govuk-footer__inline-list-item",
                   tags$a(
                     class="govuk-footer__link",
-                    href="#",
+                    href="#!/accessibility",
                     "Accessibility"
                   )
                 )

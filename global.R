@@ -32,18 +32,21 @@ source("pages/template.R")
 source("pages/home.R")
 source("pages/dashboard.R")
 source("pages/information.R")
+source("pages/accessibility.R")
 
 # Pages
 home_page <- template("Home page", uiOutput("current_page"), home())
 dashboard_page <- template("Dashboard page", uiOutput("current_page"), dashboard())
 info_page <- template("Info page", uiOutput("current_page"), information())
+ally_page <- accessibility()
 
 # Creates router. We provide routing path, a UI as
 # well as a server-side callback for each page.
 router <- make_router(
   route("home", home_page, NA),
   route("dashboard", dashboard_page, NA),
-  route("information", info_page, NA)
+  route("information", info_page, NA),
+  route("accessibility", ally_page, NA)
 )
 
 

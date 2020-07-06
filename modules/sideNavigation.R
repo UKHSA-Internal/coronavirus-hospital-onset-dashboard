@@ -9,13 +9,13 @@ sideNavigation <- function(page) {
         class="moj-side-navigation__list",
         tags$li(
           class="moj-side-navigation__item",
-          a(class = "item", href = "#!/", "Home page")),
+          a(class = "item", href = "#!/", "Home")),
         tags$li(
           class="moj-side-navigation__item",
-          a(class = "item", href = "#!/dashboard", "Dashboard page")),
+          a(class = "item", href = "#!/dashboard", "Dashboard")),
         tags$li(
           class="moj-side-navigation__item",
-          a(class = "item", href = "#!/information", "Information page"))
+          a(class = "item", href = "#!/information", "Information"))
       )
     )
   )

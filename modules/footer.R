@@ -14,6 +14,27 @@ footer <- function(full = FALSE){
           tagList(
             tags$div(
               class = "govuk-footer__meta-item govuk-footer__meta-item--grow",
+              tags$ul(
+                class="govuk-footer__inline-list",
+                tags$li(
+                  class="govuk-footer__inline-list-item",
+                  tags$a(
+                    class="govuk-footer__link",
+                    href="#!/accessibility",
+                    "Accessibility"
+                  )
+                )
+              ),
+              tags$div(
+                class="govuk-footer__meta-custom",
+                "Developed by ",
+                tags$a(
+                  class="govuk-footer__link",
+                  href="https://www.gov.uk/government/organisations/public-health-england",
+                  target="_blank",
+                  "PHE"
+                )
+              ),
               tag(
                 "svg",
                 list(

@@ -1,4 +1,7 @@
+@import 'govuk/all';
 @import 'partials/variables';
+@import 'partials/side-navigation';
+@import 'partials/dashboard';
 
 html {
     // Overriding bootstrap default of 10px

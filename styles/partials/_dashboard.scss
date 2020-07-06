@@ -1,0 +1,31 @@
+/* Dashboard
+*/
+
+.dashboard-container {
+    display: flex;
+}
+
+.dashboard-menu {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 4px;
+    display: none;
+    flex: 0 0 auto;
+    align-self: flex-start;
+
+    @include govuk-media-query($from: tablet) {
+        display: block;
+        width: 180px;
+    }
+
+    @include govuk-media-query($from: desktop) {
+        width: 260px;
+    }
+}
+
+.dashboard-content {
+    display: flex;
+    min-width: 0;
+    flex: 1 1 100%;
+    flex-direction: column;
+}

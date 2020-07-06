@@ -12,11 +12,6 @@ function(input, output, session) {
 
   # SASS
   sass::sass(
-    sass::sass_file("styles/govuk/all.scss"),
-    output = "www/govuk.css"
-  )
-
-  sass::sass(
     sass::sass_file("styles/main.scss"),
     output = "www/main.css"
   )

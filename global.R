@@ -12,6 +12,9 @@ library(plotly)
 library(DT)
 library(modules)
 
+## load data
+hcai <- readr::read_csv("data/hcai.csv")
+
 # Setting up modules
 header <- modules::use("modules/header.R")
 banner <- modules::use("modules/banner.R")
@@ -54,8 +57,6 @@ font_style <- list(
 
 
 #### SOURCE DATA ##############################################################
-
-hcai <- readr::read_csv("data/hcai.csv")
 
 # Transform and prep
 hcai <- hcai %>%

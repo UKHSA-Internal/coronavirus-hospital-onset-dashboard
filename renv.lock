@@ -514,7 +514,7 @@
       "RemoteRepo": "plotly",
       "RemoteRef": "master",
       "RemoteSha": "1d1eddda377685cf900ed4a7b16e7796a24b8fe4",
-      "Hash": "7698086dabb32adf0e386b5d4a546531"
+      "Hash": "5439cf74346b8a86b179d3f4610a469a"
     },
     "plyr": {
       "Package": "plyr",

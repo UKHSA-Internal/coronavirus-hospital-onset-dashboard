@@ -684,6 +684,13 @@
       "Repository": "CRAN",
       "Hash": "ee4ed72d7a5047d9e73cf922ad66e9c9"
     },
+    "shiny.router": {
+      "Package": "shiny.router",
+      "Version": "0.1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "51f7a7642fb26deffed72ea1e8f91bad"
+    },
     "sourcetools": {
       "Package": "sourcetools",
       "Version": "0.1.7",

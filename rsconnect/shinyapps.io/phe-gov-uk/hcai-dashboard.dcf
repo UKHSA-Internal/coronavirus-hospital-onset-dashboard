@@ -5,9 +5,9 @@ account: phe-gov-uk
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2532943
-bundleId: 3357383
+bundleId: 3357420
 url: https://phe-gov-uk.shinyapps.io/hcai-dashboard/
-when: 1594032826.3571
+when: 1594033830.98487
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: .Rprofile

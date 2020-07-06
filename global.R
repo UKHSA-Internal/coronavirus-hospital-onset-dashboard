@@ -28,13 +28,8 @@ source("modules/selectInput.R")
 
 menu <- (
   tags$ul(
-    tags$li(a(class = "item", href = route_link("/"), "Home page")),
-    tags$li(a(class = "item", href = route_link("/dashboard"), "Dashboard page")),
-    tags$li(a(class = "item", href = route_link("/information"), "Information page")),
-    tags$li(a(class = "item", href = route_link("information"), "Information page")),
-    tags$li(a(class = "item", href = "/information", "Information page")),
-    tags$li(a(class = "item", href = "information", "Information page")),
-    tags$li(a(class = "item", href = "/#!/information", "Information page")),
+    tags$li(a(class = "item", href = "#!/"), "Home page")),
+    tags$li(a(class = "item", href = "#!/dashboard", "Dashboard page")),
     tags$li(a(class = "item", href = "#!/information", "Information page"))
   )
 )

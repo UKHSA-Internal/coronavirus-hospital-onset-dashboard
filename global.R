@@ -4,13 +4,45 @@
 
 ## load required packages
 library(shiny)
-library(shinyGovukFrontend)
+library(shiny.router)
 library(tidyverse)
 library(lubridate)
 library(sass)
 library(plotly)
 library(DT)
 library(modules)
+
+# Setting up modules
+header <- modules::use("modules/header.R")
+banner <- modules::use("modules/banner.R")
+footer <- modules::use("modules/footer.R")
+selectInput <- modules::use("modules/selectInput.R")
+
+menu <- (
+  tags$ul(
+    tags$li(a(class = "item", href = route_link("home"), "Home page")),
+    tags$li(a(class = "item", href = route_link("dashboard"), "Dashboard page")),
+    tags$li(a(class = "item", href = route_link("information"), "Information page"))
+  )
+)
+
+source("pages/template.R")
+source("pages/home.R")
+source("pages/dashboard.R")
+source("pages/information.R")
+
+# Pages
+home_page <- template("Home page", home())
+dashboard_page <- template("Dashboard page", dashboard())
+info_page <- template("Info page", information())
+
+# Creates router. We provide routing path, a UI as
+# well as a server-side callback for each page.
+router <- make_router(
+  route("home", home_page, NA),
+  route("dashboard", dashboard_page, NA),
+  route("information", info_page, NA)
+)
 
 
 ## font stylings for plotlys

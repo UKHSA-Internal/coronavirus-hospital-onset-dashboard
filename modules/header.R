@@ -1,7 +1,6 @@
 # Header.R
-import("shiny")
-import("modules")
-export("ui")
+modules::import("shiny")
+modules::export("ui")
 
 ui <- function(id,serviceName="Service name") {
     tagList(

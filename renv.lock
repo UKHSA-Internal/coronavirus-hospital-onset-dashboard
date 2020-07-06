@@ -443,15 +443,10 @@
     },
     "modules": {
       "Package": "modules",
-      "Version": "0.8.1",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "wahani",
-      "RemoteRepo": "modules",
-      "RemoteRef": "master",
-      "RemoteSha": "3f0aa794b9378fac81cd0f36be037692a5513de7",
-      "Hash": "23d30e188a8f1e1f83eb8574ad6f856a"
+      "Version": "0.8.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "1369eeb0fd28eebe2019a72537208551"
     },
     "munsell": {
       "Package": "munsell",
@@ -519,7 +514,7 @@
       "RemoteRepo": "plotly",
       "RemoteRef": "master",
       "RemoteSha": "1d1eddda377685cf900ed4a7b16e7796a24b8fe4",
-      "Hash": "5439cf74346b8a86b179d3f4610a469a"
+      "Hash": "7698086dabb32adf0e386b5d4a546531"
     },
     "plyr": {
       "Package": "plyr",
@@ -689,24 +684,12 @@
       "Repository": "CRAN",
       "Hash": "ee4ed72d7a5047d9e73cf922ad66e9c9"
     },
-    "shinyGovukFrontend": {
-      "Package": "shinyGovukFrontend",
-      "Version": "0.1.0",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "Biggsen",
-      "RemoteRepo": "shinyGovukFrontend",
-      "RemoteRef": "master",
-      "RemoteSha": "c4fdcab129c7ecd87c682bc67aef8da0e7dd587b",
-      "Hash": "4cb90a4c6c968e7f2dc3162182b98fdc"
-    },
-    "shinyjs": {
-      "Package": "shinyjs",
-      "Version": "1.1",
+    "shiny.router": {
+      "Package": "shiny.router",
+      "Version": "0.1.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "b40a5207b6624f6e2b8cdb50689cdb69"
+      "Hash": "51f7a7642fb26deffed72ea1e8f91bad"
     },
     "sourcetools": {
       "Package": "sourcetools",

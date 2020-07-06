@@ -5,8 +5,14 @@ account: phe-gov-uk
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2532943
+<<<<<<< HEAD
 bundleId: 3348490
 url: https://phe-gov-uk.shinyapps.io/hcai-dashboard/
 when: 1593790290.56873
+=======
+bundleId: 3348521
+url: https://phe-gov-uk.shinyapps.io/hcai-dashboard/
+when: 1593790733.08396
+>>>>>>> 4e00311a779be71a168c78512559db4de548522f
 asMultiple: FALSE
 asStatic: FALSE

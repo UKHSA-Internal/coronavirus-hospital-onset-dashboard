@@ -33,7 +33,8 @@ menu <- (
     tags$li(a(class = "item", href = route_link("/information"), "Information page")),
     tags$li(a(class = "item", href = route_link("information"), "Information page")),
     tags$li(a(class = "item", href = "/information", "Information page")),
-    tags$li(a(class = "item", href = "information", "Information page"))
+    tags$li(a(class = "item", href = "information", "Information page")),
+    tags$li(a(class = "item", href = "/#!/information", "Information page"))
   )
 )
 

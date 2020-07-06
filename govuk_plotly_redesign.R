@@ -45,7 +45,7 @@ plotly_graph <- function(data) {
                     col=="HO.pHA" ~ "Hospital onset probable healthcare associated",
                     col=="HO.HA" ~ "Hospital onset healthcare associated",
                     TRUE ~ "No hospital record"),
-                  # hovertemplate = '%{hovertext}: %{y}',
+                  hovertemplate = '%{text}: %{y}',
                   marker = list(
                     color = case_when(
                       col=="CO" ~ "#5694ca",

@@ -17,8 +17,8 @@ bootstrapPage(
       tags$link(href = "govuk.css", rel = "stylesheet", type = "text/css")
     ),
     tags$body(class="govuk-template__body"),
-    header$ui(serviceName="COVID19 Weekly Trust Reporting"),
-    banner$ui("banner", "beta", 'This is a new service – your <a class="govuk-link" href="mailto:coronavirus-hcai@phe.gov.uk">feedback</a> will help us to improve it.'),
+    header(serviceName="COVID19 Weekly Trust Reporting"),
+    banner("banner", "beta", 'This is a new service – your <a class="govuk-link" href="mailto:coronavirus-hcai@phe.gov.uk">feedback</a> will help us to improve it.'),
     tags$div(class="govuk-width-container",
       tags$main(
         id="main-content",
@@ -27,7 +27,7 @@ bootstrapPage(
         router_ui()
       )
     ),
-    footer$ui(TRUE)
+    footer(TRUE)
   )
 )
 

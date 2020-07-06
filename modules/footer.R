@@ -1,8 +1,5 @@
 # banner.R
-modules::import("shiny")
-modules::export("ui")
-
-ui <- function(full = FALSE){
+footer <- function(full = FALSE){
   tags$footer(
     class = "govuk-footer ",
     role = "contentinfo",

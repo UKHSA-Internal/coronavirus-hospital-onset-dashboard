@@ -1,8 +1,5 @@
 # selectInput.R
-modules::import("shiny")
-modules::export("ui")
-
-ui <- function(inputId, label, select_text, select_value) {
+selectInput <- function(inputId, label, select_text, select_value) {
   tagList(
     tags$div(
       class="govuk-form-group",

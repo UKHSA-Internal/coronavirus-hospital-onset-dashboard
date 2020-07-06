@@ -10,16 +10,15 @@ library(lubridate)
 library(sass)
 library(plotly)
 library(DT)
-library(modules)
 
 ## load data
 hcai <- readr::read_csv("data/hcai.csv")
 
 # Setting up modules
-header <- modules::use("modules/header.R")
-banner <- modules::use("modules/banner.R")
-footer <- modules::use("modules/footer.R")
-selectInput <- modules::use("modules/selectInput.R")
+source("modules/header.R")
+source("modules/banner.R")
+source("modules/footer.R")
+source("modules/selectInput.R")
 
 menu <- (
   tags$ul(

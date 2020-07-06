@@ -1,8 +1,5 @@
 # banner.R
-modules::import("shiny")
-modules::export("ui")
-
-ui <- function(inputId, type, label) {
+banner <- function(inputId, type, label) {
   tagList(
     tags$div(
       class="govuk-phase-banner govuk-width-container govuk-main-wrapper",

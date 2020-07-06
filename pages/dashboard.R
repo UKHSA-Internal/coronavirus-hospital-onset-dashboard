@@ -3,7 +3,7 @@ dashboard <- function(title, content) {
     tabPanel(title = "Dashboard",
       sidebarLayout(
         sidebarPanel(
-          selectInput$ui(
+          selectInput(
             "nhs_region",
             label = "NHS Region",
             select_value = c("ALL",
@@ -19,7 +19,7 @@ dashboard <- function(title, content) {
                   exclude = "Unknown"))
             )
           ),
-          selectInput$ui(
+          selectInput(
             "trust_type",
             label = "Trust type",
             select_value = c("ALL",
@@ -35,7 +35,7 @@ dashboard <- function(title, content) {
                   exclude = "Unknown"))
             )
           ),
-          selectInput$ui(
+          selectInput(
             "trust_code",
             label = "Trust code",
             select_value = c("ALL",
@@ -51,7 +51,7 @@ dashboard <- function(title, content) {
                   exclude = "Unknown"))
             )
           ),
-          selectInput$ui(
+          selectInput(
             "trust_name",
             label = "Trust name",
             select_value = c("ALL",
@@ -67,7 +67,7 @@ dashboard <- function(title, content) {
                   exclude = "Unknown"))
             )
           ),
-          selectInput$ui(
+          selectInput(
             "link",
             label = "Case inclusion",
             select_text = c("Include unlinked cases",

@@ -11,6 +11,7 @@ library(forcats)
 library(tidyr)
 library(lubridate)
 library(sass)
+library(markdown)
 library(plotly)
 library(DT)
 

@@ -25,24 +25,18 @@ source("modules/header.R")
 source("modules/banner.R")
 source("modules/footer.R")
 source("modules/selectInput.R")
+source("modules/sideNavigation.R")
 
-menu <- (
-  tags$ul(
-    tags$li(a(class = "item", href = route_link("/home"), "Home page")),
-    tags$li(a(class = "item", href = route_link("/dashboard"), "Dashboard page")),
-    tags$li(a(class = "item", href = route_link("/information"), "Information page"))
-  )
-)
-
+# Pages
 source("pages/template.R")
 source("pages/home.R")
 source("pages/dashboard.R")
 source("pages/information.R")
 
 # Pages
-home_page <- template("Home page", home())
-dashboard_page <- template("Dashboard page", dashboard())
-info_page <- template("Info page", information())
+home_page <- template("Home page", uiOutput("current_page"), home())
+dashboard_page <- template("Dashboard page", uiOutput("current_page"), dashboard())
+info_page <- template("Info page", uiOutput("current_page"), information())
 
 # Creates router. We provide routing path, a UI as
 # well as a server-side callback for each page.

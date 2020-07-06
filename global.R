@@ -2,22 +2,24 @@
 ##  on pull, to get package dependencies, run
 #   renv::restore()
 
+#### STARTUP ####################################################################
 ## load required packages
-library(shiny)
-library(shiny.router)
-library(dplyr)
-library(readr)
-library(forcats)
-library(tidyr)
-library(lubridate)
-library(sass)
-library(markdown)
-library(plotly)
-library(DT)
+library(shiny, warn.conflicts = FALSE)
+library(shiny.router, warn.conflicts = FALSE)
+library(dplyr, warn.conflicts = FALSE)
+library(readr, warn.conflicts = FALSE)
+library(forcats, warn.conflicts = FALSE)
+library(tidyr, warn.conflicts = FALSE)
+library(lubridate, warn.conflicts = FALSE)
+library(sass, warn.conflicts = FALSE)
+library(markdown, warn.conflicts = FALSE)
+library(plotly, warn.conflicts = FALSE)
+library(DT, warn.conflicts = FALSE)
 
 ## load data
-hcai <- readr::read_csv("data/hcai.csv")
+hcai <- readr::read_csv("data/hcai.csv", col_types = cols())
 
+#### UI AND NAV ELEMENTS ########################################################
 # Setting up modules
 source("modules/header.R")
 source("modules/banner.R")

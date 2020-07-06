@@ -8,143 +8,26 @@
 #       + counts graph
 #       + proportions graph
 
-# Setting up modules
-header <- modules::use("modules/header.R")
-banner <- modules::use("modules/banner.R")
-footer <- modules::use("modules/footer.R")
-selectInput <- modules::use("modules/selectInput.R")
 
-tags$div(
-  tags$html(lang="en", class="govuk-template"),
-  tags$head(
-    tags$link(href = "main.css", rel = "stylesheet", type = "text/css"),
-    tags$link(href = "govuk.css", rel = "stylesheet", type = "text/css")
-  ),
-  tags$body(class="govuk-template__body"),
-  header$ui(serviceName="COVID19 Weekly Trust Reporting"),
-  banner$ui("banner", "beta", 'This is a new service – your <a class="govuk-link" href="mailto:coronavirus-hcai@phe.gov.uk">feedback</a> will help us to improve it.'),
-  tags$div(class="govuk-width-container",
-    tags$main(
-      id="main-content",
-      class="govuk-main-wrapper",
-      role="main",
-      navbarPage("COVID-19 HCAI Dashboard",
-        tabPanel(title = "Home",
-          includeMarkdown("content/home.md"),
-        ),
-        tabPanel(title = "Dashboard",
-          sidebarLayout(
-            sidebarPanel(
-              selectInput$ui(
-                "nhs_region",
-                label = "NHS Region",
-                select_value = c("ALL",
-                  levels(
-                    droplevels(
-                      factor(hcai$nhs_region),
-                      exclude = "Unknown"))
-                ),
-                select_text = c("ALL",
-                  levels(
-                    droplevels(
-                      factor(hcai$nhs_region),
-                      exclude = "Unknown"))
-                )
-              ),
-              selectInput$ui(
-                "trust_type",
-                label = "Trust type",
-                select_value = c("ALL",
-                  levels(
-                    droplevels(
-                      factor(hcai$trust_type),
-                      exclude = "Unknown"))
-                ),
-                select_text = c("ALL",
-                  levels(
-                    droplevels(
-                      factor(hcai$trust_type),
-                      exclude = "Unknown"))
-                )
-              ),
-              selectInput$ui(
-                "trust_code",
-                label = "Trust code",
-                select_value = c("ALL",
-                  levels(
-                    droplevels(
-                      factor(hcai$provider_code),
-                      exclude = "Unknown"))
-                ),
-                select_text = c("ALL",
-                  levels(
-                    droplevels(
-                      factor(hcai$provider_code),
-                      exclude = "Unknown"))
-                )
-              ),
-              selectInput$ui(
-                "trust_name",
-                label = "Trust name",
-                select_value = c("ALL",
-                  levels(
-                    droplevels(
-                      factor(hcai$trust_name),
-                      exclude = "Unknown"))
-                ),
-                select_text = c("ALL",
-                  levels(
-                    droplevels(
-                      factor(hcai$trust_name),
-                      exclude = "Unknown"))
-                )
-              ),
-              selectInput$ui(
-                "link",
-                label = "Case inclusion",
-                select_text = c("Include unlinked cases",
-                  "Linked cases only"),
-                select_value = c(1, 0)
-              ),
-              shiny::dateInput(
-                "date_filter",
-                label = "Filter dates before",
-                min = min(hcai$wk_start),
-                max = max(hcai$wk_start),
-                value = "2020-03-01",
-                format = "dd MM yyyy"
-              ),
-              # text for sidebar
-              includeMarkdown("content/filter.md")
-            ),
-            # Show a plot of the generated distribution
-            mainPanel(
-              div(
-                style = "display: flex; flex-wrap: wrap;",
-                uiOutput('valuebox_total', class = "valuebox"),
-                uiOutput('valuebox_prop', class = "valuebox"),
-                uiOutput('valuebox_co', class = "valuebox"),
-                uiOutput('valuebox_hoiha', class = "valuebox"),
-                uiOutput('valuebox_hopha', class = "valuebox"),
-                uiOutput('valuebox_hoha', class = "valuebox"),
-              ),
-              tabsetPanel(tabPanel(title = "Dashboard",
-                plotly::plotlyOutput("plotly_count"),
-                plotly::plotlyOutput("plotly_proportion")
-              ),
-                tabPanel(title = "Data table",
-                  h1("Data table"),
-                  DT::dataTableOutput("data_table")
-                )
-              )
-            )
-          )
-        ),
-        tabPanel(title = "Information",
-          includeMarkdown("content/information.md")
-        )
+bootstrapPage(
+  tags$div(
+    tags$html(lang="en", class="govuk-template"),
+    tags$head(
+      tags$link(href = "main.css", rel = "stylesheet", type = "text/css"),
+      tags$link(href = "govuk.css", rel = "stylesheet", type = "text/css")
+    ),
+    tags$body(class="govuk-template__body"),
+    header$ui(serviceName="COVID19 Weekly Trust Reporting"),
+    banner$ui("banner", "beta", 'This is a new service – your <a class="govuk-link" href="mailto:coronavirus-hcai@phe.gov.uk">feedback</a> will help us to improve it.'),
+    tags$div(class="govuk-width-container",
+      tags$main(
+        id="main-content",
+        class="govuk-main-wrapper",
+        role="main",
+        router_ui()
       )
-    )
-  ),
-  footer$ui(TRUE)
+    ),
+    footer$ui(TRUE)
+  )
 )
+

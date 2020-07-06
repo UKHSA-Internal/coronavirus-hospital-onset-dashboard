@@ -6,10 +6,11 @@
 #     + graph of proportions
 #     + table of counts and proportions
 
+
 function(input, output, session) {
+  router(input, output, session)
 
   # SASS
-
   sass::sass(
     sass::sass_file("styles/govuk/all.scss"),
     output = "www/govuk.css"
@@ -355,3 +356,4 @@ function(input, output, session) {
     })
 
 }
+

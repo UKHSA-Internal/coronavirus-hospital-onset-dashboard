@@ -24,3 +24,9 @@
 .util-flex-align-items-start {
     align-items: flex-start !important;
 }
+
+.util-until-desktop-full {
+    @include govuk-media-query($until: desktop) {
+      width: 100%;
+    }
+}

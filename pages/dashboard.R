@@ -6,10 +6,11 @@ dashboard <- function(title, content) {
         "Dashboard"
     ),
     tags$hr(
-        class="govuk-section-break govuk-section-break--m govuk-!-margin-top-2 govuk-!-margin-bottom-0 govuk-section-break--visible"
+        class="govuk-section-break govuk-section-break--m govuk-!-margin-top-2 govuk-!-margin-bottom-4 govuk-section-break--visible"
     ),
+    tags$p("Select a trust or NHS region to customise the dashboard data."),
     tags$div(
-      class="d-flex",
+      class="util-flex util-flex-wrap",
       selectInput(
         "nhs_region",
         label = "NHS Region",
@@ -89,6 +90,9 @@ dashboard <- function(title, content) {
         value = "2020-03-01",
         format = "dd MM yyyy"
       )
+    ),
+    tags$hr(
+        class="govuk-section-break govuk-section-break--m govuk-!-margin-top-2 govuk-!-margin-bottom-4 govuk-section-break--visible"
     ),
     tags$div(
       style = "display: flex; flex-wrap: wrap;",

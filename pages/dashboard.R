@@ -92,16 +92,36 @@ dashboard <- function(title, content) {
       )
     ),
     tags$hr(
-        class="govuk-section-break govuk-section-break--m govuk-!-margin-top-2 govuk-!-margin-bottom-4 govuk-section-break--visible"
+        class="govuk-section-break govuk-section-break--m govuk-!-margin-top-2 govuk-!-margin-bottom-0 govuk-section-break--visible"
     ),
     tags$div(
-      style = "display: flex; flex-wrap: wrap;",
-      uiOutput('valuebox_total', class = "valuebox"),
-      uiOutput('valuebox_prop', class = "valuebox"),
-      uiOutput('valuebox_co', class = "valuebox"),
-      uiOutput('valuebox_hoiha', class = "valuebox"),
-      uiOutput('valuebox_hopha', class = "valuebox"),
-      uiOutput('valuebox_hoha', class = "valuebox"),
+      class = "util-flex util-flex-wrap govuk-!-margin-bottom-4",
+      tags$div(
+        class="util-flex util-flex-col govuk-!-margin-right-9 govuk-!-margin-top-4",
+        h2(
+          class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1",
+          "Number of cases"
+        ),
+        tags$div(
+          class="util-flex",
+          uiOutput('valuebox_total', class = "govuk-!-margin-right-6"),
+          uiOutput('valuebox_prop'),
+        )
+      ),
+      tags$div(
+        class="util-flex util-flex-col govuk-!-margin-top-4",
+        h2(
+          class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1",
+          "HCAI category breakdown"
+        ),
+        tags$div(
+          class="util-flex",
+          uiOutput('valuebox_co', class = "govuk-!-margin-right-6"),
+          uiOutput('valuebox_hoiha', class = "govuk-!-margin-right-6"),
+          uiOutput('valuebox_hopha', class = "govuk-!-margin-right-6"),
+          uiOutput('valuebox_hoha')
+        )
+      )
     ),
     # Show a plot of the generated distribution
     tabsetPanel(

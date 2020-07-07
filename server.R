@@ -185,68 +185,77 @@ function(input, output, session) {
         p = round(n / t * 100, 1))
   })
 
-
   #### VALUE BOXES FOR DATA INDICATORS ##########################################
+
+  # Template
+  valueBox <- function(label,number){
+    tagList(
+      p(
+        class="govuk-!-font-size-16 govuk-!-margin-bottom-0 govuk-caption-m",
+        label
+      ),
+      h3(
+        class="govuk-heading-m govuk-!-font-weight-regular govuk-!-margin-bottom-0 govuk-!-padding-top-0",
+        number
+      )
+    )
+  }
+
   output$valuebox_total <- renderUI({
-    div(style="padding: 10px",
-      h2(paste(sum(vb_data()$n))),
-      p("Total cases")
+    valueBox(
+      "Total",
+      paste(sum(vb_data()$n))
     )
   })
 
   output$valuebox_prop <- renderUI({
-    div(style="padding: 10px",
-      h2(paste0(sum(vb_data()$p[vb_data()$linkgrp]),
-        "%")),
-      p("Cases linked")
+    valueBox(
+      "Linked",
+      paste0(sum(vb_data()$p[vb_data()$linkgrp]))
     )
   })
 
   output$valuebox_co <- renderUI({
-    div(style="padding: 10px",
-      h2(paste0(ifelse(
-        any(vb_data()$hcai_group == "CO"),
-        vb_data()$link_p[vb_data()$hcai_group == "CO"],
-        0
-      ),
-        "%")),
-      p("CO")
+    valueBox(
+      "CO",
+      paste0(ifelse(any(vb_data()$hcai_group == "CO"), vb_data()$link_p[vb_data()$hcai_group == "CO"],0),
+      "%")
     )
   })
 
   output$valuebox_hoiha <- renderUI({
-    div(style="padding: 10px",
-      h2(paste0(ifelse(
+    valueBox(
+      "HO.iHA",
+      paste0(ifelse(
         any(vb_data()$hcai_group == "HO.iHA"),
         vb_data()$link_p[vb_data()$hcai_group == "HO.iHA"],
         0
       ),
-        "%")),
-      p("HO.iHA")
+        "%")
     )
   })
 
   output$valuebox_hopha <- renderUI({
-    div(style="padding: 10px",
-      h2(paste0(ifelse(
+    valueBox(
+      "HO.pHA",
+      paste0(ifelse(
         any(vb_data()$hcai_group == "HO.pHA"),
         vb_data()$link_p[vb_data()$hcai_group == "HO.pHA"],
         0
       ),
-        "%")),
-      p("HO.pHA")
+        "%")
     )
   })
 
   output$valuebox_hoha <- renderUI({
-    div(style="padding: 10px",
-      h2(paste0(ifelse(
+    valueBox(
+      "HO.HA",
+      paste0(ifelse(
         any(vb_data()$hcai_group == "HO.HA"),
         vb_data()$link_p[vb_data()$hcai_group == "HO.HA"],
         0
       ),
-        "%")),
-      p("HO.HA")
+        "%")
     )
   })
 

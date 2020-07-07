@@ -361,6 +361,7 @@ function(input, output, session) {
 
     })
 
+  #### TEXT STRING FOR DISPLAY ##################################################
   output$data_for_text <- renderText({
 
     t <- paste(
@@ -368,17 +369,24 @@ function(input, output, session) {
       case_when(
         input$trust_name == "ALL" & input$trust_type == "ALL" ~ "all Providers",
         input$trust_name == "ALL" & input$trust_type != "ALL" ~
-          paste("all",str_to_title(input$trust_type),"Providers"),
-        TRUE ~ str_to_title(input$trust_name)
+          paste("all",input$trust_type,"Providers"),
+        TRUE ~ input$trust_name
       ),
       "in",
       case_when(
-        input$nhs_region != "ALL" ~ str_to_title(input$nhs_region),
+        input$nhs_region == "LONDON" ~ input$nhs_region,
+        input$nhs_region != "ALL" ~ paste("the",input$nhs_region),
         TRUE ~ "England"
       )
       )
 
+    t <- stringr::str_to_title(t)
+
     t <- stringr::str_replace_all(t,"Nhs","NHS")
+
+    for(lower in c("All","Of","The","For","In")) {
+      t <- stringr::str_replace_all(t,lower,stringr::str_to_lower(lower))
+    }
   })
 
 }

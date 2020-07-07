@@ -131,6 +131,7 @@ dashboard <- function(title, content) {
         "Number and proportion of COVID-19 cases by HCAI category"
       ),
       p("Chart showing the breakdown number of COVID-19 cases by HCAI category: Unlinked, CO, HO.iHA, HO.pHA and HO.HA."),
+      p(shiny::textOutput("data_for_text")),
       tabsetPanel(
         tabPanel(
           title = "Dashboard",
@@ -140,7 +141,6 @@ dashboard <- function(title, content) {
         tabPanel(
           title = "Data table",
           h1("Data table"),
-          shiny::textOutput("data_for_text"),
           DT::dataTableOutput("data_table")
         )
       )

@@ -27,6 +27,6 @@
 
 .util-until-desktop-full {
     @include govuk-media-query($until: desktop) {
-      width: 100%;
+      width: 100% !important;
     }
 }

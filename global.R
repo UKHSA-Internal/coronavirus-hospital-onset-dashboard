@@ -7,6 +7,7 @@
 library(shiny, warn.conflicts = FALSE)
 library(shiny.router, warn.conflicts = FALSE)
 library(dplyr, warn.conflicts = FALSE)
+library(stringr, warn.conflicts = FALSE)
 library(readr, warn.conflicts = FALSE)
 library(forcats, warn.conflicts = FALSE)
 library(tidyr, warn.conflicts = FALSE)
@@ -138,10 +139,10 @@ plotly_graph <- function(data) {
 
   p <- p %>%
     layout(
-      title = list(text = "<b>Patients first positive COVID-19 test, by HCAI category</b>",
-                   xref="container",
-                   x=0.01,
-                   y=0.9),
+      # title = list(text = "<b>Patients first positive COVID-19 test, by HCAI category</b>",
+      #              xref="container",
+      #              x=0.01,
+      #              y=0.9),
       barmode = 'stack',
       hovermode = 'x unified',
       font = font_style,
@@ -152,7 +153,7 @@ plotly_graph <- function(data) {
       margin = list(l = 60,
                     r = 25,
                     b = 40,
-                    t = 90,
+                    t = 20, # 90 if title is added
                     pad = 5)
     ) %>%
     config(displaylogo = FALSE,

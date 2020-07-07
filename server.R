@@ -100,8 +100,9 @@ function(input, output, session) {
 
   observeEvent(input$trust_code,{
 
+
     if (input$trust_code != "ALL") {
-      t <- unfiltered() %>% filter(provider_code == input$trust_code)
+    t <- unfiltered() %>% filter(provider_code == input$trust_code)
 
       updateSelectInput(
         session = session,
@@ -109,6 +110,17 @@ function(input, output, session) {
         selected = c(levels(factor(as.character(t$trust_name))))
       )
 
+      updateSelectInput(
+        session = session,
+        inputId = "trust_type",
+        selected = c(as.character(t$trust_type))
+      )
+
+      updateSelectInput(
+        session = session,
+        inputId = "nhs_region",
+        selected = c(as.character(t$nhs_region))
+      )
     } else {
       updateSelectInput(session = session,
         inputId = "trust_name",
@@ -118,8 +130,9 @@ function(input, output, session) {
   )
 
   observeEvent(input$trust_name, {
+
     if (input$trust_name != "ALL") {
-      t <- unfiltered() %>% filter(trust_name == input$trust_name)
+    t <- unfiltered() %>% filter(trust_name == input$trust_name)
 
       updateSelectInput(
         session = session,
@@ -128,10 +141,10 @@ function(input, output, session) {
       )
 
     } else {
-      updateSelectInput(session = session,
+      updateSelectInput(
+        session = session,
         inputId = "trust_name",
         selected = c("ALL"))
-
     }
   })
 
@@ -322,10 +335,10 @@ function(input, output, session) {
         mutate(cT = cumsum(wT)) %>%
         arrange(desc(wk_start)) %>%
         select(
-          wk,
-          wk_start,
-          Cumulative_Total = cT,
-          wk_Total = wT,
+          # wk,
+          Week=wk_start,
+          # Cumulative_Total = cT,
+          Total = wT,
           ends_with("CO.pHA"),
           ends_with("CO"),
           ends_with("HO.iHA"),
@@ -334,30 +347,39 @@ function(input, output, session) {
           ends_with("Unlinked")
         )
 
-      names(dt) <- sapply(sapply(strsplit(names(dt), "p_"), rev), paste, collapse="_%")
-      names(dt) <- sapply(sapply(strsplit(names(dt), "n_"), rev), paste, collapse="_n")
+      names(dt) <- sapply(sapply(strsplit(names(dt), "p_"), rev), paste, collapse=" %")
+      names(dt) <- sapply(sapply(strsplit(names(dt), "n_"), rev), paste, collapse=" n")
 
-      DT::datatable(dt,
+      DT::datatable(
+        dt,
         extensions = 'Buttons',
         options=list(pageLength=25,
           dom = 'Bfrtip',
           buttons=c('copy','csv')),
-        caption = paste(
-          "Data for",
-          case_when(
-            input$trust_name == "ALL" &
-              input$trust_type == "ALL" ~ "all Providers",
-            input$trust_name == "ALL" &
-              input$trust_type != "ALL" ~ paste("all",
-                input$trust_type,
-                "Providers"),
-            TRUE ~ input$trust_name
-          )),
-
         rownames = FALSE) %>%
         DT::formatPercentage(grep("%",names(dt)),1)
 
     })
+
+  output$data_for_text <- renderText({
+
+    t <- paste(
+      "Data for",
+      case_when(
+        input$trust_name == "ALL" & input$trust_type == "ALL" ~ "all Providers",
+        input$trust_name == "ALL" & input$trust_type != "ALL" ~
+          paste("all",str_to_title(input$trust_type),"Providers"),
+        TRUE ~ str_to_title(input$trust_name)
+      ),
+      "in",
+      case_when(
+        input$nhs_region != "ALL" ~ str_to_title(input$nhs_region),
+        TRUE ~ "England"
+      )
+      )
+
+    t <- stringr::str_replace_all(t,"Nhs","NHS")
+  })
 
 }
 

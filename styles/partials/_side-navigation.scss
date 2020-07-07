@@ -5,13 +5,10 @@
     @include govuk-font(19);
 
     @include govuk-media-query($from: tablet) {
+        padding-right: 15px;
+        padding-top: 10px;
         @include govuk-font(16);
-    }
-}
 
-.moj-side-navigation-mobile {
-    @include govuk-media-query($from: tablet) {
-        display: none;
     }
 }
 

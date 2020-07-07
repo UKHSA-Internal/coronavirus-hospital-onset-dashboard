@@ -1,14 +1,14 @@
 # sideNavigation.R
 sideNavigation <- function(page) {
-  tags$aside(
+  tags$div(
     class="dashboard-menu",
     tags$nav(
-      class="moj-side-navigation govuk-!-padding-right-4 govuk-!-padding-top-2",
+      class="moj-side-navigation",
       #h2(page),
       tags$ul(
         class="moj-side-navigation__list",
         tags$li(
-          class="moj-side-navigation__item",
+          class="moj-side-navigation__item moj-side-navigation__item--active",
           a(class = "item", href = "#!/", "Home")),
         tags$li(
           class="moj-side-navigation__item",

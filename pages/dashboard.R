@@ -124,16 +124,24 @@ dashboard <- function(title, content) {
       )
     ),
     # Show a plot of the generated distribution
-    tabsetPanel(
-      tabPanel(
-        title = "Dashboard",
-        plotly::plotlyOutput("plotly_count"),
-        plotly::plotlyOutput("plotly_proportion")
+    tags$div(
+      class="dashboard-panel govuk-!-padding-5",
+      h2(
+        class="govuk-heading-m govuk-!-margin-bottom-2",
+        "Number of cases by HCAI category"
       ),
-      tabPanel(
-        title = "Data table",
-        h1("Data table"),
-        DT::dataTableOutput("data_table")
+      p("Chart showing the breakdown number of COVID-19 cases by HCAI category: Unlinked, CO, HO.iHA, HO.pHA and HO.HA."),
+      tabsetPanel(
+        tabPanel(
+          title = "Dashboard",
+          plotly::plotlyOutput("plotly_count"),
+          plotly::plotlyOutput("plotly_proportion")
+        ),
+        tabPanel(
+          title = "Data table",
+          h1("Data table"),
+          DT::dataTableOutput("data_table")
+        )
       )
     )
   )

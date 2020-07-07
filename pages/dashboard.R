@@ -88,7 +88,8 @@ dashboard <- function(title, content) {
         min = min(hcai$wk_start),
         max = max(hcai$wk_start),
         value = "2020-03-01",
-        format = "dd MM yyyy"
+        format = "dd MM yyyy",
+        width = 170
       )
     ),
     tags$hr(

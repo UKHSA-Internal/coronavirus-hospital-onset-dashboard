@@ -2,7 +2,7 @@
 selectInput <- function(inputId, label, select_text, select_value) {
   tagList(
     tags$div(
-      class="govuk-form-group govuk-!-margin-right-4 util-until-desktop-full",
+      class="govuk-form-group util-until-desktop-full form-select-container",
       tags$label(
         HTML(label),
         class="govuk-label govuk-!-font-weight-bold",

@@ -28,7 +28,7 @@ govDateInput <- function(inputId, label, value = NULL, min = NULL, max = NULL,
   value <- restoreInput(id = inputId, default = value)
 
   tags$div(id = inputId,
-    class = "shiny-date-input form-group shiny-input-container",
+    class = "shiny-date-input form-group shiny-input-container util-until-desktop-full",
     style = if (!is.null(width)) paste0("width: ", validateCssUnit(width), ";"),
 
     tags$label(
@@ -37,7 +37,7 @@ govDateInput <- function(inputId, label, value = NULL, min = NULL, max = NULL,
       label
     ),
     tags$input(type = "text",
-               class = "govuk-input govuk-input--width-10",
+               class = "govuk-input util-until-desktop-full",
                id = paste0(inputId, "_input"),
                `data-date-language` = language,
                `data-date-week-start` = weekstart,

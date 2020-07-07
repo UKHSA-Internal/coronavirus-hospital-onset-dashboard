@@ -224,14 +224,15 @@ function(input, output, session) {
   output$valuebox_prop <- renderUI({
     valueBox(
       "Linked",
-      paste0(sum(vb_data()$p[vb_data()$linkgrp]))
+      paste0(sum(vb_data()$p[vb_data()$linkgrp]),"%")
     )
   })
 
   output$valuebox_co <- renderUI({
     valueBox(
       "CO",
-      paste0(ifelse(any(vb_data()$hcai_group == "CO"), vb_data()$link_p[vb_data()$hcai_group == "CO"],0),
+      paste0(ifelse(any(vb_data()$hcai_group == "CO"),
+                    vb_data()$link_p[vb_data()$hcai_group == "CO"],0),
       "%")
     )
   })

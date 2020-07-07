@@ -13,6 +13,7 @@ library(tidyr, warn.conflicts = FALSE)
 library(lubridate, warn.conflicts = FALSE)
 library(sass, warn.conflicts = FALSE)
 library(markdown, warn.conflicts = FALSE)
+library(ggplot2, warn.conflicts = FALSE)
 library(plotly, warn.conflicts = FALSE)
 library(DT, warn.conflicts = FALSE)
 

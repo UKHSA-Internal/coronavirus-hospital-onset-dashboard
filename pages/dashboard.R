@@ -84,6 +84,7 @@ dashboard <- function(title, content) {
           ),
           # text for sidebar
           includeMarkdown("content/filter.md")
+    tags$title("Dashboard - Healthcare associated COVID-19 Surveillance in England"),
         ),
         # Show a plot of the generated distribution
         mainPanel(

@@ -24,7 +24,7 @@ header <- function(id,serviceName="Service name") {
           class="govuk-header__content",
           tags$a(
             class="govuk-header__link govuk-header__link--service-name",
-            href="/",
+            href="#!/",
             serviceName
           )
         )

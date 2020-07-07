@@ -82,7 +82,7 @@ dashboard <- function(title, content) {
           "Linked cases only"),
         select_value = c(1, 0)
       ),
-      shiny::dateInput(
+      govDateInput(
         "date_filter",
         label = "Filter dates before",
         min = min(hcai$wk_start),

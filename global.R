@@ -38,9 +38,9 @@ source("pages/information.R")
 source("pages/accessibility.R")
 
 # Pages
-home_page <- template("Home page", uiOutput("current_page"), home())
-dashboard_page <- template("Dashboard page", uiOutput("current_page"), dashboard())
-info_page <- template("Info page", uiOutput("current_page"), information())
+home_page <- template("home", home())
+dashboard_page <- template("dashboard", dashboard())
+info_page <- template("information", information())
 ally_page <- accessibility()
 
 # Creates router. We provide routing path, a UI as

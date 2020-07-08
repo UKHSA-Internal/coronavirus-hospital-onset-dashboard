@@ -1,8 +1,8 @@
-template <- function(title, current_page, content) {
+template <- function(title, content) {
   tagList(
     tags$div(
       class="dashboard-container",
-      sideNavigation(current_page),
+      sideNavigation(title),
       tags$div(
         class="dashboard-content",
         tagList(content)

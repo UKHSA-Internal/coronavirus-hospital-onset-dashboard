@@ -1,0 +1,47 @@
+/* Tabs
+*/
+
+.nav-tabs {
+  border-bottom: 0;
+  padding-bottom: 20px;
+    > li {
+      margin-right: 30px;
+      a {
+        @extend %govuk-link;
+        padding: 0 0 2px 0;
+        border: 0;
+        font-size: 19px;
+        text-decoration: none;
+        cursor: pointer;
+        &:hover {
+          border-bottom: 4px solid $govuk-link-colour;
+          background-color: transparent;
+        }
+        &:focus {
+          border-radius: 0;
+          box-shadow: none;
+          border-bottom: 4px solid $govuk-focus-text-colour;
+        }
+      }
+    }
+    > li.active {
+      a {
+        @extend %govuk-link;
+        font-weight: bold;
+        border: 0;
+        border-bottom: 4px solid $govuk-link-colour;
+        &:hover {
+          cursor: pointer;
+          color: $govuk-link-colour;
+          border: 0;
+          border-bottom: 4px solid $govuk-link-colour;
+        }
+        &:focus {
+          background: $govuk-focus-colour;
+          color: $govuk-focus-text-colour;
+          border: 0;
+          border-bottom: 4px solid $govuk-focus-text-colour;
+        }
+    }
+  }
+}

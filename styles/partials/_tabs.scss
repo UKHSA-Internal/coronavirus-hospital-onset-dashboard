@@ -30,6 +30,7 @@
         font-weight: bold;
         border: 0;
         border-bottom: 4px solid $govuk-link-colour;
+        background-color: transparent;
         &:hover {
           cursor: pointer;
           color: $govuk-link-colour;

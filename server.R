@@ -201,75 +201,72 @@ function(input, output, session) {
   #### VALUE BOXES FOR DATA INDICATORS ##########################################
 
   # Template
-  valueBox <- function(label,number){
+  valueBox <- function(label,number,tooltipText="Current capacity target"){
     tagList(
       p(
         class="govuk-!-font-size-16 govuk-!-margin-bottom-0 govuk-caption-m",
         label
       ),
       h3(
-        class="govuk-heading-m govuk-!-font-weight-regular govuk-!-margin-bottom-0 govuk-!-padding-top-0",
-        number
+        class="govuk-heading-m govuk-!-font-weight-regular govuk-!-margin-bottom-0 govuk-!-padding-top-0 hasGovTooltip",
+        number,
+        tags$span(
+          class="govTooltip",
+          tooltipText
+        )
       )
     )
   }
 
   output$valuebox_total <- renderUI({
     valueBox(
-      "Total",
-      paste(sum(vb_data()$n))
+      label = "Total",
+      number = paste(sum(vb_data()$n)),
+      tooltipText = "Total Healthcare Associated Infections (HCAI)"
     )
   })
 
   output$valuebox_prop <- renderUI({
     valueBox(
-      "Linked",
-      paste0(sum(vb_data()$p[vb_data()$linkgrp]),"%")
+      label = "Linked",
+      number = paste0(sum(vb_data()$p[vb_data()$linkgrp]),"%"),
+      tooltipText = "Linked COVID19 Positive Specimen"
     )
   })
 
   output$valuebox_co <- renderUI({
     valueBox(
-      "CO",
-      paste0(ifelse(any(vb_data()$hcai_group == "CO"),
-                    vb_data()$link_p[vb_data()$hcai_group == "CO"],0),
-      "%")
+      label = "CO",
+      number = paste0(ifelse(any(vb_data()$hcai_group == "CO"),
+        vb_data()$link_p[vb_data()$hcai_group == "CO"],0),"%"),
+      tooltipText = "Community Onset (CO)"
     )
   })
 
   output$valuebox_hoiha <- renderUI({
     valueBox(
-      "HO.iHA",
-      paste0(ifelse(
-        any(vb_data()$hcai_group == "HO.iHA"),
-        vb_data()$link_p[vb_data()$hcai_group == "HO.iHA"],
-        0
-      ),
-        "%")
+      label = "HO.iHA",
+      number = paste0(ifelse(any(vb_data()$hcai_group == "HO.iHA"),
+        vb_data()$link_p[vb_data()$hcai_group == "HO.iHA"],0),"%"),
+      tooltipText = "Hospital-Onset Indeterminate Healthcare-Associated (HO.iHA)"
     )
   })
 
   output$valuebox_hopha <- renderUI({
     valueBox(
-      "HO.pHA",
-      paste0(ifelse(
-        any(vb_data()$hcai_group == "HO.pHA"),
-        vb_data()$link_p[vb_data()$hcai_group == "HO.pHA"],
-        0
-      ),
-        "%")
+      label = "HO.pHA",
+      number = paste0(ifelse(any(vb_data()$hcai_group == "HO.pHA"),
+        vb_data()$link_p[vb_data()$hcai_group == "HO.pHA"],0),"%"),
+      tooltipText = "Hospital-Onset Probable Healthcare-Associated (HO.pHA)"
     )
   })
 
   output$valuebox_hoha <- renderUI({
     valueBox(
-      "HO.HA",
-      paste0(ifelse(
-        any(vb_data()$hcai_group == "HO.HA"),
-        vb_data()$link_p[vb_data()$hcai_group == "HO.HA"],
-        0
-      ),
-        "%")
+      label = "HO.HA",
+      number = paste0(ifelse(any(vb_data()$hcai_group == "HO.HA"),
+        vb_data()$link_p[vb_data()$hcai_group == "HO.HA"],0),"%"),
+      tooltipText = "Hospital-Onset Healthcare-Associated (HO.HA)"
     )
   })
 

@@ -143,7 +143,6 @@ dashboard <- function(title, content) {
         ),
         tabPanel(
           title = "Data",
-          h1("Data table"),
           DT::dataTableOutput("data_table")
         )
       )

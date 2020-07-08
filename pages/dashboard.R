@@ -135,12 +135,12 @@ dashboard <- function(title, content) {
       p(shiny::textOutput("data_for_text")),
       tabsetPanel(
         tabPanel(
-          title = "Dashboard",
+          title = "Chart",
           plotly::plotlyOutput("plotly_count"),
           plotly::plotlyOutput("plotly_proportion")
         ),
         tabPanel(
-          title = "Data table",
+          title = "Data",
           h1("Data table"),
           DT::dataTableOutput("data_table")
         )

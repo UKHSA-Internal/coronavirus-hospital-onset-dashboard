@@ -222,7 +222,7 @@ function(input, output, session) {
     valueBox(
       label = "Total",
       number = paste(sum(vb_data()$n)),
-      tooltipText = "Total Healthcare Associated Infections (HCAI)"
+      tooltipText = "Total COVID-19 infections reported by NHS laboratories"
     )
   })
 
@@ -230,7 +230,7 @@ function(input, output, session) {
     valueBox(
       label = "Linked",
       number = paste0(sum(vb_data()$p[vb_data()$linkgrp]),"%"),
-      tooltipText = "Linked COVID19 Positive Specimen"
+      tooltipText = "Proportion of COVID-19 cases linked to a hospital record"
     )
   })
 
@@ -239,7 +239,7 @@ function(input, output, session) {
       label = "CO",
       number = paste0(ifelse(any(vb_data()$hcai_group == "CO"),
         vb_data()$link_p[vb_data()$hcai_group == "CO"],0),"%"),
-      tooltipText = "Community Onset (CO)"
+      tooltipText = "Proportion of linked cases which are Community Onset (CO)"
     )
   })
 
@@ -248,7 +248,7 @@ function(input, output, session) {
       label = "HO.iHA",
       number = paste0(ifelse(any(vb_data()$hcai_group == "HO.iHA"),
         vb_data()$link_p[vb_data()$hcai_group == "HO.iHA"],0),"%"),
-      tooltipText = "Hospital-Onset Indeterminate Healthcare-Associated (HO.iHA)"
+      tooltipText = "Proportion of linked cases which are Hospital-Onset Indeterminate Healthcare-Associated (HO.iHA)"
     )
   })
 
@@ -257,7 +257,7 @@ function(input, output, session) {
       label = "HO.pHA",
       number = paste0(ifelse(any(vb_data()$hcai_group == "HO.pHA"),
         vb_data()$link_p[vb_data()$hcai_group == "HO.pHA"],0),"%"),
-      tooltipText = "Hospital-Onset Probable Healthcare-Associated (HO.pHA)"
+      tooltipText = "Proportion of linked cases which are Hospital-Onset Probable Healthcare-Associated (HO.pHA)"
     )
   })
 
@@ -266,7 +266,7 @@ function(input, output, session) {
       label = "HO.HA",
       number = paste0(ifelse(any(vb_data()$hcai_group == "HO.HA"),
         vb_data()$link_p[vb_data()$hcai_group == "HO.HA"],0),"%"),
-      tooltipText = "Hospital-Onset Healthcare-Associated (HO.HA)"
+      tooltipText = "Proportion of linked cases which are Hospital-Onset Healthcare-Associated (HO.HA)"
     )
   })
 

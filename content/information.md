@@ -19,12 +19,22 @@ Where a patient has had multiple hospital admissions, priority is given to: (1) 
 Cases are presented in Healthcare associated infection (HCAI) categories. Allocation to a HCAI category is calculated using the first positive COVID19 PCR test result per patient, paired with the date of admission for an inpatient hospital stay or an emergency care A&E attendance.
 
 Records are not allocated to an HCAI category where COVID19 positive tests have not linked to a hospital admission. In these unlinked cases, hospital provider sites are determined based on the reporting laboratory. Unlinked cases may be related to healthcare staff, outpatient or nursing home patients tested within the NHS or PHE laboratories who do not have a record on ECDS or SUS.
-| HCAI Category                                                | Criteria                                                                                                                                                                                  |
-|--------------------|-------------------------------------------------------------------------------------------------|
-| Community-Onset (CO)                                         | Positive specimen date <=2 days after hospital admission  <br>or  <br>hospital attendance ±14 days from a positive specimen date with no test during a confirmed hospital admission <br>  |
-| Hospital-Onset Indeterminate Healthcare-Associated (HO.iHA)  | Positive specimen date 3-7 days after hospital admission                                                                                                                                  |
-| Hospital-Onset Probable Healthcare-Associated (HO.pHA)       | Positive specimen date 8-14 days after hospital admission                                                                                                                                 |
-| Hospital-Onset Definite Healthcare-Associated (HO.dHA)       | Positive specimen date 15 or more days after hospital admission                                                                                                                           |
-| Unlinked COVID-19 Positive Specimen                          | No link was made between the positive test and a hospital stay; HCAI category cannot be established                                                                                       |
+
+### Community-Onset (CO)
+
+Positive specimen date <=2 days after hospital admission  _or_ hospital attendance ±14 days from a positive specimen date with no test during a confirmed hospital admission
+
+### Hospital-Onset Indeterminate Healthcare-Associated (HO.iHA)
+
+Positive specimen date 3-7 days after hospital admission
+
+### Hospital-Onset Probable Healthcare-Associated (HO.pHA)
+Positive specimen date 8-14 days after hospital admission
+
+### Hospital-Onset Definite Healthcare-Associated (HO.dHA)
+Positive specimen date 15 or more days after hospital admission
+
+### Unlinked COVID-19 Positive Specimen
+HCAI category cannot be established as there was no time-relevant hospital record found for the positive case.
 
 [Questions or feedback?](mailto:coronavirus-hcai@phe.gov.uk?subject=COVID%20%HCAI%20%Dashboard)

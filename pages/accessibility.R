@@ -6,6 +6,9 @@ accessibility <- function(title, content) {
         href="#!/dashboard",
         "Back to dashboard"
     ),
-    includeMarkdown("content/accessibility.md")
+    tags$div(
+        class="markdown util-text-max-width",
+        includeMarkdown("content/accessibility.md")
+    )
   )
 }

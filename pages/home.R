@@ -8,6 +8,9 @@ home <- function(title, content) {
     tags$hr(
         class="govuk-section-break govuk-section-break--m govuk-!-margin-top-2 govuk-!-margin-bottom-4 govuk-section-break--visible"
     ),
-    includeMarkdown("content/home.md")
+    tags$div(
+        class="markdown util-text-max-width",
+        includeMarkdown("content/home.md")
+    )
   )
 }

@@ -4,6 +4,7 @@ template <- function(title, content) {
       class="dashboard-container",
       sideNavigation(title),
       tags$div(
+        id="content",
         class="dashboard-content",
         tagList(content)
       )

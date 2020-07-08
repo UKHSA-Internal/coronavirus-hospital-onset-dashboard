@@ -16,6 +16,11 @@ bootstrapPage(
       tags$link(href = "main.css", rel = "stylesheet", type = "text/css")
     ),
     tags$body(class="govuk-template__body"),
+    tags$a(
+      class="govuk-skip-link",
+      href="#content",
+      "Skip to main content"
+    ),
     header(serviceName="Healthcare associated COVID-19 Surveillance in England"),
     banner("banner", "beta", 'This is a new service – your <a class="govuk-link" href="mailto:coronavirus-hcai@phe.gov.uk">feedback</a> will help us to improve it.'),
     tags$div(class="govuk-width-container",

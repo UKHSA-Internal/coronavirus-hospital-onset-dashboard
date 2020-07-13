@@ -385,6 +385,9 @@ function(input, output, session) {
     for(lower in c("All","Of","The","For","In")) {
       t <- stringr::str_replace_all(t,lower,stringr::str_to_lower(lower))
     }
+
+    HTML(t)
+
   })
 
 }

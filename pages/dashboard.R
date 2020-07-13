@@ -134,10 +134,10 @@ dashboard <- function(title, content) {
       p(
         class="util-text-max-width",
         "Chart showing the breakdown number of COVID-19 cases by HCAI category: Unlinked, CO, HO.iHA, HO.pHA and HO.HA."
-        ),
-      p(class="util-text-max-width",
-        shiny::textOutput("data_for_text")
-        ),
+      ),
+      p(class="util-text-max-width govuk-!-font-weight-bold",
+        textOutput("data_for_text",inline=TRUE)
+      ),
       tabsetPanel(
         tabPanel(
           title = "Chart",

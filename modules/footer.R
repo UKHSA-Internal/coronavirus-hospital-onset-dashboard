@@ -38,7 +38,6 @@ footer <- function(full = FALSE){
               tag(
                 "svg",
                 list(
-                  role = "presentation",
                   focusable = "false",
                   class = "govuk-footer__licence-logo",
                   xmlns = "http://www.w3.org/2000/svg",

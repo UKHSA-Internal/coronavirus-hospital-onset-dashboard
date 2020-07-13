@@ -141,6 +141,8 @@ dashboard <- function(title, content) {
       tabsetPanel(
         tabPanel(
           title = "Chart",
+          tags$h4(class="govuk-visually-hidden", "Interactive bar chart displaying the number of COVID-19 cases by HCAI category."),
+          tags$p(class="govuk-visually-hidden", "Please note this bar chart is not accessible via assistive technologies. We have provided the same data in an accessible tabular format under the tab called 'Data'."),
           plotly::plotlyOutput("plotly_count"),
           plotly::plotlyOutput("plotly_proportion")
         ),

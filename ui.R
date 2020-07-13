@@ -12,7 +12,6 @@ tags$body(
   class="govuk-template__body",
   bootstrapPage(
     tags$div(
-      tags$html(lang="en", class="govuk-template"),
       tags$head(
         tags$link(href = "main.css", rel = "stylesheet", type = "text/css"),
         tags$title("Healthcare associated COVID-19 Surveillance in England")

@@ -20,7 +20,6 @@ function(input, output, session) {
   unfiltered <- reactive({
     ## filter dates always
     d <- hcai %>%
-      filter(wk_start >= input$date_filter) %>%
       ungroup()
 
     ## NHS region

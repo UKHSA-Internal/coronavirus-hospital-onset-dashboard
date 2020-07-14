@@ -27,7 +27,6 @@ source("modules/header.R")
 source("modules/banner.R")
 source("modules/footer.R")
 source("modules/selectInput.R")
-source("modules/govDateInput.R")
 source("modules/sideNavigation.R")
 
 # Pages

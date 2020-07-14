@@ -350,9 +350,11 @@ function(input, output, session) {
       DT::datatable(
         dt,
         extensions = 'Buttons',
-        options=list(pageLength=25,
+        options=list(
+          pageLength=25,
           dom = 'Bfrtip',
-          buttons=c('copy','csv')),
+          buttons=c('copy','csv'),
+          searching = FALSE),
         rownames = FALSE) %>%
         DT::formatPercentage(grep("%",names(dt)),1)
 

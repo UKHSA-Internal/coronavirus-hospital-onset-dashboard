@@ -37,4 +37,4 @@ Positive specimen date 15 or more days after hospital admission
 #### Unlinked COVID-19 Positive Specimen
 HCAI category cannot be established as there was no time-relevant hospital record found for the positive case.
 
-[Questions or feedback?](mailto:coronavirus-hcai@phe.gov.uk?subject=COVID%20%HCAI%20%Dashboard)
+<a href="mailto:coronavirus-hcai@phe.gov.uk?subject=COVID HCAI Dashboard" target="_blank">Questions or feedback?</a>

@@ -55,8 +55,8 @@ router <- make_router(
 
 ## font stylings for plotlys
 font_style <- list(
-  family = c("GDS Transport","Arial","sans-serif"),
-  size = 12,
+  family = '"GDS Transport",sans-serif',
+  size = 14,
   color = "black"
 )
 

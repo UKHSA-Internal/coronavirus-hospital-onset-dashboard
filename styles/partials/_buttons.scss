@@ -193,3 +193,14 @@ $button-shadow-size: $govuk-border-width-form-element;
     @extend %button;
   }
 }
+
+// Applying darker column sorting image for better contrast
+table {
+  &.dataTable {
+    thead {
+      .sorting {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAQFJREFUeNpi/P//PwO1ABMDFQELNkFGRkY4OyMjgwtItQFx2YwZM37BxLH5iBiXZQNxFhCnElLIiM0GmMuArtICUjuBWAaI7wCxB9B1d0l2GdAgkInFUINAQAWI86DiJEeAAxAHooklArE1SYYBbecFUrVALIgmBRKvAcqzk+KyEKgLfmDBjkAcRHIE4APY9LHg8GYkkFoAxP9w+CYDiOcT6811QLwfiDmw4KNAvIboMAOmpZ9AqgWIP6NJvQfiZqD8Z1KTxlEsXlkPxAdITmdA20EhPAma8kHgCRD3QsVJLzWgWWcCEP8GGQzkXyO51EADs4FYFYinkpXRB0XhCBBgADtMU0R4UBOGAAAAAElFTkSuQmCC) !important;
+      }
+    }
+  }
+}

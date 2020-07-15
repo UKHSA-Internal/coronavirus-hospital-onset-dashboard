@@ -188,9 +188,12 @@ $button-shadow-size: $govuk-border-width-form-element;
   }
 }
 
-.dt-buttons {
-  button.dt-button {
-    @extend %button;
+.datatables {
+  div.dt-buttons {
+    float: none;
+    button.dt-button {
+      @extend %button;
+    }
   }
 }
 

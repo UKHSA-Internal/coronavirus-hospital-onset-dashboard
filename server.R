@@ -352,7 +352,7 @@ function(input, output, session) {
         extensions = 'Buttons',
         options=list(
           pageLength=25,
-          dom = 'Bfrtip',
+          dom = "Bfr<'table-container't>ip",
           buttons=c('copy','csv'),
           searching = FALSE),
         rownames = FALSE) %>%

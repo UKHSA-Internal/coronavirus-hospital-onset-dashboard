@@ -32,19 +32,19 @@ source("modules/sideNavigation.R")
 # Pages
 source("pages/template.R")
 source("pages/dashboard.R")
-source("pages/information.R")
+source("pages/methods.R")
 source("pages/accessibility.R")
 
 # Pages
 dashboard_page <- template("dashboard", dashboard())
-info_page <- template("information", information())
+methods_page <- template("methods", methods())
 ally_page <- accessibility()
 
 # Creates router. We provide routing path, a UI as
 # well as a server-side callback for each page.
 router <- make_router(
   route("dashboard", dashboard_page, NA),
-  route("information", info_page, NA),
+  route("methods", methods_page, NA),
   route("accessibility", ally_page, NA)
 )
 

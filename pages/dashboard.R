@@ -100,7 +100,7 @@ dashboard <- function(title, content) {
         )
       ),
       tags$div(
-        class="util-flex util-flex-col govuk-!-margin-top-4",
+        class="util-flex util-flex-col govuk-!-margin-right-9 govuk-!-margin-top-4",
         h2(
           class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1",
           "HCAI category breakdown"

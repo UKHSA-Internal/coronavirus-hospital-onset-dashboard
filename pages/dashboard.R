@@ -78,8 +78,7 @@ dashboard <- function(title, content) {
       selectInput(
         "link",
         label = "Case inclusion",
-        select_text = c("Include unlinked cases",
-          "Linked cases only"),
+        select_text = c("Include all cases","Hospital linked cases only"),
         select_value = c(1, 0)
       )
     ),

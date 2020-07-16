@@ -113,6 +113,18 @@ dashboard <- function(title, content) {
           uiOutput('valuebox_hopha', class = "govuk-!-margin-right-6"),
           uiOutput('valuebox_hoha')
         )
+      ),
+      tags$div(
+        class="util-flex util-flex-col govuk-!-margin-top-4",
+        h2(
+          class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1",
+          "Hospital data reporting"
+        ),
+        tags$div(
+          class="util-flex",
+          uiOutput('valuebox_ecds', class = "govuk-!-margin-right-6"),
+          uiOutput('valuebox_sus')
+        )
       )
     ),
     # Show a plot of the generated distribution

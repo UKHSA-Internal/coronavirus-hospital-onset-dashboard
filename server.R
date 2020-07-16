@@ -436,7 +436,7 @@ function(input, output, session) {
 
   })
 
-}
+
   output$chart_description_text <- renderText({
 
     t <- paste(

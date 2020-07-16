@@ -62,17 +62,21 @@ font_style <- list(
 
 #### PREP SOURCE DATA ###########################################################
 
+unlinked <- "No hospital record"
+
 # Transform and prep
 hcai <- hcai %>%
+  mutate(hcai_group=ifelse(hcai_group=="Unlinked",unlinked,hcai_group)) %>%
   mutate(wk_start=ymd(wk_start),
     ecds_last_update=ymd(ecds_last_update),
     sus_last_update=ymd(sus_last_update),
     hcai_group=factor(hcai_group,
-      levels = c("Unlinked",
+      levels = c(
         "CO",
         "HO.iHA",
         "HO.pHA",
-        "HO.HA"
+        "HO.HA",
+        unlinked
       )
     )
   ) %>%
@@ -93,9 +97,9 @@ hcai <- hcai %>%
     trust_name=fct_explicit_na(factor(trust_name),"Unknown"),
     trust_type=fct_explicit_na(factor(trust_type),"Unknown"),
     nhs_region=fct_explicit_na(factor(nhs_region),"Unknown"),
-    hcai_group=fct_explicit_na(hcai_group,"Unlinked"),
-    linkset=if_else(hcai_group=="Unlinked","SGSS",linkset)
+    hcai_group=fct_explicit_na(hcai_group,unlinked)
   )
+
 
 
 #### OUTPUT PLOTLY FUNCTION #####################################################
@@ -104,7 +108,7 @@ plotly_graph <- function(data) {
 
   p <- plot_ly(type='bar')
 
-  for(col in c("CO","HO.iHA","HO.pHA","HO.HA","Unlinked")) {
+  for(col in levels(hcai$hcai_group)) {
     if(col %in% names(data)) {
       p <- p %>%
         add_trace(x=data$wk_start,

@@ -42,7 +42,7 @@ function(input, output, session) {
 
     ## deal with linked/unlinked data
     if (input$link == 0) {
-      d <- d %>% filter(hcai_group != "Unlinked")
+      d <- d %>% filter(hcai_group != unlinked)
 
     } else {
       d <- d
@@ -185,7 +185,7 @@ function(input, output, session) {
 
     ## group up data
     vb <- vb %>%
-      mutate(linkgrp = hcai_group != "Unlinked") %>%
+      mutate(linkgrp = hcai_group != unlinked) %>%
       group_by(linkgrp, hcai_group) %>%
       summarise(n = sum(n),.groups="drop") %>%
       group_by(linkgrp) %>%
@@ -377,20 +377,20 @@ function(input, output, session) {
         mutate(cT = cumsum(wT)) %>%
         arrange(desc(wk_start)) %>%
         select(
-          # wk,
           Week=wk_start,
-          # Cumulative_Total = cT,
           Total = wT,
           ends_with("CO.pHA"),
           ends_with("CO"),
           ends_with("HO.iHA"),
           ends_with("HO.pHA"),
           ends_with("HO.HA"),
-          ends_with("Unlinked")
+          ends_with(unlinked)
         )
 
+      ## rename variables with prefix to suffix
       names(dt) <- sapply(sapply(strsplit(names(dt), "p_"), rev), paste, collapse=" %")
       names(dt) <- sapply(sapply(strsplit(names(dt), "n_"), rev), paste, collapse=" n")
+      names(dt) <- str_replace_all(names(dt),unlinked,"No link")
 
       DT::datatable(
         dt,
@@ -435,7 +435,6 @@ function(input, output, session) {
     HTML(t)
 
   })
-
 
   output$chart_description_text <- renderText({
 

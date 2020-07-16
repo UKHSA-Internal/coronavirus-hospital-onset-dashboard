@@ -20,6 +20,8 @@ library(DT, warn.conflicts = FALSE)
 
 ## load data
 hcai <- readr::read_csv("data/hcai.csv", col_types = cols())
+# github_data <- "https://raw.githubusercontent.com/publichealthengland/hcai-dashboard/development/data/hcai.csv?token=AICMFJGVFSCT3DMHIZRS4BS7DGTFI"
+# hcai <- readr::read_csv(url(github_data)), col_types = cols())
 
 #### UI AND NAV ELEMENTS ########################################################
 # Setting up modules

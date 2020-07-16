@@ -28,6 +28,7 @@ source("modules/banner.R")
 source("modules/footer.R")
 source("modules/selectInput.R")
 source("modules/sideNavigation.R")
+source("modules/valueBox.R")
 
 # Pages
 source("pages/template.R")

@@ -78,7 +78,6 @@ function(input, output, session) {
       inputId = "trust_code",
       choices = c("ALL",levels(factor(unfiltered()$provider_code)))
     )
-
   })
 
 
@@ -239,24 +238,6 @@ function(input, output, session) {
   })
 
   #### VALUE BOXES FOR DATA INDICATORS ##########################################
-
-  # Template
-  valueBox <- function(label,number,tooltipText="Current capacity target"){
-    tagList(
-      p(
-        class="govuk-!-font-size-16 govuk-!-margin-bottom-0 govuk-caption-m",
-        label
-      ),
-      h3(
-        class="govuk-heading-m govuk-!-font-weight-regular govuk-!-margin-bottom-0 govuk-!-padding-top-0 hasGovTooltip",
-        number,
-        tags$span(
-          class="govTooltip",
-          tooltipText
-        )
-      )
-    )
-  }
 
   output$valuebox_total <- renderUI({
     valueBox(

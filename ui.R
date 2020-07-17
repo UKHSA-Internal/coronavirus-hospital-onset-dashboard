@@ -14,7 +14,7 @@ tags$body(
     tags$div(
       tags$head(
         tags$link(href = "main.css", rel = "stylesheet", type = "text/css"),
-        tags$script(src = "js/aria-tooltips.js"),
+        tags$script(src = "main.js"),
         tags$title("Healthcare associated COVID-19 Surveillance in England")
       ),
       header(serviceName="Healthcare associated COVID-19 Surveillance in England"),

@@ -2,7 +2,7 @@ accessibility <- function(title, content) {
   tagList(
     tags$title("Accessibility statement - Healthcare associated COVID-19 Surveillance in England"),
     tags$a(
-        class="govuk-back-link",
+        class="govuk-back-link js-gototop",
         href="#!/dashboard",
         "Back to dashboard"
     ),

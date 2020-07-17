@@ -1,4 +1,10 @@
+// Global object
 let app = {};
+
+// -----------------------------------
+// A11y Tooltip plugin
+// https://www.jqueryscript.net/tooltip/ARIA-Tooltip-Plugin-jQuery.html
+// -----------------------------------
 (function ( $, w, doc, app ) {
 
   // enable strict mode
@@ -89,8 +95,19 @@ let app = {};
 
 })( jQuery, this, this.document, app );
 
+
+// -----------------------------------
+// Run all the things
+// -----------------------------------
 $(function(){
+
+  // Initialise tooltips on input update
   $(document).on('shiny:updateinput', function(event) {
     app.a11yTT.init();
+  })
+
+  // Utility to scroll top of page
+  $('.js-gototop').click(function(){
+    window.scrollTo(0,0);
   })
 })

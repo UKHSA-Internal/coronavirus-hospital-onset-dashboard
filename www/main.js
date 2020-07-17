@@ -14,7 +14,6 @@ let app = {};
   var a11yTT = app.a11yTT;
 
   a11yTT.init = function () {
-    console.log('does this run?')
 
     var $ttContainer  = $('.a11y-tip');
     var ttTrigger     = '.a11y-tip__trigger';

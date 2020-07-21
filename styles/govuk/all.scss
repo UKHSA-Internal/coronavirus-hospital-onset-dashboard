@@ -1,6 +1,7 @@
-$govuk-global-styles: true;
+$govuk-global-styles: false;
 $govuk-page-width: 1600px;
 $govuk-assets-path: "./";
+$govuk-font-family: "HelveticaNeue", Helvetica, Arial, sans-serif;
 
 @import "base";
 

@@ -6,37 +6,26 @@ sideNavigation <- function(page) {
       class="moj-side-navigation",
       tags$ul(
         class="moj-side-navigation__list",
-        if (page == 'home') {
-          tags$li(
-            class="moj-side-navigation__item moj-side-navigation__item--active",
-            a(class = "item", href = "#!/", "Home")
-          )
-        } else {
-          tags$li(
-            class="moj-side-navigation__item",
-            a(class = "item", href = "#!/", "Home")
-          )
-        },
         if (page == 'dashboard') {
           tags$li(
             class="moj-side-navigation__item moj-side-navigation__item--active",
-            a(class = "item", href = "#!/dashboard", "Dashboard")
+            a(class = "item", href = "#!/", "Dashboard")
           )
         } else {
           tags$li(
             class="moj-side-navigation__item",
-            a(class = "item", href = "#!/dashboard", "Dashboard")
+            a(class = "item", href = "#!/", "Dashboard")
           )
         },
-        if (page == 'information') {
+        if (page == 'methods') {
           tags$li(
             class="moj-side-navigation__item moj-side-navigation__item--active",
-            a(class = "item", href = "#!/information", "Information")
+            a(class = "item", href = "#!/methods", "Methods")
           )
         } else {
           tags$li(
             class="moj-side-navigation__item",
-            a(class = "item", href = "#!/information", "Information")
+            a(class = "item", href = "#!/methods", "Methods")
           )
         }
       )

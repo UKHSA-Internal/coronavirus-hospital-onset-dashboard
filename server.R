@@ -20,7 +20,6 @@ function(input, output, session) {
   unfiltered <- reactive({
     ## filter dates always
     d <- hcai %>%
-      filter(wk_start >= input$date_filter) %>%
       ungroup()
 
     ## NHS region
@@ -43,7 +42,7 @@ function(input, output, session) {
 
     ## deal with linked/unlinked data
     if (input$link == 0) {
-      d <- d %>% filter(hcai_group != "Unlinked")
+      d <- d %>% filter(hcai_group != unlinked)
 
     } else {
       d <- d
@@ -79,7 +78,6 @@ function(input, output, session) {
       inputId = "trust_code",
       choices = c("ALL",levels(factor(unfiltered()$provider_code)))
     )
-
   })
 
 
@@ -187,7 +185,7 @@ function(input, output, session) {
 
     ## group up data
     vb <- vb %>%
-      mutate(linkgrp = hcai_group != "Unlinked") %>%
+      mutate(linkgrp = hcai_group != unlinked) %>%
       group_by(linkgrp, hcai_group) %>%
       summarise(n = sum(n),.groups="drop") %>%
       group_by(linkgrp) %>%
@@ -198,25 +196,48 @@ function(input, output, session) {
         p = round(n / t * 100, 1))
   })
 
-  #### VALUE BOXES FOR DATA INDICATORS ##########################################
+  reporting_indicator <- reactive({
 
-  # Template
-  valueBox <- function(label,number,tooltipText="Current capacity target"){
-    tagList(
-      p(
-        class="govuk-!-font-size-16 govuk-!-margin-bottom-0 govuk-caption-m",
-        label
-      ),
-      h3(
-        class="govuk-heading-m govuk-!-font-weight-regular govuk-!-margin-bottom-0 govuk-!-padding-top-0 hasGovTooltip",
-        number,
-        tags$span(
-          class="govTooltip",
-          tooltipText
+    rp <- data() %>%
+      mutate(
+        ecds_timely = ifelse(
+          ecds_last_update >= wk_start & !is.na(ecds_last_update), 1, 0),
+        sus_timely = ifelse(
+          sus_last_update >= wk_start & !is.na(sus_last_update), 1, 0
         )
+      ) %>%
+      group_by(nhs_region, provider_code, wk_start) %>%
+      summarise(ecds_timely = max(ecds_timely,na.rm=T),
+                sus_timely = max(sus_timely,na.rm=T),
+                .groups="drop") %>%
+      group_by(wk_start) %>%
+      summarise(n_trusts_ecds = sum(ecds_timely),
+                n_trusts_sus = sum(sus_timely),
+                .groups="drop") %>%
+      mutate(
+        pc_trust_rptng_ecds = (n_trusts_ecds / max(n_trusts_ecds,na.rm=T)) * 100,
+        pc_trust_rptng_sus = (n_trusts_sus / max(n_trusts_sus,na.rm=T)) * 100
       )
-    )
-  }
+
+  })
+
+  report_prop_cutoff <- 75
+
+  ecds_reporting <- reactive({
+    rp <- reporting_indicator() %>%
+      filter(pc_trust_rptng_ecds >= report_prop_cutoff) %>%
+      filter(wk_start == max(wk_start)) %>%
+      pull(wk_start)
+  })
+
+  sus_reporting <- reactive({
+    rp <- reporting_indicator() %>%
+      filter(pc_trust_rptng_sus >= report_prop_cutoff) %>%
+      filter(wk_start == max(wk_start)) %>%
+      pull(wk_start)
+  })
+
+  #### VALUE BOXES FOR DATA INDICATORS ##########################################
 
   output$valuebox_total <- renderUI({
     valueBox(
@@ -267,6 +288,29 @@ function(input, output, session) {
       number = paste0(ifelse(any(vb_data()$hcai_group == "HO.HA"),
         vb_data()$link_p[vb_data()$hcai_group == "HO.HA"],0),"%"),
       tooltipText = "Proportion of linked cases which are Hospital-Onset Healthcare-Associated (HO.HA)"
+    )
+  })
+
+  output$valuebox_ecds <- renderUI({
+    valueBox(
+      label = "A&E attendance data",
+      number = format(ecds_reporting(),"%d %b %Y"),
+      tooltipText = ifelse(
+        input$trust_code=="ALL",
+        "75% of Trusts reporting ECDS A&E data",
+        "Most recent ECDS A&E data submission"
+        )
+    )
+  })
+  output$valuebox_sus <- renderUI({
+    valueBox(
+      label = "Admitted patient data",
+      number = format(sus_reporting(),"%d %b %Y"),
+      tooltipText = ifelse(
+        input$trust_code=="ALL",
+        "75% of Trusts reporting SUS hospital inpatient data",
+        "Most recent SUS hospital inpatient data submission"
+      )
     )
   })
 
@@ -333,27 +377,29 @@ function(input, output, session) {
         mutate(cT = cumsum(wT)) %>%
         arrange(desc(wk_start)) %>%
         select(
-          # wk,
           Week=wk_start,
-          # Cumulative_Total = cT,
           Total = wT,
           ends_with("CO.pHA"),
           ends_with("CO"),
           ends_with("HO.iHA"),
           ends_with("HO.pHA"),
           ends_with("HO.HA"),
-          ends_with("Unlinked")
+          ends_with(unlinked)
         )
 
+      ## rename variables with prefix to suffix
       names(dt) <- sapply(sapply(strsplit(names(dt), "p_"), rev), paste, collapse=" %")
       names(dt) <- sapply(sapply(strsplit(names(dt), "n_"), rev), paste, collapse=" n")
+      names(dt) <- str_replace_all(names(dt),unlinked,"No link")
 
       DT::datatable(
         dt,
         extensions = 'Buttons',
-        options=list(pageLength=25,
-          dom = 'Bfrtip',
-          buttons=c('copy','csv')),
+        options=list(
+          pageLength=25,
+          dom = "Bfr<'table-container't>ip",
+          buttons=c('csv'),
+          searching = FALSE),
         rownames = FALSE) %>%
         DT::formatPercentage(grep("%",names(dt)),1)
 
@@ -386,6 +432,20 @@ function(input, output, session) {
       t <- stringr::str_replace_all(t,lower,stringr::str_to_lower(lower))
     }
 
+    HTML(t)
+
+  })
+
+  output$chart_description_text <- renderText({
+
+    t <- paste(
+      "Chart showing the breakdown number of COVID-19 cases by HCAI category:",
+      ifelse(
+        input$link==1,
+        "those with no hospital record, CO, HO.iHA, HO.pHA and HO.HA.",
+        "CO, HO.iHA, HO.pHA and HO.HA."
+      )
+    )
     HTML(t)
 
   })

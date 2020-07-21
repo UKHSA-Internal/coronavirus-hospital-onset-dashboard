@@ -20,6 +20,8 @@ library(DT, warn.conflicts = FALSE)
 
 ## load data
 hcai <- readr::read_csv("data/hcai.csv", col_types = cols())
+# github_data <- "https://raw.githubusercontent.com/publichealthengland/hcai-dashboard/development/data/hcai.csv?token=AICMFJGVFSCT3DMHIZRS4BS7DGTFI"
+# hcai <- readr::read_csv(url(github_data)), col_types = cols())
 
 #### UI AND NAV ELEMENTS ########################################################
 # Setting up modules
@@ -27,53 +29,54 @@ source("modules/header.R")
 source("modules/banner.R")
 source("modules/footer.R")
 source("modules/selectInput.R")
-source("modules/govDateInput.R")
 source("modules/sideNavigation.R")
+source("modules/valueBox.R")
 
 # Pages
 source("pages/template.R")
-source("pages/home.R")
 source("pages/dashboard.R")
-source("pages/information.R")
+source("pages/methods.R")
 source("pages/accessibility.R")
 
 # Pages
-home_page <- template("home", home())
 dashboard_page <- template("dashboard", dashboard())
-info_page <- template("information", information())
+methods_page <- template("methods", methods())
 ally_page <- accessibility()
 
 # Creates router. We provide routing path, a UI as
 # well as a server-side callback for each page.
 router <- make_router(
-  route("home", home_page, NA),
   route("dashboard", dashboard_page, NA),
-  route("information", info_page, NA),
+  route("methods", methods_page, NA),
   route("accessibility", ally_page, NA)
 )
 
 
 ## font stylings for plotlys
 font_style <- list(
-  family = c("GDS Transport","Arial","sans-serif"),
-  size = 12,
+  family = '"GDS Transport",sans-serif',
+  size = 14,
   color = "black"
 )
 
 
 #### PREP SOURCE DATA ###########################################################
 
+unlinked <- "No hospital record"
+
 # Transform and prep
 hcai <- hcai %>%
+  mutate(hcai_group=ifelse(hcai_group=="Unlinked",unlinked,hcai_group)) %>%
   mutate(wk_start=ymd(wk_start),
     ecds_last_update=ymd(ecds_last_update),
     sus_last_update=ymd(sus_last_update),
     hcai_group=factor(hcai_group,
-      levels = c("Unlinked",
+      levels = c(
         "CO",
         "HO.iHA",
         "HO.pHA",
-        "HO.HA"
+        "HO.HA",
+        unlinked
       )
     )
   ) %>%
@@ -94,9 +97,9 @@ hcai <- hcai %>%
     trust_name=fct_explicit_na(factor(trust_name),"Unknown"),
     trust_type=fct_explicit_na(factor(trust_type),"Unknown"),
     nhs_region=fct_explicit_na(factor(nhs_region),"Unknown"),
-    hcai_group=fct_explicit_na(hcai_group,"Unlinked"),
-    linkset=if_else(hcai_group=="Unlinked","SGSS",linkset)
+    hcai_group=fct_explicit_na(hcai_group,unlinked)
   )
+
 
 
 #### OUTPUT PLOTLY FUNCTION #####################################################
@@ -105,7 +108,7 @@ plotly_graph <- function(data) {
 
   p <- plot_ly(type='bar')
 
-  for(col in c("CO","HO.iHA","HO.pHA","HO.HA","Unlinked")) {
+  for(col in levels(hcai$hcai_group)) {
     if(col %in% names(data)) {
       p <- p %>%
         add_trace(x=data$wk_start,

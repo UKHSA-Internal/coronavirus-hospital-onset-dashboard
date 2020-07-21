@@ -1,16 +1,16 @@
-home <- function(title, content) {
+methods <- function(title, content) {
   tagList(
-    tags$title("Healthcare associated COVID-19 Surveillance in England"),
+    tags$title("Methods - Healthcare associated COVID-19 Surveillance in England"),
     h1(
         class="govuk-caption-l govuk-!-margin-0 govuk-!-padding-top-3",
-        "Home"
+        "Methods"
     ),
     tags$hr(
         class="govuk-section-break govuk-section-break--m govuk-!-margin-top-2 govuk-!-margin-bottom-4 govuk-section-break--visible"
     ),
     tags$div(
         class="markdown util-text-max-width",
-        includeMarkdown("content/home.md")
+        includeMarkdown("content/methods.md")
     )
   )
 }

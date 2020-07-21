@@ -34,6 +34,7 @@
         &:hover {
           cursor: pointer;
           color: $govuk-link-colour;
+          background-color: transparent;
           border: 0;
           border-bottom: 4px solid $govuk-link-colour;
         }

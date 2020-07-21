@@ -78,18 +78,8 @@ dashboard <- function(title, content) {
       selectInput(
         "link",
         label = "Case inclusion",
-        select_text = c("Include unlinked cases",
-          "Linked cases only"),
+        select_text = c("Include all cases","Hospital linked cases only"),
         select_value = c(1, 0)
-      ),
-      govDateInput(
-        "date_filter",
-        label = "Filter dates before",
-        min = min(hcai$wk_start),
-        max = max(hcai$wk_start),
-        value = "2020-03-01",
-        format = "dd MM yyyy",
-        width = 170
       )
     ),
     tags$hr(
@@ -110,7 +100,7 @@ dashboard <- function(title, content) {
         )
       ),
       tags$div(
-        class="util-flex util-flex-col govuk-!-margin-top-4",
+        class="util-flex util-flex-col govuk-!-margin-right-9 govuk-!-margin-top-4",
         h2(
           class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1",
           "HCAI category breakdown"
@@ -121,6 +111,18 @@ dashboard <- function(title, content) {
           uiOutput('valuebox_hoiha', class = "govuk-!-margin-right-6"),
           uiOutput('valuebox_hopha', class = "govuk-!-margin-right-6"),
           uiOutput('valuebox_hoha')
+        )
+      ),
+      tags$div(
+        class="util-flex util-flex-col govuk-!-margin-top-4",
+        h2(
+          class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1",
+          "Hospital data reporting"
+        ),
+        tags$div(
+          class="util-flex",
+          uiOutput('valuebox_ecds', class = "govuk-!-margin-right-6"),
+          uiOutput('valuebox_sus')
         )
       )
     ),
@@ -133,7 +135,7 @@ dashboard <- function(title, content) {
       ),
       p(
         class="util-text-max-width",
-        "Chart showing the breakdown number of COVID-19 cases by HCAI category: Unlinked, CO, HO.iHA, HO.pHA and HO.HA."
+        textOutput("chart_description_text",inline=TRUE)
       ),
       p(class="util-text-max-width govuk-!-font-weight-bold",
         textOutput("data_for_text",inline=TRUE)

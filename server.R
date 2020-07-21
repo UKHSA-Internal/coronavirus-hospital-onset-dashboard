@@ -398,7 +398,7 @@ function(input, output, session) {
         options=list(
           pageLength=25,
           dom = "Bfr<'table-container't>ip",
-          buttons=c('copy','csv'),
+          buttons=c('csv'),
           searching = FALSE),
         rownames = FALSE) %>%
         DT::formatPercentage(grep("%",names(dt)),1)

@@ -13,7 +13,7 @@ tags$body(
   bootstrapPage(
     tags$div(
       tags$head(
-        tags$link(href="favicon.ico", rel="shortcut icon"),
+        tags$link(href="crown.ico", rel="shortcut icon"),
         tags$link(href = "main.css", rel = "stylesheet", type = "text/css"),
         tags$script(src = "main.js"),
         tags$title("Healthcare associated COVID-19 Surveillance in England")

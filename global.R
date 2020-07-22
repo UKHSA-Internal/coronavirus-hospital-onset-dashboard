@@ -19,7 +19,7 @@ library(plotly, warn.conflicts = FALSE)
 library(DT, warn.conflicts = FALSE)
 
 ## load data
-hcai <- readr::read_csv("data/hcai.csv", col_types = cols())
+hcai <- readr::read_csv("data/hcai.csv", col_types = readr::cols())
 # github_data <- "https://raw.githubusercontent.com/publichealthengland/hcai-dashboard/development/data/hcai.csv?token=AICMFJGVFSCT3DMHIZRS4BS7DGTFI"
 # hcai <- readr::read_csv(url(github_data)), col_types = cols())
 

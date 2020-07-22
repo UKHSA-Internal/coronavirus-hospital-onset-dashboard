@@ -161,7 +161,7 @@ plotly_graph <- function(data) {
                     pad = 5)
     ) %>%
     config(displaylogo = FALSE,
-           modeBarButtons = list(list("resetView","toImage")))
+           modeBarButtonsToRemove = list("zoom2d", "pan2d", "select2d", "lasso2d", "zoomIn2d", "zoomOut2d", "autoScale2d"))
 
 
   return(p)

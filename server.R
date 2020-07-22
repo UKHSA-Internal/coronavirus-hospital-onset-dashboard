@@ -71,12 +71,14 @@ function(input, output, session) {
     updateSelectInput(
       session = session,
       inputId = "trust_name",
-      choices = c("ALL",levels(factor(unfiltered()$trust_name)))
+      choices = c("ALL",levels(factor(unfiltered()$trust_name))),
+      selected = input$trust_name
     )
     updateSelectInput(
       session = session,
       inputId = "trust_code",
-      choices = c("ALL",levels(factor(unfiltered()$provider_code)))
+      choices = c("ALL",levels(factor(unfiltered()$provider_code))),
+      selected = input$provider_code
     )
   })
 
@@ -120,9 +122,9 @@ function(input, output, session) {
         selected = c(as.character(t$nhs_region))
       )
     } else {
-      updateSelectInput(session = session,
-        inputId = "trust_name",
-        selected = c("ALL"))
+      updateSelectInput(
+        session = session,
+        inputId = "trust_name")
     }
   }
   )
@@ -141,8 +143,7 @@ function(input, output, session) {
     } else {
       updateSelectInput(
         session = session,
-        inputId = "trust_name",
-        selected = c("ALL"))
+        inputId = "trust_name")
     }
   })
 

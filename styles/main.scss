@@ -1,5 +1,6 @@
 @import 'govuk/all';
 @import 'partials/variables';
+@import 'partials/header';
 @import 'partials/side-navigation';
 @import 'partials/dashboard';
 @import 'partials/filter';
@@ -19,8 +20,4 @@ a {
     // Overriding bootstrap default
     cursor: pointer;
     text-decoration: underline;
-}
-
-body {
-    background-color: $colour !important;
 }

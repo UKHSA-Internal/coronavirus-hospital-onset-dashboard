@@ -161,7 +161,7 @@ plotly_graph <- function(data) {
                     pad = 5)
     ) %>%
     config(displaylogo = FALSE,
-           modeBarButtons = list(list("toImage")))
+           modeBarButtons = list(list("resetView","toImage")))
 
 
   return(p)

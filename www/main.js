@@ -119,11 +119,14 @@ app.cookieBanner = {
   },
 
   setDefaultConsentCookie: function(){
-    const today = new Date(),
-          [year, month, day] = [today.getFullYear(), today.getMonth(), today.getDate()],
-          cookieExpiryDate = new Date(year + 1, month, day).toUTCString()
-    document.cookie = `cookies_policy=${encodeURIComponent('{"essential":true,"settings":false,"usage":false,"campaigns":false}')}; expires=${cookieExpiryDate};`
-    //console.log('default cookie set')
+    let cookiePolicy = this.getCookie("cookies_policy")
+    if (cookiePolicy == null) {
+      const today = new Date(),
+            [year, month, day] = [today.getFullYear(), today.getMonth(), today.getDate()],
+            cookieExpiryDate = new Date(year + 1, month, day).toUTCString()
+      document.cookie = `cookies_policy=${encodeURIComponent('{"essential":true,"settings":false,"usage":false,"campaigns":false}')}; expires=${cookieExpiryDate};`
+      //console.log('default cookie set')
+    }
   },
 
   displayBannerIfPrefNotSet: function(){

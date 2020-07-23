@@ -1,17 +1,10 @@
 ## PHE COVID19 HCAI Dashboard
-# Define UI for application
-#   Current layout:
-#     + top navigation (3 panels; home, dashboard, info/methods)
-#     + sidebar with filters
-#     + three rows of information on main dashboard panel
-#       + data indicators
-#       + counts graph
-#       + proportions graph
 
 tags$body(
   class="govuk-template__body js",
   bootstrapPage(
-    tags$div(
+    tagList(
+      cookieBanner("global-cookie-message"),
       tags$head(
         tags$link(href="phe-favicon.png", rel="shortcut icon"),
         tags$link(href = "main.css", rel = "stylesheet", type = "text/css"),

@@ -31,6 +31,7 @@ source("modules/footer.R")
 source("modules/selectInput.R")
 source("modules/sideNavigation.R")
 source("modules/valueBox.R")
+source("modules/cookieBanner.R")
 
 # Pages
 source("pages/template.R")

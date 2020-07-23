@@ -95,6 +95,86 @@ let app = {};
 })( jQuery, this, this.document, app );
 
 
+
+// -----------------------------------
+// Cookie banner
+// -----------------------------------
+
+app.cookieBanner = {
+  init: function(){
+    let self = this
+
+    this.setDefaultConsentCookie()
+    this.displayBannerIfPrefNotSet()
+    $('#accept-cookies').click(function(){
+      self.setAcceptAllCookies()
+      self.setPrefsCookie()
+      $('.gem-c-cookie-banner__wrapper').hide()
+      $('.gem-c-cookie-banner__confirmation').show()
+    })
+
+    $('.gem-c-cookie-banner__hide-button').click(function(){
+      $('#global-cookie-message').hide()
+    })
+  },
+
+  setDefaultConsentCookie: function(){
+    let cookiePolicy = this.getCookie("cookies_policy")
+    if (cookiePolicy == null) {
+      const today = new Date(),
+            [year, month, day] = [today.getFullYear(), today.getMonth(), today.getDate()],
+            cookieExpiryDate = new Date(year + 1, month, day).toUTCString()
+      document.cookie = `cookies_policy=${encodeURIComponent('{"essential":true,"settings":false,"usage":false,"campaigns":false}')}; expires=${cookieExpiryDate};`
+      //console.log('default cookie set')
+    }
+  },
+
+  displayBannerIfPrefNotSet: function(){
+    let cookiePrefs = this.getCookie("cookies_preferences_set")
+    if (cookiePrefs == null) {
+      $('#global-cookie-message').show()
+    }
+  },
+
+  setAcceptAllCookies: function(){
+    let today = new Date(),
+          [year, month, day] = [today.getFullYear(), today.getMonth(), today.getDate()],
+          cookieExpiryDate = new Date(year + 1, month, day).toUTCString()
+    document.cookie = `cookies_policy=${encodeURIComponent('{"essential":true,"settings":true,"usage":true,"campaigns":false}')}; expires=${cookieExpiryDate};`
+    //console.log('accept all cookies. settings and usage flags set to true')
+  },
+
+  setPrefsCookie: function(){
+    let today = new Date(),
+          [year, month, day] = [today.getFullYear(), today.getMonth(), today.getDate()],
+          cookieExpiryDate = new Date(year + 1, month, day).toUTCString()
+    document.cookie = `cookies_preferences_set=true; expires=${cookieExpiryDate};`
+    //console.log('set prefs cookie')
+  },
+
+  getCookie: function(name){
+    var dc = document.cookie;
+    var prefix = name + "=";
+    var begin = dc.indexOf("; " + prefix);
+    if (begin == -1) {
+        begin = dc.indexOf(prefix);
+        if (begin != 0) return null;
+    }
+    else
+    {
+        begin += 2;
+        var end = document.cookie.indexOf(";", begin);
+        if (end == -1) {
+        end = dc.length;
+        }
+    }
+    // because unescape has been deprecated, replaced with decodeURI
+    //return unescape(dc.substring(begin + prefix.length, end));
+    return decodeURI(dc.substring(begin + prefix.length, end));
+  }
+}
+
+
 // -----------------------------------
 // Run all the things
 // -----------------------------------
@@ -109,4 +189,7 @@ $(function(){
   $('.js-gototop').click(function(){
     window.scrollTo(0,0);
   })
+
+  // Initialise cookie banner
+  app.cookieBanner.init();
 })

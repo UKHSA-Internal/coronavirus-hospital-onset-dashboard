@@ -66,18 +66,35 @@ function(input, output, session) {
 
   #### REACTIVE FILTERS FOR UI ##################################################
   # update menus
-  observeEvent(input$nhs_region, {
 
-    updateSelectInput(
-      session = session,
-      inputId = "trust_name",
-      choices = c("ALL",levels(factor(unfiltered()$trust_name)))
-    )
-    updateSelectInput(
-      session = session,
-      inputId = "trust_code",
-      choices = c("ALL",levels(factor(unfiltered()$provider_code)))
-    )
+  observeEvent(input$nhs_region, {
+    if(input$nhs_region=="ALL"){
+      updateSelectInput(
+        session = session,
+        inputId = "trust_name",
+        choices = c("ALL", levels(factor(unfiltered()$trust_name))),
+        selected = "ALL"
+      )
+      updateSelectInput(
+        session = session,
+        inputId = "trust_code",
+        choices = c("ALL", levels(factor(unfiltered()$provider_code))),
+        selected = "ALL"
+      )
+    } else {
+      updateSelectInput(
+        session = session,
+        inputId = "trust_name",
+        choices = c("ALL", levels(factor(unfiltered()$trust_name))),
+        selected = ifelse(input$trust_code=="ALL","ALL",input$trust_name)
+      )
+      updateSelectInput(
+        session = session,
+        inputId = "trust_code",
+        choices = c("ALL", levels(factor(unfiltered()$provider_code))),
+        selected = input$trust_code
+      )
+    }
   })
 
 
@@ -97,9 +114,14 @@ function(input, output, session) {
   )
 
   observeEvent(input$trust_code,{
-
-
-    if (input$trust_code != "ALL") {
+    if(!is.na(input$trust_code) | input$trust_code=="") {
+      updateSelectInput(
+        session = session,
+        inputId = "trust_code",
+        choices = c("ALL", levels(factor(unfiltered()$provider_code))),
+        selected = "ALL"
+      )
+    } else if (input$trust_code != "ALL") {
     t <- unfiltered() %>% filter(provider_code == input$trust_code)
 
       updateSelectInput(
@@ -120,9 +142,9 @@ function(input, output, session) {
         selected = c(as.character(t$nhs_region))
       )
     } else {
-      updateSelectInput(session = session,
-        inputId = "trust_name",
-        selected = c("ALL"))
+      updateSelectInput(
+        session = session,
+        inputId = "trust_name")
     }
   }
   )
@@ -142,7 +164,8 @@ function(input, output, session) {
       updateSelectInput(
         session = session,
         inputId = "trust_name",
-        selected = c("ALL"))
+        selected = "ALL"
+        )
     }
   })
 

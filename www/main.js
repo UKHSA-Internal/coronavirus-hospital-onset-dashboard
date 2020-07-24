@@ -283,4 +283,8 @@ $(function(){
   // Initialise cookie settings form
   app.cookieSettings.init()
 
+  // Initialise cookie settings form when going to Cookies page
+  $('.js-goto-cookies').click(function(){
+    app.cookieSettings.init()
+  })
 })

@@ -23,6 +23,14 @@ footer <- function(full = FALSE){
                     href="#!/accessibility",
                     "Accessibility"
                   )
+                ),
+                tags$li(
+                  class="govuk-footer__inline-list-item",
+                  tags$a(
+                    class="govuk-footer__link js-gototop js-goto-cookies",
+                    href="#!/cookies",
+                    "Cookies"
+                  )
                 )
               ),
               tags$div(

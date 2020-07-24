@@ -95,6 +95,18 @@ function(input, output, session) {
         selected = input$trust_code
       )
     }
+    updateSelectInput(
+      session = session,
+      inputId = "trust_name",
+      choices = c("ALL",levels(factor(unfiltered()$trust_name))),
+      selected = input$trust_name
+    )
+    updateSelectInput(
+      session = session,
+      inputId = "trust_code",
+      choices = c("ALL",levels(factor(unfiltered()$provider_code))),
+      selected = input$provider_code
+    )
   })
 
 

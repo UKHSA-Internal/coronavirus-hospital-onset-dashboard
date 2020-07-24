@@ -147,7 +147,7 @@ app.cookieBanner = {
   },
 
   setDefaultConsentCookie: function(){
-    let cookiePolicy = this.getCookie("cookies_policy")
+    let cookiePolicy = app.utils.getCookie("cookies_policy")
     if (cookiePolicy == null) {
       const today = new Date(),
             [year, month, day] = [today.getFullYear(), today.getMonth(), today.getDate()],
@@ -158,7 +158,7 @@ app.cookieBanner = {
   },
 
   displayBannerIfPrefNotSet: function(){
-    let cookiePrefs = this.getCookie("cookies_preferences_set")
+    let cookiePrefs = app.utils.getCookie("cookies_preferences_set")
     if (cookiePrefs == null) {
       $('#global-cookie-message').show()
     }

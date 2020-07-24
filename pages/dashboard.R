@@ -78,8 +78,8 @@ dashboard <- function(title, content) {
       selectInput(
         "link",
         label = "Case inclusion",
-        select_text = c("Include all cases","Hospital linked cases only"),
-        select_value = c(1, 0)
+        select_text = c("Hospital linked cases only","Include all cases"),
+        select_value = c(0, 1)
       )
     ),
     tags$hr(

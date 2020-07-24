@@ -2,35 +2,35 @@ cookies <- function(title, content) {
   tagList(
     tags$title("Cookies - Healthcare associated COVID-19 Surveillance in England"),
     tags$div(
-        class="cookie-settings__confirmation",
-        style="display: none",
-        tags$section(
-            class="gem-c-notice govuk-!-margin-bottom-8",
-            "aria-label"="Notice",
-            "aria-live"="polite",
-            role="region",
-            tags$h2(
-                class="gem-c-notice__title",
-                "Your cookie settings were saved",
-            ),
-            tags$p(
-                class="govuk-body",
-                "Government services may set additional cookies and, if so, will have their own cookie policy and banner."
-            ),
-            tags$a(
-                class="govuk-button govuk-!-margin-bottom-2",
-                href="#!/",
-                "Go back to dashboard"
-            )
-        )
-    ),
-    tags$a(
-        class="govuk-back-link js-gototop",
-        href="#!/dashboard",
-        "Back to dashboard"
-    ),
-    tags$div(
         class="util-text-max-width",
+        tags$div(
+            class="cookie-settings__confirmation",
+            style="display: none",
+            tags$section(
+                class="gem-c-notice govuk-!-margin-bottom-8",
+                "aria-label"="Notice",
+                "aria-live"="polite",
+                role="region",
+                tags$h2(
+                    class="gem-c-notice__title",
+                    "Your cookie settings were saved",
+                ),
+                tags$p(
+                    class="govuk-body",
+                    "Government services may set additional cookies and, if so, will have their own cookie policy and banner."
+                ),
+                tags$a(
+                    class="govuk-button govuk-!-margin-bottom-2",
+                    href="#!/",
+                    "Go back to dashboard"
+                )
+            )
+        ),
+        tags$a(
+            class="govuk-back-link js-gototop",
+            href="#!/dashboard",
+            "Back to dashboard"
+        ),
         tags$div(
             class="markdown",
             includeMarkdown("content/cookies.md")

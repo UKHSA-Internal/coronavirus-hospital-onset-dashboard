@@ -54,58 +54,62 @@ cookies <- function(title, content) {
                 )
             )
         ),
-        tags$div(
-            class="govuk-form-group",
+        tags$form(
+            name="cookiesForm",
+            id="cookiesForm",
             tags$div(
-                class="govuk-radios",
+                class="govuk-form-group",
                 tags$div(
-                    class="govuk-radios__item",
-                    tags$input(
-                        class="govuk-radios__input",
-                        id="allow-usage-cookies",
-                        name="usage-cookies",
-                        type="radio",
-                        value="allow"
+                    class="govuk-radios",
+                    tags$div(
+                        class="govuk-radios__item",
+                        tags$input(
+                            class="govuk-radios__input",
+                            id="allow-usage-cookies",
+                            name="usage-cookies",
+                            type="radio",
+                            value="allow"
+                        ),
+                        tags$label(
+                            class="govuk-label govuk-radios__label",
+                            "for"="allow-usage-cookies",
+                            "Use cookies that measure my website use"
+                        )
                     ),
-                    tags$label(
-                        class="govuk-label govuk-radios__label",
-                        "for"="allow-usage-cookies",
-                        "Use cookies that measure my website use"
-                    )
-                ),
-                tags$div(
-                    class="govuk-radios__item",
-                    tags$input(
-                        class="govuk-radios__input",
-                        id="disallow-usage-cookies",
-                        name="usage-cookies",
-                        type="radio",
-                        value="disallow"
-                    ),
-                    tags$label(
-                        class="govuk-label govuk-radios__label",
-                        "for"="disallow-usage-cookies",
-                        "Do not use cookies that measure my website use"
+                    tags$div(
+                        class="govuk-radios__item",
+                        tags$input(
+                            class="govuk-radios__input",
+                            id="disallow-usage-cookies",
+                            name="usage-cookies",
+                            type="radio",
+                            value="disallow"
+                        ),
+                        tags$label(
+                            class="govuk-label govuk-radios__label",
+                            "for"="disallow-usage-cookies",
+                            "Do not use cookies that measure my website use"
+                        )
                     )
                 )
+            ),
+            tags$h2(
+                class="govuk-heading-m",
+                "Strictly necessary cookies"
+            ),
+            tags$p(
+                class="govuk-body",
+                "These essential cookies do things like remember your cookie preferences, so we don't ask for them again."
+            ),
+            tags$p(
+                class="govuk-body",
+                "They always need to be on."
+            ),
+            tags$button(
+                class="govuk-button js-cookies-submit",
+                type="submit",
+                "Save changes"
             )
-        ),
-        tags$h2(
-            class="govuk-heading-m",
-            "Strictly necessary cookies"
-        ),
-        tags$p(
-            class="govuk-body",
-            "These essential cookies do things like remember your cookie preferences, so we don't ask for them again."
-        ),
-        tags$p(
-            class="govuk-body",
-            "They always need to be on."
-        ),
-        tags$button(
-            class="govuk-button js-cookies-submit",
-            type="submit",
-            "Save changes"
         )
     )
   )

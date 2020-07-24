@@ -128,11 +128,11 @@ plotly_graph <- function(data) {
                   # hovertemplate = '%{text}: %{y}',
                   marker = list(
                     color = case_when(
-                      col=="CO" ~ "#5694ca",
-                      col=="HO.iHA" ~ "#ffdd00",
+                      col=="CO" ~ "#AC189F",
+                      col=="HO.iHA" ~ "#1C9C91",
                       col=="HO.pHA" ~ "#003078",
-                      col=="HO.HA" ~ "#d4351c",
-                      TRUE ~ "#b1b4b6"
+                      col=="HO.HA" ~ "#5694CA",
+                      TRUE ~ "#B9BCBD"
                     )
                   ))
     }

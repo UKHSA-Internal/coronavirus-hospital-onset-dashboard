@@ -38,18 +38,21 @@ source("pages/template.R")
 source("pages/dashboard.R")
 source("pages/methods.R")
 source("pages/accessibility.R")
+source("pages/cookies.R")
 
 # Pages
 dashboard_page <- template("dashboard", dashboard())
 methods_page <- template("methods", methods())
 ally_page <- accessibility()
+cookies_page <- cookies()
 
 # Creates router. We provide routing path, a UI as
 # well as a server-side callback for each page.
 router <- make_router(
   route("dashboard", dashboard_page, NA),
   route("methods", methods_page, NA),
-  route("accessibility", ally_page, NA)
+  route("accessibility", ally_page, NA),
+  route("cookies", cookies_page, NA)
 )
 
 

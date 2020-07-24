@@ -95,6 +95,34 @@ let app = {};
 })( jQuery, this, this.document, app );
 
 
+// -----------------------------------
+// App Utils
+// -----------------------------------
+
+app.utils = {
+  getCookie: function(name){
+    var dc = document.cookie;
+    var prefix = name + "=";
+    var begin = dc.indexOf("; " + prefix);
+    if (begin == -1) {
+        begin = dc.indexOf(prefix);
+        if (begin != 0) return null;
+    }
+    else
+    {
+        begin += 2;
+        var end = document.cookie.indexOf(";", begin);
+        if (end == -1) {
+        end = dc.length;
+        }
+    }
+    // because unescape has been deprecated, replaced with decodeURI
+    //return unescape(dc.substring(begin + prefix.length, end));
+    return decodeURIComponent(dc.substring(begin + prefix.length, end));
+  }
+}
+
+
 
 // -----------------------------------
 // Cookie banner
@@ -113,13 +141,18 @@ app.cookieBanner = {
       $('.gem-c-cookie-banner__confirmation').show()
     })
 
+    $('#set-cookie-prefs').click(function(){
+      self.setPrefsCookie()
+      $('#global-cookie-message').hide()
+    })
+
     $('.gem-c-cookie-banner__hide-button').click(function(){
       $('#global-cookie-message').hide()
     })
   },
 
   setDefaultConsentCookie: function(){
-    let cookiePolicy = this.getCookie("cookies_policy")
+    let cookiePolicy = app.utils.getCookie("cookies_policy")
     if (cookiePolicy == null) {
       const today = new Date(),
             [year, month, day] = [today.getFullYear(), today.getMonth(), today.getDate()],
@@ -130,7 +163,7 @@ app.cookieBanner = {
   },
 
   displayBannerIfPrefNotSet: function(){
-    let cookiePrefs = this.getCookie("cookies_preferences_set")
+    let cookiePrefs = app.utils.getCookie("cookies_preferences_set")
     if (cookiePrefs == null) {
       $('#global-cookie-message').show()
     }
@@ -150,29 +183,83 @@ app.cookieBanner = {
           cookieExpiryDate = new Date(year + 1, month, day).toUTCString()
     document.cookie = `cookies_preferences_set=true; expires=${cookieExpiryDate};`
     //console.log('set prefs cookie')
-  },
-
-  getCookie: function(name){
-    var dc = document.cookie;
-    var prefix = name + "=";
-    var begin = dc.indexOf("; " + prefix);
-    if (begin == -1) {
-        begin = dc.indexOf(prefix);
-        if (begin != 0) return null;
-    }
-    else
-    {
-        begin += 2;
-        var end = document.cookie.indexOf(";", begin);
-        if (end == -1) {
-        end = dc.length;
-        }
-    }
-    // because unescape has been deprecated, replaced with decodeURI
-    //return unescape(dc.substring(begin + prefix.length, end));
-    return decodeURI(dc.substring(begin + prefix.length, end));
   }
 }
+
+
+
+// -----------------------------------
+// Cookie Settings
+// -----------------------------------
+
+app.cookieSettings = {
+  init: function(){
+    let self = this;
+    this.setNoticeDisplay(false)
+    setTimeout(function(){
+      if ($('#allow-usage-cookies').length && $('#disallow-usage-cookies').length) {
+        self.setSelectedRadio()
+        $('#cookiesForm').on('submit', function(){
+          //console.log('submitted')
+          self.submitSettings()
+        })
+      }
+    }, 1000)
+  },
+
+  setSelectedRadio: function(){
+    let cookiePolicy = app.utils.getCookie("cookies_policy").split(";")
+    let cookiePolicyUsage = JSON.parse(cookiePolicy[0]).usage
+    if (cookiePolicyUsage) {
+      $('#allow-usage-cookies').attr('checked',true)
+      $('#disallow-usage-cookies').attr('checked',false)
+      //console.log('on')
+    } else {
+      $('#allow-usage-cookies').attr('checked',false)
+      $('#disallow-usage-cookies').attr('checked',true)
+      //console.log('off')
+    }
+  },
+
+  submitSettings: function(){
+    let self = this
+    let radios = $('input[name="usage-cookies"]')
+    for (var i = 0, length = radios.length; i < length; i++) {
+      if (radios[i].checked) {
+        // do whatever you want with the checked radio
+        //console.log(radios[i].value);
+        if (radios[i].value === 'allow') {
+          self.updatePolicyCookie(true)
+        } else {
+          self.updatePolicyCookie(false)
+        }
+        // only one radio can be logically checked, don't check the rest
+        break;
+      }
+    }
+    window.scrollTo(0,0)
+    this.setNoticeDisplay(true)
+  },
+
+  updatePolicyCookie: function(usage){
+    let today = new Date(),
+          [year, month, day] = [today.getFullYear(), today.getMonth(), today.getDate()],
+          cookieExpiryDate = new Date(year + 1, month, day).toUTCString()
+          cookieValue = `{"essential":true,"settings":true,"usage":${usage},"campaigns":false}`
+          //console.log(cookieValue)
+    document.cookie = `cookies_policy=${encodeURIComponent(cookieValue)}; expires=${cookieExpiryDate};`
+    //console.log('usage flag updated to ' + usage)
+  },
+
+  setNoticeDisplay: function(showNotice){
+    if (showNotice) {
+      $('.cookie-settings__confirmation').show()
+    } else {
+      $('.cookie-settings__confirmation').hide()
+    }
+  }
+}
+
 
 
 // -----------------------------------
@@ -182,14 +269,22 @@ $(function(){
 
   // Initialise tooltips on input update
   $(document).on('shiny:updateinput', function(event) {
-    app.a11yTT.init();
+    app.a11yTT.init()
   })
 
   // Utility to scroll top of page
   $('.js-gototop').click(function(){
-    window.scrollTo(0,0);
+    window.scrollTo(0,0)
   })
 
   // Initialise cookie banner
-  app.cookieBanner.init();
+  app.cookieBanner.init()
+
+  // Initialise cookie settings form
+  app.cookieSettings.init()
+
+  // Initialise cookie settings form when going to Cookies page
+  $('.js-goto-cookies').click(function(){
+    app.cookieSettings.init()
+  })
 })

@@ -141,6 +141,11 @@ app.cookieBanner = {
       $('.gem-c-cookie-banner__confirmation').show()
     })
 
+    $('#set-cookie-prefs').click(function(){
+      self.setPrefsCookie()
+      $('#global-cookie-message').hide()
+    })
+
     $('.gem-c-cookie-banner__hide-button').click(function(){
       $('#global-cookie-message').hide()
     })
@@ -264,16 +269,16 @@ $(function(){
 
   // Initialise tooltips on input update
   $(document).on('shiny:updateinput', function(event) {
-    app.a11yTT.init();
+    app.a11yTT.init()
   })
 
   // Utility to scroll top of page
   $('.js-gototop').click(function(){
-    window.scrollTo(0,0);
+    window.scrollTo(0,0)
   })
 
   // Initialise cookie banner
-  app.cookieBanner.init();
+  app.cookieBanner.init()
 
   // Initialise cookie settings form
   app.cookieSettings.init()

@@ -19,7 +19,3 @@ We use Google Analytics to measure how you use the website so we can improve it 
 We do not allow Google to use or share the data about how you use this site.
 
 These are the Google Analytics cookies we’ll use:
-
-| Name           | Purpose      | Expires      |
-| :------------- | :----------: | -----------: |
-|  _ga, _gid   | These help us count how many people visit data.gov.uk by tracking if you’ve visited before   | _ga 2 years, _gid 24 hours   |

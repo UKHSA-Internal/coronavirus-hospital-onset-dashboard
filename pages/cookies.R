@@ -12,6 +12,48 @@ cookies <- function(title, content) {
             class="markdown",
             includeMarkdown("content/cookies.md")
         ),
+        tags$table(
+            class="govuk-table",
+            tags$thead(
+                class="govuk-table__head",
+                tags$tr(
+                    class="govuk-table__row",
+                    tags$th(
+                        class="govuk-table__header",
+                        "scope"="col",
+                        "Name"
+                    ),
+                    tags$th(
+                        class="govuk-table__header",
+                        "scope"="col",
+                        "Purpose"
+                    ),
+                    tags$th(
+                        class="govuk-table__header",
+                        "scope"="col",
+                        "Expires"
+                    )
+                )
+            ),
+            tags$tbody(
+                class="govuk-table__body",
+                tags$tr(
+                    class="govuk-table__row",
+                    tags$td(
+                        class="govuk-table__cell",
+                        "_ga, _gid"
+                    ),
+                    tags$td(
+                        class="govuk-table__cell",
+                        "These help us count how many people visit data.gov.uk by tracking if you’ve visited before"
+                    ),
+                    tags$td(
+                        class="govuk-table__cell",
+                        "_ga 2 years, _gid 24 hours"
+                    )
+                )
+            )
+        ),
         tags$div(
             class="govuk-form-group",
             tags$div(

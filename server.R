@@ -93,13 +93,15 @@ function(input, output, session) {
         session = session,
         inputId = "trust_code",
         choices = c("ALL",levels(factor(unfiltered()$provider_code))),
-        selected = input$trust_code
+        selected = ifelse(input$trust_code %in% levels(factor(unfiltered()$provider_code)),
+                          input$trust_code,"ALL")
       )
       updateSelectInput(
         session = session,
         inputId = "trust_name",
         choices = c("ALL",levels(factor(unfiltered()$trust_name))),
-        selected = input$trust_name
+        selected = ifelse(input$trust_code %in% levels(factor(unfiltered()$provider_code)),
+                          input$trust_name,"ALL")
       )
     } else {
       updateSelectInput(

@@ -178,13 +178,83 @@ app.cookieBanner = {
           cookieExpiryDate = new Date(year + 1, month, day).toUTCString()
     document.cookie = `cookies_preferences_set=true; expires=${cookieExpiryDate};`
     //console.log('set prefs cookie')
+  }
+}
+
+
+
+// -----------------------------------
+// Cookie Settings
+// -----------------------------------
+
+app.cookieSettings = {
+  init: function(){
+    let self = this;
+    this.setNoticeDisplay(false)
+    setTimeout(function(){
+      if ($('#allow-usage-cookies').length && $('#disallow-usage-cookies').length) {
+        self.setSelectedRadio()
+        $('#cookiesForm').on('submit', function(){
+          //console.log('submitted')
+          self.submitSettings()
+        })
+      }
+    }, 1000)
   },
 
+  setSelectedRadio: function(){
+    let cookiePolicy = app.utils.getCookie("cookies_policy").split(";")
+    let cookiePolicyUsage = JSON.parse(cookiePolicy[0]).usage
+    if (cookiePolicyUsage) {
+      $('#allow-usage-cookies').attr('checked',true)
+      $('#disallow-usage-cookies').attr('checked',false)
+      //console.log('on')
+    } else {
+      $('#allow-usage-cookies').attr('checked',false)
+      $('#disallow-usage-cookies').attr('checked',true)
+      //console.log('off')
     }
+  },
+
+  submitSettings: function(){
+    let self = this
+    let radios = $('input[name="usage-cookies"]')
+    for (var i = 0, length = radios.length; i < length; i++) {
+      if (radios[i].checked) {
+        // do whatever you want with the checked radio
+        //console.log(radios[i].value);
+        if (radios[i].value === 'allow') {
+          self.updatePolicyCookie(true)
+        } else {
+          self.updatePolicyCookie(false)
         }
+        // only one radio can be logically checked, don't check the rest
+        break;
+      }
+    }
+    window.scrollTo(0,0)
+    this.setNoticeDisplay(true)
+  },
+
+  updatePolicyCookie: function(usage){
+    let today = new Date(),
+          [year, month, day] = [today.getFullYear(), today.getMonth(), today.getDate()],
+          cookieExpiryDate = new Date(year + 1, month, day).toUTCString()
+          cookieValue = `{"essential":true,"settings":true,"usage":${usage},"campaigns":false}`
+          //console.log(cookieValue)
+    document.cookie = `cookies_policy=${encodeURIComponent(cookieValue)}; expires=${cookieExpiryDate};`
+    //console.log('usage flag updated to ' + usage)
+  },
+
+  setNoticeDisplay: function(showNotice){
+    if (showNotice) {
+      $('.cookie-settings__confirmation').show()
+    } else {
+      $('.cookie-settings__confirmation').hide()
     }
   }
 }
+
 
 
 // -----------------------------------
@@ -204,4 +274,8 @@ $(function(){
 
   // Initialise cookie banner
   app.cookieBanner.init();
+
+  // Initialise cookie settings form
+  app.cookieSettings.init()
+
 })

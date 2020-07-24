@@ -95,6 +95,34 @@ let app = {};
 })( jQuery, this, this.document, app );
 
 
+// -----------------------------------
+// App Utils
+// -----------------------------------
+
+app.utils = {
+  getCookie: function(name){
+    var dc = document.cookie;
+    var prefix = name + "=";
+    var begin = dc.indexOf("; " + prefix);
+    if (begin == -1) {
+        begin = dc.indexOf(prefix);
+        if (begin != 0) return null;
+    }
+    else
+    {
+        begin += 2;
+        var end = document.cookie.indexOf(";", begin);
+        if (end == -1) {
+        end = dc.length;
+        }
+    }
+    // because unescape has been deprecated, replaced with decodeURI
+    //return unescape(dc.substring(begin + prefix.length, end));
+    return decodeURIComponent(dc.substring(begin + prefix.length, end));
+  }
+}
+
+
 
 // -----------------------------------
 // Cookie banner
@@ -152,25 +180,9 @@ app.cookieBanner = {
     //console.log('set prefs cookie')
   },
 
-  getCookie: function(name){
-    var dc = document.cookie;
-    var prefix = name + "=";
-    var begin = dc.indexOf("; " + prefix);
-    if (begin == -1) {
-        begin = dc.indexOf(prefix);
-        if (begin != 0) return null;
     }
-    else
-    {
-        begin += 2;
-        var end = document.cookie.indexOf(";", begin);
-        if (end == -1) {
-        end = dc.length;
         }
     }
-    // because unescape has been deprecated, replaced with decodeURI
-    //return unescape(dc.substring(begin + prefix.length, end));
-    return decodeURI(dc.substring(begin + prefix.length, end));
   }
 }
 

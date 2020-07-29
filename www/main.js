@@ -158,6 +158,9 @@ app.cookieBanner = {
             [year, month, day] = [today.getFullYear(), today.getMonth(), today.getDate()],
             cookieExpiryDate = new Date(year + 1, month, day).toUTCString()
       document.cookie = `cookies_policy=${encodeURIComponent('{"essential":true,"settings":false,"usage":false,"campaigns":false}')}; expires=${cookieExpiryDate};`
+      window['ga-disable-UA-161400643-3'] = true;
+      document.cookie = "_ga= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=";
+      document.cookie = "_gid= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=";
       //console.log('default cookie set')
     }
   },
@@ -174,6 +177,7 @@ app.cookieBanner = {
           [year, month, day] = [today.getFullYear(), today.getMonth(), today.getDate()],
           cookieExpiryDate = new Date(year + 1, month, day).toUTCString()
     document.cookie = `cookies_policy=${encodeURIComponent('{"essential":true,"settings":true,"usage":true,"campaigns":false}')}; expires=${cookieExpiryDate};`
+    window['ga-disable-UA-161400643-3'] = false;
     //console.log('accept all cookies. settings and usage flags set to true')
   },
 
@@ -232,6 +236,8 @@ app.cookieSettings = {
           self.updatePolicyCookie(true)
         } else {
           self.updatePolicyCookie(false)
+          document.cookie = "_ga= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=";
+          document.cookie = "_gid= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=";
         }
         // only one radio can be logically checked, don't check the rest
         break;
@@ -248,6 +254,7 @@ app.cookieSettings = {
           cookieValue = `{"essential":true,"settings":true,"usage":${usage},"campaigns":false}`
           //console.log(cookieValue)
     document.cookie = `cookies_policy=${encodeURIComponent(cookieValue)}; expires=${cookieExpiryDate};`
+    window['ga-disable-UA-161400643-3'] = !usage;
     //console.log('usage flag updated to ' + usage)
   },
 

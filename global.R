@@ -39,6 +39,7 @@ source("pages/dashboard.R")
 source("pages/methods.R")
 source("pages/accessibility.R")
 source("pages/cookies.R")
+source("pages/nonJS.R")
 
 # Pages
 dashboard_page <- template("dashboard", dashboard())

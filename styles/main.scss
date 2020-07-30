@@ -22,3 +22,11 @@ a {
     cursor: pointer;
     text-decoration: underline;
 }
+
+// Hide non-js content if we have js
+.non-js {
+    display: block;
+    .js & {
+        display: none;
+    }
+}

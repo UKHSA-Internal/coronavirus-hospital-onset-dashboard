@@ -2,12 +2,12 @@
 
 ### Introduction
 
-This accessibility statement applies to [URL].
+This accessibility statement applies to [https://phe-gov-uk.shinyapps.io/hcai_dev/#!/](https://phe-gov-uk.shinyapps.io/hcai_dev/#!/).
 
 This website is run by Public Health England. We want as many people as possible to be able to use this website. For example, that means you should be able to:
 
 + change colours, contrast levels and fonts
-+ zoom in up to 300% without the text spilling off the screen
++ zoom in up to 200% without the text spilling off the screen
 + navigate most of the website using just a keyboard
 + navigate most of the website using speech recognition software
 + listen to most of the website using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)
@@ -36,10 +36,40 @@ The content listed below is non-accessible for the following reasons.
 
 ### Non-compliance with the accessibility regulations
 
-Issues
+#### Contrast and use of colour
+
+Some elements of the graph on the [Dashboard page](#!/) are indicated just by colour. The information is also displayed as text on hover, but this cannot be accessed by keyboard users.
+
+Some elements of the [Dashboard page](#!/) lack contrast with the background, for example:
+
++ grey and yellow bars in the graphs. We are in the process of fixing this.
++ on the graph keys, when the user selects them to remove the data from the graph.  The graphs are created by a third party, so unfortunately we cannot fix this.
++ on the camera icon, when the graph is hovered over. The graphs are created by a third party, so unfortunately we cannot fix this.
+
+#### Keyboard accessibility
+
+Some parts of the website are not accessible when navigating by keyboard only. On the [Dashboard page](#!/), keyboard users cannot tab to elements of the graph, so cannot view the statistics that can be seen when hovering over parts of the graph. The graphs are created by a third party, so unfortunately we cannot fix this. The data can be accessed in an alternative format, in the data table.
+
+#### Screen reader accessibility
+
+Some parts of the website are not accessible using a screen reader. When swiping through the [Dashboard page](#!/), iOS Voiceover users cannot access the graph screenshot option. The graphs are created by a third party, so unfortunately we cannot fix this.
+
+#### Time limits
+
+There is a timeout on all pages. People are prompted to reload the page when this happens. There is no option to extend the timer.
+We cannot fix this, but please be aware that the website has a 10-minute idle limit, which cannot be changed.
+
+#### Navigation
+
+There is no option for keyboard users to skip to the main content, to bypass features like the header and navigation menu. As there are few focusable features before the main content, this should be a minor problem.
+
+#### Source code and markup accessibility
+
+Some parts of the source code are not closed correctly, with end tags missing.
+On the Dashboard page, the message that is displayed when selecting a category is not announced to NVDA screen reader users. The graphs are created by a third party, so unfortunately we cannot fix this.
 
 ### Preparation of this accessibility statement
 
-This statement was prepared on [date]. It was last reviewed on [date]. All pages on the website were tested.
+This statement was prepared on 28 July 2020. It was last reviewed on 28 July 2020. All pages on the website were tested.
 
-This website was last tested on [date]. The test was carried out externally by [company].
+This website was last tested on 17 July 2020. The test was carried out externally by Zoonou.

@@ -42,7 +42,6 @@ Some elements of the graph on the [Dashboard page](#!/) are indicated just by co
 
 Some elements of the [Dashboard page](#!/) lack contrast with the background, for example:
 
-+ grey and yellow bars in the graphs. We are in the process of fixing this.
 + on the graph keys, when the user selects them to remove the data from the graph.  The graphs are created by a third party, so unfortunately we cannot fix this.
 + on the camera icon, when the graph is hovered over. The graphs are created by a third party, so unfortunately we cannot fix this.
 
@@ -66,12 +65,10 @@ There is no option for keyboard users to skip to the main content, to bypass fea
 
 #### Source code and markup accessibility
 
-Some parts of the source code are not closed correctly, with end tags missing.
-
-On the Dashboard page, the message that is displayed when selecting a category is not announced to NVDA screen reader users. The graphs are created by a third party, so unfortunately we cannot fix this.
+On the [Dashboard page](#!/), the message that is displayed when selecting a category is not announced to NVDA screen reader users. The graphs are created by a third party, so unfortunately we cannot fix this.
 
 ### Preparation of this accessibility statement
 
-This statement was prepared on 28 July 2020. It was last reviewed on 28 July 2020. All pages on the website were tested.
+This statement was prepared on 28 July 2020. It was last reviewed on 28 July 2020. Of all the pages on the website, the Cookies page has not been tested.
 
 This website was last tested on 17 July 2020. The test was carried out externally by Zoonou.

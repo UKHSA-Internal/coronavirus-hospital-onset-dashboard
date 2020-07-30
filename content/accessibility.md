@@ -69,6 +69,6 @@ On the [Dashboard page](#!/), the message that is displayed when selecting a cat
 
 ### Preparation of this accessibility statement
 
-This statement was prepared on 28 July 2020. It was last reviewed on 28 July 2020. Of all the pages on the website, the Cookies page has not been tested.
+This statement was prepared on 28 July 2020. It was last reviewed on 30 July 2020. All pages of the website except the Cookies page were tested.
 
 This website was last tested on 17 July 2020. The test was carried out externally by Zoonou.

@@ -57,6 +57,7 @@ Some parts of the website are not accessible using a screen reader. When swiping
 #### Time limits
 
 There is a timeout on all pages. People are prompted to reload the page when this happens. There is no option to extend the timer.
+
 We cannot fix this, but please be aware that the website has a 10-minute idle limit, which cannot be changed.
 
 #### Navigation
@@ -66,6 +67,7 @@ There is no option for keyboard users to skip to the main content, to bypass fea
 #### Source code and markup accessibility
 
 Some parts of the source code are not closed correctly, with end tags missing.
+
 On the Dashboard page, the message that is displayed when selecting a category is not announced to NVDA screen reader users. The graphs are created by a third party, so unfortunately we cannot fix this.
 
 ### Preparation of this accessibility statement

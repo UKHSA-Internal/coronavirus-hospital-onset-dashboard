@@ -66,65 +66,94 @@ function(input, output, session) {
 
   #### REACTIVE FILTERS FOR UI ##################################################
   # update menus
+
   observeEvent(input$nhs_region, {
 
     updateSelectInput(
       session = session,
       inputId = "trust_name",
-      choices = c("ALL",levels(factor(unfiltered()$trust_name))),
-      selected = input$trust_name
+      choices = c("ALL", levels(factor(unfiltered()$trust_name))),
+      selected = ifelse(input$trust_code %in% levels(factor(unfiltered()$provider_code)),
+                        input$trust_name,"ALL")
+
     )
     updateSelectInput(
       session = session,
       inputId = "trust_code",
-      choices = c("ALL",levels(factor(unfiltered()$provider_code))),
-      selected = input$provider_code
-    )
+      choices = c("ALL", levels(factor(unfiltered()$provider_code))),
+      selected = ifelse(input$trust_code %in% levels(factor(unfiltered()$provider_code)),
+                        input$trust_code,"ALL")
+      )
   })
 
 
   observeEvent(input$trust_type, {
-
-    updateSelectInput(
-      session = session,
-      inputId = "trust_code",
-      choices = c("ALL",levels(factor(unfiltered()$provider_code)))
-    )
-    updateSelectInput(
-      session = session,
-      inputId = "trust_name",
-      choices = c("ALL",levels(factor(unfiltered()$trust_name)))
-    )
+    if(input$trust_code!="ALL"){
+      updateSelectInput(
+        session = session,
+        inputId = "trust_code",
+        choices = c("ALL",levels(factor(unfiltered()$provider_code))),
+        selected = ifelse(input$trust_code %in% levels(factor(unfiltered()$provider_code)),
+                          input$trust_code,"ALL")
+      )
+      updateSelectInput(
+        session = session,
+        inputId = "trust_name",
+        choices = c("ALL",levels(factor(unfiltered()$trust_name))),
+        selected = ifelse(input$trust_code %in% levels(factor(unfiltered()$provider_code)),
+                          input$trust_name,"ALL")
+      )
+    } else {
+      updateSelectInput(
+        session = session,
+        inputId = "trust_code",
+        choices = c("ALL",levels(factor(unfiltered()$provider_code))),
+        selected = "ALL"
+      )
+      updateSelectInput(
+        session = session,
+        inputId = "trust_name",
+        choices = c("ALL",levels(factor(unfiltered()$trust_name))),
+        selected = "ALL"
+      )
+    }
   }
   )
 
   observeEvent(input$trust_code,{
-
-
-    if (input$trust_code != "ALL") {
-    t <- unfiltered() %>% filter(provider_code == input$trust_code)
+    if (is.null(input$trust_code)) {
+      updateSelectInput(
+        session = session,
+        inputId = "trust_code",
+        selected = "ALL"
+      )
+    } else if (input$trust_code != "ALL") {
+    tn <- unfiltered() %>%
+      filter(provider_code == input$trust_code) %>%
+      distinct(trust_name,provider_code,trust_type,nhs_region)
 
       updateSelectInput(
         session = session,
         inputId = "trust_name",
-        selected = c(levels(factor(as.character(t$trust_name))))
+        selected = c(as.character(tn$trust_name))
       )
 
       updateSelectInput(
         session = session,
         inputId = "trust_type",
-        selected = c(as.character(t$trust_type))
+        selected = c(as.character(tn$trust_type))
       )
 
       updateSelectInput(
         session = session,
         inputId = "nhs_region",
-        selected = c(as.character(t$nhs_region))
+        selected = c(as.character(tn$nhs_region))
       )
     } else {
       updateSelectInput(
         session = session,
-        inputId = "trust_name")
+        inputId = "trust_name",
+        selected = input$trust_name)
     }
   }
   )
@@ -132,18 +161,22 @@ function(input, output, session) {
   observeEvent(input$trust_name, {
 
     if (input$trust_name != "ALL") {
-    t <- unfiltered() %>% filter(trust_name == input$trust_name)
+    pc <- unfiltered() %>%
+      filter(trust_name == input$trust_name) %>%
+      distinct(provider_code) %>% pull()
 
       updateSelectInput(
         session = session,
         inputId = "trust_code",
-        selected = c(as.character(t$provider_code))
+        selected = c(as.character(pc))
       )
 
     } else {
       updateSelectInput(
         session = session,
-        inputId = "trust_name")
+        inputId = "trust_name",
+        selected = "ALL"
+        )
     }
   })
 

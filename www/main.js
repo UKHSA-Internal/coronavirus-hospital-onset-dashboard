@@ -159,8 +159,8 @@ app.cookieBanner = {
             cookieExpiryDate = new Date(year + 1, month, day).toUTCString()
       document.cookie = `cookies_policy=${encodeURIComponent('{"essential":true,"settings":false,"usage":false,"campaigns":false}')}; expires=${cookieExpiryDate};`
       window['ga-disable-UA-161400643-3'] = true;
-      document.cookie = "_ga= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=.shinyapps.io";
-      document.cookie = "_gid= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=.shinyapps.io";
+      document.cookie = "_ga= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=.shinyapps.io ; path=/";
+      document.cookie = "_gid= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=.shinyapps.io ; path=/";
       //console.log('default cookie set')
     }
   },
@@ -236,8 +236,8 @@ app.cookieSettings = {
           self.updatePolicyCookie(true)
         } else {
           self.updatePolicyCookie(false)
-          document.cookie = "_ga= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=.shinyapps.io";
-          document.cookie = "_gid= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=.shinyapps.io";
+          document.cookie = "_ga= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=.shinyapps.io ; path=/";
+          document.cookie = "_gid= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=.shinyapps.io ; path=/";
         }
         // only one radio can be logically checked, don't check the rest
         break;

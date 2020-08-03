@@ -1,9 +1,10 @@
 ## PHE COVID19 HCAI Dashboard
 
 tags$body(
-  class="govuk-template__body js",
+  class="govuk-template__body non-js",
   bootstrapPage(
     tagList(
+      tags$script("document.body.className = 'govuk-template__body js';"),
       cookieBanner("global-cookie-message"),
       tags$head(
         tags$link(href="crown.ico", rel="shortcut icon"),
@@ -19,7 +20,8 @@ tags$body(
           id="main-content",
           class="govuk-main-wrapper",
           role="main",
-          router_ui()
+          router_ui(),
+          nonJS()
         )
       ),
       footer(TRUE)

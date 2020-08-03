@@ -12,7 +12,7 @@ cookies <- function(title, content) {
                 "aria-live"="polite",
                 role="region",
                 tags$h2(
-                    class="gem-c-notice__title",
+                    class="govuk-heading-m gem-c-notice__title",
                     "Your cookie settings were saved",
                 ),
                 tags$p(

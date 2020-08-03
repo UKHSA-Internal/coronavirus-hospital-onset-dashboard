@@ -158,9 +158,10 @@ app.cookieBanner = {
             [year, month, day] = [today.getFullYear(), today.getMonth(), today.getDate()],
             cookieExpiryDate = new Date(year + 1, month, day).toUTCString()
       document.cookie = `cookies_policy=${encodeURIComponent('{"essential":true,"settings":false,"usage":false,"campaigns":false}')}; expires=${cookieExpiryDate};`
-      window['ga-disable-UA-161400643-3'] = true;
+      document.cookie = `ga-disable-UA-161400643-3 = true; expires=${cookieExpiryDate};`;
       document.cookie = "_ga= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=.shinyapps.io ; path=/";
       document.cookie = "_gid= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=.shinyapps.io ; path=/";
+      document.cookie = "_gat_gtag_UA_161400643_3= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=.shinyapps.io ; path=/";
       //console.log('default cookie set')
     }
   },
@@ -177,7 +178,11 @@ app.cookieBanner = {
           [year, month, day] = [today.getFullYear(), today.getMonth(), today.getDate()],
           cookieExpiryDate = new Date(year + 1, month, day).toUTCString()
     document.cookie = `cookies_policy=${encodeURIComponent('{"essential":true,"settings":true,"usage":true,"campaigns":false}')}; expires=${cookieExpiryDate};`
-    window['ga-disable-UA-161400643-3'] = false;
+    document.cookie = "ga-disable-UA-161400643-3= ; expires = Thu, 01 Jan 1970 00:00:00 GMT;";
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-161400643-3');
     //console.log('accept all cookies. settings and usage flags set to true')
   },
 
@@ -233,11 +238,21 @@ app.cookieSettings = {
         // do whatever you want with the checked radio
         //console.log(radios[i].value);
         if (radios[i].value === 'allow') {
-          self.updatePolicyCookie(true)
+          self.updatePolicyCookie(true);
+          document.cookie = "ga-disable-UA-161400643-3= ; expires = Thu, 01 Jan 1970 00:00:00 GMT;";
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-161400643-3');
         } else {
+          let today = new Date(),
+            [year, month, day] = [today.getFullYear(), today.getMonth(), today.getDate()],
+            cookieExpiryDate = new Date(year + 1, month, day).toUTCString()
           self.updatePolicyCookie(false)
+          document.cookie = `ga-disable-UA-161400643-3 = true; expires=${cookieExpiryDate};`;
           document.cookie = "_ga= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=.shinyapps.io ; path=/";
           document.cookie = "_gid= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=.shinyapps.io ; path=/";
+          document.cookie = "_gat_gtag_UA_161400643_3= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; domain=.shinyapps.io ; path=/";
         }
         // only one radio can be logically checked, don't check the rest
         break;
@@ -254,8 +269,6 @@ app.cookieSettings = {
           cookieValue = `{"essential":true,"settings":true,"usage":${usage},"campaigns":false}`
           //console.log(cookieValue)
     document.cookie = `cookies_policy=${encodeURIComponent(cookieValue)}; expires=${cookieExpiryDate};`
-    window['ga-disable-UA-161400643-3'] = !usage;
-    //console.log('usage flag updated to ' + usage)
   },
 
   setNoticeDisplay: function(showNotice){

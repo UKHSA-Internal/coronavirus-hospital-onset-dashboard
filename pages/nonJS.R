@@ -2,7 +2,7 @@ nonJS <- function() {
   tags$div(
     class="non-js util-text-max-width",
     tags$title("Methods - Healthcare associated COVID-19 Surveillance in England"),
-    h1(
+    tags$h1(
         class="govuk-caption-l govuk-!-margin-0 govuk-!-padding-top-3",
         "Dashboard"
     ),
@@ -11,11 +11,11 @@ nonJS <- function() {
     ),
     tags$p(
         class="govuk-body",
-        "This dashboard shows the location at where a patient was when they had their first COVID-19 positive PCR test, in relation to a hospital attendance in A&E or inpatient admission."
+        "This dashboard shows patient location when they first tested positive for COVID-19 (PCR test). Location relates to the hospital they attended in A&E or inpatient admission."
     ),
     tags$p(
         class="govuk-body",
-        "This is the non javascript version of the dashboard which has reduced functionality. None of the interactive graphs and tables are available. You will have to enable javascript to use those."
+        "This is the non-javascript version of the dashboard, which does not show interactive graphs and tables. To view those, you will need to enable javascript."
     ),
     tags$p(
         class="govuk-body",
@@ -26,7 +26,7 @@ nonJS <- function() {
         href="#",
         "Download data"
     ),
-    h1(
+    tags$h1(
         class="govuk-caption-l govuk-!-margin-0 govuk-!-padding-top-3",
         "Methods"
     ),
@@ -36,6 +36,17 @@ nonJS <- function() {
     tags$div(
         class="markdown util-text-max-width",
         includeMarkdown("content/methods.md")
+    ),
+    tags$h1(
+        class="govuk-caption-l govuk-!-margin-0 govuk-!-padding-top-3",
+        "Accessibility"
+    ),
+    tags$hr(
+        class="govuk-section-break govuk-section-break--m govuk-!-margin-top-2 govuk-!-margin-bottom-4 govuk-section-break--visible"
+    ),
+    tags$div(
+        class="markdown util-text-max-width",
+        includeMarkdown("content/accessibility.md")
     )
   )
 }

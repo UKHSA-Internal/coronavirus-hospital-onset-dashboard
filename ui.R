@@ -6,7 +6,7 @@ tags$body(
     tagList(
       cookieBanner("global-cookie-message"),
       tags$head(
-        tags$link(href="phe-favicon.png", rel="shortcut icon"),
+        tags$link(href="crown.ico", rel="shortcut icon"),
         tags$link(href = "main.css", rel = "stylesheet", type = "text/css"),
         tags$script(src = "main.js"),
         tags$title("Healthcare associated COVID-19 Surveillance in England"),

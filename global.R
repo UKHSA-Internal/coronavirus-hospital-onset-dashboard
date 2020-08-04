@@ -130,9 +130,9 @@ plotly_graph <- function(data) {
                   marker = list(
                     color = case_when(
                       col=="CO" ~ "#AC189F",
-                      col=="HO.iHA" ~ "#1C9C91",
-                      col=="HO.pHA" ~ "#003078",
-                      col=="HO.HA" ~ "#5694CA",
+                      col=="HO.iHA" ~ "#B3C1D7",
+                      col=="HO.pHA" ~ "#5694CA",
+                      col=="HO.HA" ~ "#003078",
                       TRUE ~ "#B9BCBD"
                     )
                   ))

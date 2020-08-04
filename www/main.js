@@ -287,6 +287,11 @@ app.cookieSettings = {
 // -----------------------------------
 $(function(){
 
+  // Remove loader just before content comes in
+  $(document).on('shiny:idle', function(event) {
+    $('#main-content').removeClass('loader');
+  })
+
   // Initialise tooltips on input update
   $(document).on('shiny:updateinput', function(event) {
     app.a11yTT.init()

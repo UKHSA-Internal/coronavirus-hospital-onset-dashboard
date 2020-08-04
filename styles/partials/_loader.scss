@@ -1,0 +1,23 @@
+/* Content loaders
+*/
+
+#main-outer {
+    min-height: 300px;
+    @include govuk-media-query($from: tablet) {
+        min-height: 600px;
+    }
+}
+
+.loader {
+    &.govuk-main-wrapper {
+        min-height: 300px;
+        background: no-repeat url('images/spinner.gif');
+        background-size: 100px;
+        background-position: center;
+        @include govuk-media-query($from: tablet) {
+            min-height: 600px;
+        }
+    }
+}
+
+

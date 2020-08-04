@@ -15,10 +15,12 @@ tags$body(
       ),
       header(serviceName="Healthcare associated COVID-19 Surveillance in England"),
       banner("banner", "beta", 'This is a new service – your <a class="govuk-link" href="mailto:coronavirus-hcai@phe.gov.uk">feedback</a> will help us to improve it.'),
-      tags$div(class="govuk-width-container",
+      tags$div(
+        id="main-outer",
+        class="govuk-width-container",
         tags$main(
           id="main-content",
-          class="govuk-main-wrapper",
+          class="govuk-main-wrapper loader",
           role="main",
           router_ui(),
           nonJS()

@@ -42,7 +42,7 @@ Some elements of the graph on the [Dashboard page](#!/) are indicated just by co
 
 Some elements of the [Dashboard page](#!/) lack contrast with the background, for example:
 
-+ on the graph keys, when the user selects them to remove the data from the graph.  The graphs are created by a third party, so unfortunately we cannot fix this.
++ on the graph keys, when the user selects them to remove the data from the graph.  The graphs are created by a third party (Plotly), so unfortunately we cannot fix this.
 + on the camera icon, when the graph is hovered over. The graphs are created by a third party, so unfortunately we cannot fix this.
 
 #### Keyboard accessibility

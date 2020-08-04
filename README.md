@@ -1,17 +1,17 @@
-# HCAI COVID 19 Dashboard
+# Coronavirus Hospital Onset Dashboard
 
-> __NOTE: Dashboard currently in development__
+This is the main source code for the [Coronavirus Hospital Onset Dashboard](https://coronavirus-hospital-onset.data.gov.uk) service.
 
-> THIS IS SYNTHETIC DATA, AND IS NOT REFLECTIVE OF ACTUAL RESULTS
+> __DISCLAIMER: Dashboard currently in development and all data is synthetic__
 
-Once you clone this repo, run `renv::restore()` on your first instance in R Studio to load up the managed package list.
+This dashboard shows patient location when they first tested positive for COVID-19 (PCR test). Location relates to the hospital they attended in A&E or inpatient admission.
 
-This dashboard shows the location at where a patient was when they had their first COVID-19 positive PCR test, in relation to a hospital attendance in A&E or inpatient admission.
+## Build
 
-This therefore, does not always reflect where a patient has ultimately recieved inpatient care.
+If you want to build this locally, you'll need to download and install [RStudio Desktop](https://rstudio.com/products/rstudio/#rstudio-desktop)
 
-For example, where a patient attended A&E in Trust 1 and was tested positive, then two days later was admitted as an inpatient in Trust 2, this dashboard will assign them to Trust 1.
+Once you clone this repo, run `renv::restore()` on your first instance in RStudio to load up the managed package list.
 
-Please note that these data are purely for PHE internal testing purposes only and are not fit for reporting or analysis at this time.
+## Credits
 
-Unlinked caess are assigned a trust based on the lab which undertook the test, this will result in some trusts having unlinked cases from smaller surrounding hospitals shown in grey
+This service is developed and maintained by [NHSX](https://www.nhsx.nhs.uk/) and [Public Health England](https://www.gov.uk/government/organisations/public-health-england).

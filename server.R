@@ -470,19 +470,5 @@ function(input, output, session) {
 
   })
 
-  output$chart_description_text <- renderText({
-
-    t <- paste(
-      "Chart showing the breakdown number of COVID-19 cases by HCAI category:",
-      ifelse(
-        input$link==1,
-        "those with no hospital record, CO, HO.iHA, HO.pHA and HO.HA.",
-        "CO, HO.iHA, HO.pHA and HO.HA."
-      )
-    )
-    HTML(t)
-
-  })
-
 }
 

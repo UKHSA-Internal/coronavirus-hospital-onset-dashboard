@@ -155,10 +155,6 @@ dashboard <- function(title, content) {
         class="govuk-heading-m govuk-!-margin-bottom-2",
         "Number and proportion of COVID-19 cases by HCAI category"
       ),
-      p(
-        class="util-text-max-width",
-        textOutput("chart_description_text",inline=TRUE)
-      ),
       p(class="util-text-max-width govuk-!-font-weight-bold",
         textOutput("data_for_text",inline=TRUE)
       ),

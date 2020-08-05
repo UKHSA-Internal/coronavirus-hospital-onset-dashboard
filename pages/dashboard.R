@@ -85,6 +85,28 @@ dashboard <- function(title, content) {
     tags$hr(
         class="govuk-section-break govuk-section-break--m govuk-!-margin-top-2 govuk-!-margin-bottom-0 govuk-section-break--visible"
     ),
+    tags$details(
+      class="govuk-details govuk-!-margin-top-4 govuk-!-margin-bottom-1",
+      "data-module"="govuk-details",
+      tags$summary(
+        class="govuk-details__summary",
+        tags$span(
+          class="govuk-details__summary-text",
+          "Onset categories description"
+        )
+      ),
+      tags$div(
+        class="govuk-details__text",
+        tags$ul(
+          class="govuk-list govuk-list--bullet",
+          tags$li("Community-onset (CO)"),
+          tags$li("Hospital-onset indeterminate healthcare-associated (HO.iHA)"),
+          tags$li("Hospital-onset probable healthcare-associated (HO.pHA)"),
+          tags$li("Hospital-onset definite healthcare-associated (HO.HA)"),
+          tags$li("No hospital record (NHR)"),
+        )
+      )
+    ),
     tags$div(
       class = "util-flex util-flex-wrap govuk-!-margin-bottom-4",
       tags$div(

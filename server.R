@@ -67,6 +67,34 @@ function(input, output, session) {
   #### REACTIVE FILTERS FOR UI ##################################################
   # update menus
 
+  observeEvent(input$reset, {
+    updateSelectInput(
+      session = session,
+      inputId = "nhs_region",
+      selected = "ALL"
+    )
+    updateSelectInput(
+      session = session,
+      inputId = "trust_type",
+      selected = "ALL"
+    )
+    updateSelectInput(
+      session = session,
+      inputId = "trust_name",
+      selected = "ALL"
+    )
+    updateSelectInput(
+      session = session,
+      inputId = "trust_code",
+      selected = "ALL"
+    )
+    updateSelectInput(
+      session = session,
+      inputId = "link",
+      selected = 0
+    )
+  })
+
   observeEvent(input$nhs_region, {
 
     updateSelectInput(
@@ -75,7 +103,6 @@ function(input, output, session) {
       choices = c("ALL", levels(factor(unfiltered()$trust_name))),
       selected = ifelse(input$trust_code %in% levels(factor(unfiltered()$provider_code)),
                         input$trust_name,"ALL")
-
     )
     updateSelectInput(
       session = session,

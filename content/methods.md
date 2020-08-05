@@ -1,4 +1,4 @@
-## Definitions of healthcare-associated COVID-19
+## Definitions of hospital-onset COVID-19
 
 + If a patient has a first positive test within 2 days of being admitted, the infection is counted as ‘community-onset’ (CO). This is because the patient almost certainly became infected before being admitted to hospital.
 
@@ -19,7 +19,7 @@ The NHS collects data on all hospital attendances and admissions. These data are
 
 ### Data changes
 
-Due to variation in reporting on a hospital level, data is subject to change, particularly in the most recent six weeks. This may result in changes to both the provider where a case is reported against, and in the healthcare-associated infection category.
+Due to variation in reporting on a hospital level, data is subject to change, particularly in the most recent six weeks. This may result in changes to both the provider where a case is reported against, and in the hospital-onset infection category.
 
 
 ## Data preparation and linkage
@@ -38,4 +38,4 @@ Where a test is taken between 2 distinct hospital admissions, the stay before th
 
 Patients counted as 'No record' in the most recent data may subsequently be counted as community-onset or healthcare-associated as records become available.
 
-<a href="mailto:coronavirus-hcai@phe.gov.uk?subject=COVID HCAI Dashboard" target="_blank">Questions or feedback?</a>
+<a href="mailto:coronavirus-hcai@phe.gov.uk?subject=Coronavirus hospital-onset dashboard" target="_blank">Questions or feedback?</a>

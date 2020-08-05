@@ -13,7 +13,7 @@ dashboard <- function(title, content) {
       class="util-flex util-flex-wrap",
       selectInput(
         "nhs_region",
-        label = "NHS Region",
+        label = "NHS region",
         select_value = c("ALL",
           levels(
             droplevels(

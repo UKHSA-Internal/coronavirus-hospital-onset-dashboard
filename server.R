@@ -283,7 +283,7 @@ function(input, output, session) {
 
   output$valuebox_prop <- renderUI({
     valueBox(
-      label = "Linked",
+      label = "Hospital linked",
       number = paste0(sum(vb_data()$p[vb_data()$linkgrp]),"%"),
       tooltipText = "Proportion of COVID-19 cases linked to a hospital record"
     )
@@ -445,9 +445,9 @@ function(input, output, session) {
     t <- paste(
       "Data for",
       case_when(
-        input$trust_name == "ALL" & input$trust_type == "ALL" ~ "all Providers",
+        input$trust_name == "ALL" & input$trust_type == "ALL" ~ "all providers",
         input$trust_name == "ALL" & input$trust_type != "ALL" ~
-          paste("all",input$trust_type,"Providers"),
+          paste("all",input$trust_type,"providers"),
         TRUE ~ input$trust_name
       ),
       "in",

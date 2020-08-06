@@ -511,5 +511,13 @@ function(input, output, session) {
 
   })
 
+  output$no_data <- renderText({
+
+    t_nodata <- paste("No data for your selected filters. Please revise your filter choices.")
+
+    HTML(t_nodata)
+
+  })
+
 }
 

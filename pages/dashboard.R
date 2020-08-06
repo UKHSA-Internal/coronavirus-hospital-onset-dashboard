@@ -13,7 +13,7 @@ dashboard <- function(title, content) {
       class="util-flex util-flex-wrap",
       selectInput(
         "nhs_region",
-        label = "NHS Region",
+        label = "NHS region",
         select_value = c("ALL",
           levels(
             droplevels(
@@ -93,6 +93,28 @@ dashboard <- function(title, content) {
     tags$hr(
         class="govuk-section-break govuk-section-break--m govuk-!-margin-top-2 govuk-!-margin-bottom-0 govuk-section-break--visible"
     ),
+    tags$details(
+      class="govuk-details govuk-!-margin-top-4 govuk-!-margin-bottom-1",
+      "data-module"="govuk-details",
+      tags$summary(
+        class="govuk-details__summary",
+        tags$span(
+          class="govuk-details__summary-text",
+          "Onset categories description"
+        )
+      ),
+      tags$div(
+        class="govuk-details__text",
+        tags$ul(
+          class="govuk-list govuk-list--bullet",
+          tags$li("Community-onset (CO)"),
+          tags$li("Hospital-onset indeterminate healthcare-associated (HO.iHA)"),
+          tags$li("Hospital-onset probable healthcare-associated (HO.pHA)"),
+          tags$li("Hospital-onset definite healthcare-associated (HO.HA)"),
+          tags$li("No hospital record (NHR)"),
+        )
+      )
+    ),
     tags$div(
       class = "util-flex util-flex-wrap govuk-!-margin-bottom-4",
       tags$div(
@@ -111,7 +133,7 @@ dashboard <- function(title, content) {
         class="util-flex util-flex-col govuk-!-margin-right-9 govuk-!-margin-top-4",
         h2(
           class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1",
-          "HCAI category breakdown"
+          "Onset category breakdown"
         ),
         tags$div(
           class="util-flex",
@@ -139,11 +161,7 @@ dashboard <- function(title, content) {
       class="dashboard-panel govuk-!-padding-5",
       h2(
         class="govuk-heading-m govuk-!-margin-bottom-2",
-        "Number and proportion of COVID-19 cases by HCAI category"
-      ),
-      p(
-        class="util-text-max-width",
-        textOutput("chart_description_text",inline=TRUE)
+        "Number and proportion of COVID-19 cases by onset category"
       ),
       p(class="util-text-max-width govuk-!-font-weight-bold",
         textOutput("data_for_text",inline=TRUE)
@@ -151,7 +169,7 @@ dashboard <- function(title, content) {
       tabsetPanel(
         tabPanel(
           title = "Chart",
-          tags$h4(class="govuk-visually-hidden", "Interactive bar chart displaying the number of COVID-19 cases by HCAI category."),
+          tags$h4(class="govuk-visually-hidden", "Interactive bar chart displaying the number of COVID-19 cases by onset category."),
           tags$p(class="govuk-visually-hidden", "Please note this bar chart is not accessible via assistive technologies. We have provided the same data in an accessible tabular format under the tab called 'Data'."),
           plotly::plotlyOutput("plotly_count"),
           plotly::plotlyOutput("plotly_proportion")

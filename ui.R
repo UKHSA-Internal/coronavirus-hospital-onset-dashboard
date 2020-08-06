@@ -10,10 +10,10 @@ tags$body(
         tags$link(href="crown.ico", rel="shortcut icon"),
         tags$link(href = "main.css", rel = "stylesheet", type = "text/css"),
         tags$script(src = "main.js"),
-        tags$title("Healthcare associated COVID-19 Surveillance in England"),
+        tags$title("Hospital-onset COVID-19 surveillance in England"),
         includeHTML("google-analytics.html")
       ),
-      header(serviceName="Healthcare associated COVID-19 Surveillance in England"),
+      header(serviceName="Hospital-onset COVID-19 surveillance in England"),
       banner("banner", "beta", 'This is a new service – your <a class="govuk-link" href="mailto:coronavirus-hcai@phe.gov.uk">feedback</a> will help us to improve it.'),
       tags$div(
         id="main-outer",

@@ -310,7 +310,7 @@ function(input, output, session) {
 
   output$valuebox_prop <- renderUI({
     valueBox(
-      label = "Linked",
+      label = "Hospital linked",
       number = paste0(sum(vb_data()$p[vb_data()$linkgrp]),"%"),
       tooltipText = "Proportion of COVID-19 cases linked to a hospital record"
     )
@@ -321,7 +321,7 @@ function(input, output, session) {
       label = "CO",
       number = paste0(ifelse(any(vb_data()$hcai_group == "CO"),
         vb_data()$link_p[vb_data()$hcai_group == "CO"],0),"%"),
-      tooltipText = "Proportion of linked cases which are Community Onset (CO)"
+      tooltipText = "Proportion of linked cases which are community-onset"
     )
   })
 
@@ -330,7 +330,7 @@ function(input, output, session) {
       label = "HO.iHA",
       number = paste0(ifelse(any(vb_data()$hcai_group == "HO.iHA"),
         vb_data()$link_p[vb_data()$hcai_group == "HO.iHA"],0),"%"),
-      tooltipText = "Proportion of linked cases which are Hospital-Onset Indeterminate Healthcare-Associated (HO.iHA)"
+      tooltipText = "Proportion of linked cases which are hospital-onset indeterminate healthcare-associated"
     )
   })
 
@@ -339,7 +339,7 @@ function(input, output, session) {
       label = "HO.pHA",
       number = paste0(ifelse(any(vb_data()$hcai_group == "HO.pHA"),
         vb_data()$link_p[vb_data()$hcai_group == "HO.pHA"],0),"%"),
-      tooltipText = "Proportion of linked cases which are Hospital-Onset Probable Healthcare-Associated (HO.pHA)"
+      tooltipText = "Proportion of linked cases which are hospital-onset probable healthcare-associated"
     )
   })
 
@@ -348,7 +348,7 @@ function(input, output, session) {
       label = "HO.HA",
       number = paste0(ifelse(any(vb_data()$hcai_group == "HO.HA"),
         vb_data()$link_p[vb_data()$hcai_group == "HO.HA"],0),"%"),
-      tooltipText = "Proportion of linked cases which are Hospital-Onset Healthcare-Associated (HO.HA)"
+      tooltipText = "Proportion of linked cases which are hospital-onset definite healthcare-associated"
     )
   })
 
@@ -358,7 +358,7 @@ function(input, output, session) {
       number = format(ecds_reporting(),"%d %b %Y"),
       tooltipText = ifelse(
         input$trust_code=="ALL",
-        "75% of Trusts reporting ECDS A&E data",
+        "75% of trusts reporting ECDS A&E data",
         "Most recent ECDS A&E data submission"
         )
     )
@@ -369,7 +369,7 @@ function(input, output, session) {
       number = format(sus_reporting(),"%d %b %Y"),
       tooltipText = ifelse(
         input$trust_code=="ALL",
-        "75% of Trusts reporting SUS hospital inpatient data",
+        "75% of trusts reporting SUS hospital inpatient data",
         "Most recent SUS hospital inpatient data submission"
       )
     )
@@ -472,9 +472,9 @@ function(input, output, session) {
     t <- paste(
       "Data for",
       case_when(
-        input$trust_name == "ALL" & input$trust_type == "ALL" ~ "all Providers",
+        input$trust_name == "ALL" & input$trust_type == "ALL" ~ "all providers",
         input$trust_name == "ALL" & input$trust_type != "ALL" ~
-          paste("all",input$trust_type,"Providers"),
+          paste("all",input$trust_type,"providers"),
         TRUE ~ input$trust_name
       ),
       "in",
@@ -497,20 +497,6 @@ function(input, output, session) {
 
   })
 
-  output$chart_description_text <- renderText({
-
-    t <- paste(
-      "Chart showing the breakdown number of COVID-19 cases by HCAI category:",
-      ifelse(
-        input$link==1,
-        "those with no hospital record, CO, HO.iHA, HO.pHA and HO.HA.",
-        "CO, HO.iHA, HO.pHA and HO.HA."
-      )
-    )
-    HTML(t)
-
-  })
-
   output$no_data <- renderText({
 
     t_nodata <- paste("No data for your selected filters. Please revise your filter choices.")
@@ -520,4 +506,3 @@ function(input, output, session) {
   })
 
 }
-

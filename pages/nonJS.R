@@ -11,7 +11,7 @@ nonJS <- function() {
     ),
     tags$p(
         class="govuk-body",
-        "This dashboard shows patient location when they first tested positive for COVID-19 (PCR test). Location relates to the hospital they attended in A&E or inpatient admission."
+        "This dashboard provides information on patients in hospital who tested positive for infection with SARS-CoV-2 (the virus that causes COVID-19) to understand whether the infection occurred before or during the patient's stay in hospital."
     ),
     tags$p(
         class="govuk-body",

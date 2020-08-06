@@ -139,7 +139,7 @@ plotly_graph <- function(data) {
     }
   }
 
-  if(max(rowSums(data[2:length(names(data))]))==1) {
+  if(max(rowSums(data[2:length(names(data))],na.rm=T))==1) {
     p <- p %>% layout(yaxis = list(tickformat = "%"))
   } else {
     p <- p %>% layout(yaxis = list(tickformat = ",digit"))

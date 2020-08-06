@@ -397,8 +397,14 @@ function(input, output, session) {
 
   #### OUTPUT: PROPORTIONS GRAPH ################################################
 
+  no_data_msg <- "There is no data for this selection; please change your filters."
+
   output$plotly_proportion <-
     renderPlotly({
+
+      validate(
+        need(nrow(data()) > 0, no_data_msg)
+      )
 
       plot_prop <- data() %>%
         group_by(wk_start, hcai_group) %>%
@@ -420,6 +426,11 @@ function(input, output, session) {
   #### OUTPUT: DATA TABLE #######################################################
   output$data_table <-
     DT::renderDataTable({
+
+      validate(
+        need(nrow(data()) > 0, no_data_msg)
+      )
+
       dt <- data() %>%
         group_by(wk_start, wk, hcai_group, provider_code) %>%
         summarise(n = sum(n),.groups="keep") %>%
@@ -508,14 +519,6 @@ function(input, output, session) {
       )
     )
     HTML(t)
-
-  })
-
-  output$no_data <- renderText({
-
-    t_nodata <- paste("No data for your selected filters. Please revise your filter choices.")
-
-    HTML(t_nodata)
 
   })
 

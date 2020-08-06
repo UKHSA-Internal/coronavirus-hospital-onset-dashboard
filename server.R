@@ -303,7 +303,7 @@ function(input, output, session) {
   output$valuebox_total <- renderUI({
     valueBox(
       label = "Total",
-      number = paste(sum(vb_data()$n)),
+      number = paste(formatC(sum(vb_data()$n),format="f",big.mark=",",digits=0)),
       tooltipText = "Total COVID-19 infections reported by NHS laboratories"
     )
   })

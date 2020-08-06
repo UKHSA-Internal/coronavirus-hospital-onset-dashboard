@@ -67,6 +67,34 @@ function(input, output, session) {
   #### REACTIVE FILTERS FOR UI ##################################################
   # update menus
 
+  observeEvent(input$reset, {
+    updateSelectInput(
+      session = session,
+      inputId = "nhs_region",
+      selected = "ALL"
+    )
+    updateSelectInput(
+      session = session,
+      inputId = "trust_type",
+      selected = "ALL"
+    )
+    updateSelectInput(
+      session = session,
+      inputId = "trust_name",
+      selected = "ALL"
+    )
+    updateSelectInput(
+      session = session,
+      inputId = "trust_code",
+      selected = "ALL"
+    )
+    updateSelectInput(
+      session = session,
+      inputId = "link",
+      selected = 0
+    )
+  })
+
   observeEvent(input$nhs_region, {
 
     updateSelectInput(
@@ -75,7 +103,6 @@ function(input, output, session) {
       choices = c("ALL", levels(factor(unfiltered()$trust_name))),
       selected = ifelse(input$trust_code %in% levels(factor(unfiltered()$provider_code)),
                         input$trust_name,"ALL")
-
     )
     updateSelectInput(
       session = session,
@@ -276,7 +303,7 @@ function(input, output, session) {
   output$valuebox_total <- renderUI({
     valueBox(
       label = "Total",
-      number = paste(sum(vb_data()$n)),
+      number = paste(formatC(sum(vb_data()$n),format="f",big.mark=",",digits=0)),
       tooltipText = "Total COVID-19 infections reported by NHS laboratories"
     )
   })
@@ -470,5 +497,12 @@ function(input, output, session) {
 
   })
 
-}
+  output$no_data <- renderText({
 
+    t_nodata <- paste("No data for your selected filters. Please revise your filter choices.")
+
+    HTML(t_nodata)
+
+  })
+
+}

@@ -82,6 +82,14 @@ dashboard <- function(title, content) {
         select_value = c(0, 1)
       )
     ),
+    tags$div(
+      class="govuk-form-group govuk-!-margin-bottom-0",
+      actionButton(
+        "reset",
+        class="govuk-button",
+        label="Reset"
+      )
+    ),
     tags$hr(
         class="govuk-section-break govuk-section-break--m govuk-!-margin-top-2 govuk-!-margin-bottom-0 govuk-section-break--visible"
     ),

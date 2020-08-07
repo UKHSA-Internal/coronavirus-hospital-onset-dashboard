@@ -19,9 +19,10 @@ library(plotly, warn.conflicts = FALSE)
 library(DT, warn.conflicts = FALSE)
 
 ## load data
-hcai <- readr::read_csv("data/hcai.csv", col_types = readr::cols())
-# github_data <- "https://raw.githubusercontent.com/publichealthengland/hcai-dashboard/development/data/hcai.csv?token=AICMFJGVFSCT3DMHIZRS4BS7DGTFI"
-# hcai <- readr::read_csv(url(github_data)), col_types = cols())
+# hcai <- readr::read_csv("data/hcai.csv", col_types = readr::cols())
+github_data <- "https://raw.githubusercontent.com/publichealthengland/coronavirus-hospital-onset-dashboard/development/data/hcai.csv"
+# github_data <- "https://raw.githubusercontent.com/publichealthengland/coronavirus-hospital-onset-dashboard/master/data/hcai.csv"
+hcai <- readr::read_csv(url(github_data), col_types = cols())
 
 #### UI AND NAV ELEMENTS ########################################################
 # Setting up modules
@@ -36,14 +37,14 @@ source("modules/cookieBanner.R")
 # Pages
 source("pages/template.R")
 source("pages/dashboard.R")
-source("pages/methods.R")
+source("pages/about.R")
 source("pages/accessibility.R")
 source("pages/cookies.R")
 source("pages/nonJS.R")
 
 # Pages
 dashboard_page <- template("dashboard", dashboard())
-methods_page <- template("methods", methods())
+about_page <- template("about", about())
 ally_page <- accessibility()
 cookies_page <- cookies()
 
@@ -51,7 +52,7 @@ cookies_page <- cookies()
 # well as a server-side callback for each page.
 router <- make_router(
   route("dashboard", dashboard_page, NA),
-  route("methods", methods_page, NA),
+  route("about", about_page, NA),
   route("accessibility", ally_page, NA),
   route("cookies", cookies_page, NA)
 )

@@ -1,6 +1,6 @@
-# Coronavirus Hospital Onset Dashboard
+# Coronavirus hospital-onset dashboard
 
-This is the main source code for the [Coronavirus Hospital Onset Dashboard](https://coronavirus-hospital-onset.data.gov.uk) service.
+This is the main source code for the [Coronavirus hospital-onset dashboard](https://coronavirus-hospital-onset.data.gov.uk) service.
 
 > __DISCLAIMER: Dashboard currently in development and all data is synthetic__
 
@@ -8,7 +8,7 @@ This dashboard provides information on patients in hospital who tested positive 
 
 This dashboard indicates the NHS Trust or Independent Sector provider where a patient was located (hospital admission or A&E attendance) when they received their first COVID-19 positive test result. This location does not always indicate where a patient received hospital care for COVID-19. Patients attending A&E who tested positive are assumed to have subsequently been admitted to hospital unless their hospital records indicate otherwise.
 
-Due to variation in reporting on a hospital level, data is subject to change, particularly in the most recent six weeks. This may result in changes to both the provider where a case is reported against, and in the healthcare-associated infection category. 
+Due to variation in reporting on a hospital level, data is subject to change, particularly in the most recent six weeks. This may result in changes to both the provider where a case is reported against, and in the hospital-onset infection category.
 
 ## Build
 

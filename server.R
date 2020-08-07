@@ -373,7 +373,7 @@ function(input, output, session) {
       number = ifelse(
         isTruthy(ecds_reporting()),
         format(ecds_reporting(),"%d %b %Y"),
-        "Insuffient data"
+        "Insufficient data"
         ),
       tooltipText = ifelse(
         input$trust_code=="ALL",
@@ -388,7 +388,7 @@ function(input, output, session) {
       number = ifelse(
         isTruthy(ecds_reporting()),
         format(sus_reporting(),"%d %b %Y"),
-        "Insuffient data"
+        "Insufficient data"
         ),
       tooltipText = ifelse(
         input$trust_code=="ALL",

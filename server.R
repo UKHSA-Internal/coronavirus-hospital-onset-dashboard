@@ -67,6 +67,20 @@ function(input, output, session) {
   #### REACTIVE FILTERS FOR UI ##################################################
   # update menus
 
+
+  observeEvent(c(input$reset,
+    input$nhs_region,
+    input$trust_type,
+    input$trust_name,
+    input$trust_code,
+    input$link),{
+    updateNumericInput(
+      session = session,
+      inputId = "rows",
+      value = nrow(data())
+    )
+  })
+
   observeEvent(input$reset, {
     updateSelectInput(
       session = session,
@@ -93,6 +107,7 @@ function(input, output, session) {
       inputId = "link",
       selected = 0
     )
+
   })
 
   observeEvent(input$nhs_region, {
@@ -355,7 +370,11 @@ function(input, output, session) {
   output$valuebox_ecds <- renderUI({
     valueBox(
       label = "A&E attendance data",
-      number = format(ecds_reporting(),"%d %b %Y"),
+      number = ifelse(
+        isTruthy(ecds_reporting()),
+        format(ecds_reporting(),"%d %b %Y"),
+        "Insuffient data"
+        ),
       tooltipText = ifelse(
         input$trust_code=="ALL",
         "75% of trusts reporting ECDS A&E data",
@@ -366,7 +385,11 @@ function(input, output, session) {
   output$valuebox_sus <- renderUI({
     valueBox(
       label = "Admitted patient data",
-      number = format(sus_reporting(),"%d %b %Y"),
+      number = ifelse(
+        isTruthy(ecds_reporting()),
+        format(sus_reporting(),"%d %b %Y"),
+        "Insuffient data"
+        ),
       tooltipText = ifelse(
         input$trust_code=="ALL",
         "75% of trusts reporting SUS hospital inpatient data",
@@ -397,8 +420,15 @@ function(input, output, session) {
 
   #### OUTPUT: PROPORTIONS GRAPH ################################################
 
+  no_data_msg <- "There is no data for this selection; please change your filters."
+
   output$plotly_proportion <-
+
     renderPlotly({
+
+      validate(
+        need(nrow(data()) > 0, no_data_msg)
+      )
 
       plot_prop <- data() %>%
         group_by(wk_start, hcai_group) %>%
@@ -420,6 +450,11 @@ function(input, output, session) {
   #### OUTPUT: DATA TABLE #######################################################
   output$data_table <-
     DT::renderDataTable({
+
+      validate(
+        need(nrow(data()) > 0, no_data_msg)
+      )
+
       dt <- data() %>%
         group_by(wk_start, wk, hcai_group, provider_code) %>%
         summarise(n = sum(n),.groups="keep") %>%
@@ -469,40 +504,62 @@ function(input, output, session) {
   #### TEXT STRING FOR DISPLAY ##################################################
   output$data_for_text <- renderText({
 
-    t <- paste(
-      "Data for",
-      case_when(
-        input$trust_name == "ALL" & input$trust_type == "ALL" ~ "all providers",
-        input$trust_name == "ALL" & input$trust_type != "ALL" ~
-          paste("all",input$trust_type,"providers"),
-        TRUE ~ input$trust_name
-      ),
-      "in",
-      case_when(
-        input$nhs_region == "LONDON" ~ input$nhs_region,
-        input$nhs_region != "ALL" ~ paste("the",input$nhs_region),
-        TRUE ~ "England"
-      )
-      )
+    if(input$rows>0){
 
-    t <- stringr::str_to_title(t)
+      t <- paste(
+        "Data for",
+        case_when(
+          input$trust_name == "ALL" & input$trust_type == "ALL" ~ "all Providers",
+          input$trust_name == "ALL" & input$trust_type != "ALL" ~
+            paste("all",input$trust_type,"Providers"),
+          TRUE ~ input$trust_name
+        ),
+        "in",
+        case_when(
+          input$nhs_region == "LONDON" ~ input$nhs_region,
+          input$nhs_region != "ALL" ~ paste("the",input$nhs_region),
+          TRUE ~ "England"
+        )
+        )
 
-    t <- stringr::str_replace_all(t,"Nhs","NHS")
+      t <- stringr::str_to_title(t)
 
-    for(lower in c("All","Of","The","For","In","Providers")) {
-      t <- stringr::str_replace_all(t,lower,stringr::str_to_lower(lower))
+      t <- stringr::str_replace_all(t,"Nhs","NHS")
+
+      for(lower in c("All","Of","The","For","In","Providers")) {
+        t <- stringr::str_replace_all(t,lower,stringr::str_to_lower(lower))
+      }
+    } else {
+      t <- "No data available for the current selection; please revise your filters."
     }
 
     HTML(t)
 
   })
 
-  output$no_data <- renderText({
+  output$chart_description_text <- renderText({
 
-    t_nodata <- paste("No data for your selected filters. Please revise your filter choices.")
+    t <- paste(
+      "Chart showing the breakdown number of COVID-19 cases by HCAI category:",
+      ifelse(
+        input$link==1,
+        "those with no hospital record, CO, HO.iHA, HO.pHA and HO.HA.",
+        "CO, HO.iHA, HO.pHA and HO.HA."
+      )
+    )
+    HTML(t)
 
-    HTML(t_nodata)
+  })
 
+  #### ShowHide data based on rows #############################################
+  observeEvent(input$rows,{
+    if(input$rows > 0){
+      showTab("dataPanels","Chart")
+      showTab("dataPanels","Data")
+    }else{
+      hideTab("dataPanels","Chart")
+      hideTab("dataPanels","Data")
+    }
   })
 
 }

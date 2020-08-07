@@ -80,6 +80,17 @@ dashboard <- function(title, content) {
         label = "Case inclusion",
         select_text = c("Hospital linked cases only","Include all cases"),
         select_value = c(0, 1)
+      ),
+      conditionalPanel(
+        condition = 'input.trust_code == "BLANK"',
+        numericInput(
+          inputId = "rows",
+          label = "rows",
+          value = nrow(hcai),
+          min = 0,
+          max = nrow(hcai),
+          step = 1
+        )
       )
     ),
     tags$div(
@@ -167,6 +178,7 @@ dashboard <- function(title, content) {
         textOutput("data_for_text",inline=TRUE)
       ),
       tabsetPanel(
+        id = "dataPanels",
         tabPanel(
           title = "Chart",
           tags$h4(class="govuk-visually-hidden", "Interactive bar chart displaying the number of COVID-19 cases by onset category."),

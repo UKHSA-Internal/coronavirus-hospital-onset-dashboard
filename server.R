@@ -67,6 +67,20 @@ function(input, output, session) {
   #### REACTIVE FILTERS FOR UI ##################################################
   # update menus
 
+
+  observeEvent(c(input$reset,
+    input$nhs_region,
+    input$trust_type,
+    input$trust_name,
+    input$trust_code,
+    input$link),{
+    updateNumericInput(
+      session = session,
+      inputId = "rows",
+      value = nrow(data())
+    )
+  })
+
   observeEvent(input$reset, {
     updateSelectInput(
       session = session,
@@ -355,7 +369,9 @@ function(input, output, session) {
   output$valuebox_ecds <- renderUI({
     valueBox(
       label = "A&E attendance data",
-      number = format(ecds_reporting(),"%d %b %Y"),
+      number = ifelse(isTruthy(ecds_reporting()),
+                      format(ecds_reporting(),"%d %b %Y"),
+                      "No hospital data."),
       tooltipText = ifelse(
         input$trust_code=="ALL",
         "75% of Trusts reporting ECDS A&E data",
@@ -478,40 +494,36 @@ function(input, output, session) {
 
     })
 
-  ####################
-
-  output$data_rows <- renderText({
-    HTML(nrow(data()))
-  })
-
-
-  ####################
-
   #### TEXT STRING FOR DISPLAY ##################################################
   output$data_for_text <- renderText({
 
-    t <- paste(
-      "Data for",
-      case_when(
-        input$trust_name == "ALL" & input$trust_type == "ALL" ~ "all Providers",
-        input$trust_name == "ALL" & input$trust_type != "ALL" ~
-          paste("all",input$trust_type,"Providers"),
-        TRUE ~ input$trust_name
-      ),
-      "in",
-      case_when(
-        input$nhs_region == "LONDON" ~ input$nhs_region,
-        input$nhs_region != "ALL" ~ paste("the",input$nhs_region),
-        TRUE ~ "England"
-      )
-      )
+    if(input$rows>0){
 
-    t <- stringr::str_to_title(t)
+      t <- paste(
+        "Data for",
+        case_when(
+          input$trust_name == "ALL" & input$trust_type == "ALL" ~ "all Providers",
+          input$trust_name == "ALL" & input$trust_type != "ALL" ~
+            paste("all",input$trust_type,"Providers"),
+          TRUE ~ input$trust_name
+        ),
+        "in",
+        case_when(
+          input$nhs_region == "LONDON" ~ input$nhs_region,
+          input$nhs_region != "ALL" ~ paste("the",input$nhs_region),
+          TRUE ~ "England"
+        )
+        )
 
-    t <- stringr::str_replace_all(t,"Nhs","NHS")
+      t <- stringr::str_to_title(t)
 
-    for(lower in c("All","Of","The","For","In")) {
-      t <- stringr::str_replace_all(t,lower,stringr::str_to_lower(lower))
+      t <- stringr::str_replace_all(t,"Nhs","NHS")
+
+      for(lower in c("All","Of","The","For","In")) {
+        t <- stringr::str_replace_all(t,lower,stringr::str_to_lower(lower))
+      }
+    } else {
+      t <- "No data available for the current selection; please revise your filters."
     }
 
     HTML(t)
@@ -530,6 +542,16 @@ function(input, output, session) {
     )
     HTML(t)
 
+  })
+
+  observeEvent(input$rows,{
+    if(input$rows > 0){
+      showTab("dataPanels","Chart")
+      showTab("dataPanels","Data")
+    }else{
+      hideTab("dataPanels","Chart")
+      hideTab("dataPanels","Data")
+    }
   })
 
 }

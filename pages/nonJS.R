@@ -23,7 +23,8 @@ nonJS <- function() {
     ),
     tags$a(
         class="govuk-button",
-        href="#",
+        href="https://raw.githubusercontent.com/publichealthengland/coronavirus-hospital-onset-dashboard/development/data/hcai.csv",
+        target="_blank",
         "Download data"
     ),
     tags$h1(

@@ -107,6 +107,7 @@ function(input, output, session) {
       inputId = "link",
       selected = 0
     )
+
   })
 
   observeEvent(input$nhs_region, {
@@ -369,9 +370,11 @@ function(input, output, session) {
   output$valuebox_ecds <- renderUI({
     valueBox(
       label = "A&E attendance data",
-      number = ifelse(isTruthy(ecds_reporting()),
-                      format(ecds_reporting(),"%d %b %Y"),
-                      "No hospital data."),
+      number = ifelse(
+        isTruthy(ecds_reporting()),
+        format(ecds_reporting(),"%d %b %Y"),
+        "Insuffient data"
+        ),
       tooltipText = ifelse(
         input$trust_code=="ALL",
         "75% of Trusts reporting ECDS A&E data",
@@ -382,7 +385,11 @@ function(input, output, session) {
   output$valuebox_sus <- renderUI({
     valueBox(
       label = "Admitted patient data",
-      number = format(sus_reporting(),"%d %b %Y"),
+      number = ifelse(
+        isTruthy(ecds_reporting()),
+        format(sus_reporting(),"%d %b %Y"),
+        "Insuffient data"
+        ),
       tooltipText = ifelse(
         input$trust_code=="ALL",
         "75% of Trusts reporting SUS hospital inpatient data",
@@ -544,6 +551,7 @@ function(input, output, session) {
 
   })
 
+  #### ShowHide data based on rows #############################################
   observeEvent(input$rows,{
     if(input$rows > 0){
       showTab("dataPanels","Chart")

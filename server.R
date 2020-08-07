@@ -489,7 +489,7 @@ function(input, output, session) {
 
     t <- stringr::str_replace_all(t,"Nhs","NHS")
 
-    for(lower in c("All","Of","The","For","In")) {
+    for(lower in c("All","Of","The","For","In","Providers")) {
       t <- stringr::str_replace_all(t,lower,stringr::str_to_lower(lower))
     }
 

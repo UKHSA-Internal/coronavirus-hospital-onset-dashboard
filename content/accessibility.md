@@ -2,7 +2,7 @@
 
 ### Introduction
 
-This accessibility statement applies to [https://phe-gov-uk.shinyapps.io/hcai_dev/#!/](https://phe-gov-uk.shinyapps.io/hcai_dev/#!/).
+This accessibility statement applies to [https://coronavirus-hospital-onset.data.gov.uk](https://coronavirus-hospital-onset.data.gov.uk).
 
 This website is run by Public Health England. We want as many people as possible to be able to use this website. For example, that means you should be able to:
 

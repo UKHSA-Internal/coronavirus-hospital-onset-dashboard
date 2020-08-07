@@ -2,8 +2,8 @@
 */
 
 .nav-tabs {
-  border-bottom: 0;
   padding-bottom: 20px;
+  border-bottom: 0;
     > li {
       margin-right: 30px;
       a {
@@ -46,8 +46,4 @@
         }
     }
   }
-}
-
-.tab-content {
-  min-height: 400px;
 }

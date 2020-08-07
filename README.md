@@ -1,4 +1,4 @@
-# Coronavirus Hospital Onset Dashboard
+# Coronavirus hospital-onset dashboard
 
 This is the main source code for the [Coronavirus hospital-onset dashboard](https://coronavirus-hospital-onset.data.gov.uk) service.
 

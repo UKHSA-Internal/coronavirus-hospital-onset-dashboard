@@ -400,6 +400,7 @@ function(input, output, session) {
   no_data_msg <- "There is no data for this selection; please change your filters."
 
   output$plotly_proportion <-
+
     renderPlotly({
 
       validate(
@@ -476,6 +477,15 @@ function(input, output, session) {
         DT::formatPercentage(grep("%",names(dt)),1)
 
     })
+
+  ####################
+
+  output$data_rows <- renderText({
+    HTML(nrow(data()))
+  })
+
+
+  ####################
 
   #### TEXT STRING FOR DISPLAY ##################################################
   output$data_for_text <- renderText({

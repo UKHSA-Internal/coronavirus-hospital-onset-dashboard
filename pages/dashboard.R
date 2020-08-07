@@ -127,6 +127,11 @@ dashboard <- function(title, content) {
         )
       )
     ),
+    textOutput("data_rows"),
+    conditionalPanel(
+      condition = "input.data_rows == 0",
+      tags$p("No rows eh?")
+    ),
     # Show a plot of the generated distribution
     tags$div(
       class="dashboard-panel govuk-!-padding-5",

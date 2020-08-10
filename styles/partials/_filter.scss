@@ -3,6 +3,9 @@
 
 .govuk-select {
     min-width: 100px;
+    @include govuk-media-query($from: desktop) {
+        max-width: 250px;
+    }
 }
 
 .form-select-container {

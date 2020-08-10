@@ -2,7 +2,7 @@
 
 ### Introduction
 
-This accessibility statement applies to [https://phe-gov-uk.shinyapps.io/hcai_dev/#!/](https://phe-gov-uk.shinyapps.io/hcai_dev/#!/).
+This accessibility statement applies to [https://coronavirus-hospital-onset.data.gov.uk](https://coronavirus-hospital-onset.data.gov.uk).
 
 This website is run by Public Health England. We want as many people as possible to be able to use this website. For example, that means you should be able to:
 
@@ -42,7 +42,7 @@ Some elements of the graph on the [Dashboard page](#!/) are indicated just by co
 
 Some elements of the [Dashboard page](#!/) lack contrast with the background, for example:
 
-+ on the graph keys, when the user selects them to remove the data from the graph.  The graphs are created by a third party, so unfortunately we cannot fix this.
++ on the graph keys, when the user selects them to remove the data from the graph.  The graphs are created by a third party (Plotly), so unfortunately we cannot fix this.
 + on the camera icon, when the graph is hovered over. The graphs are created by a third party, so unfortunately we cannot fix this.
 
 #### Keyboard accessibility

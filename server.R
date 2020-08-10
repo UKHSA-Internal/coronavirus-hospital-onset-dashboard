@@ -67,6 +67,49 @@ function(input, output, session) {
   #### REACTIVE FILTERS FOR UI ##################################################
   # update menus
 
+
+  observeEvent(c(input$reset,
+    input$nhs_region,
+    input$trust_type,
+    input$trust_name,
+    input$trust_code,
+    input$link),{
+    updateNumericInput(
+      session = session,
+      inputId = "rows",
+      value = nrow(data())
+    )
+  })
+
+  observeEvent(input$reset, {
+    updateSelectInput(
+      session = session,
+      inputId = "nhs_region",
+      selected = "ALL"
+    )
+    updateSelectInput(
+      session = session,
+      inputId = "trust_type",
+      selected = "ALL"
+    )
+    updateSelectInput(
+      session = session,
+      inputId = "trust_name",
+      selected = "ALL"
+    )
+    updateSelectInput(
+      session = session,
+      inputId = "trust_code",
+      selected = "ALL"
+    )
+    updateSelectInput(
+      session = session,
+      inputId = "link",
+      selected = 0
+    )
+
+  })
+
   observeEvent(input$nhs_region, {
 
     updateSelectInput(
@@ -75,7 +118,6 @@ function(input, output, session) {
       choices = c("ALL", levels(factor(unfiltered()$trust_name))),
       selected = ifelse(input$trust_code %in% levels(factor(unfiltered()$provider_code)),
                         input$trust_name,"ALL")
-
     )
     updateSelectInput(
       session = session,
@@ -276,14 +318,14 @@ function(input, output, session) {
   output$valuebox_total <- renderUI({
     valueBox(
       label = "Total",
-      number = paste(sum(vb_data()$n)),
+      number = paste(formatC(sum(vb_data()$n),format="f",big.mark=",",digits=0)),
       tooltipText = "Total COVID-19 infections reported by NHS laboratories"
     )
   })
 
   output$valuebox_prop <- renderUI({
     valueBox(
-      label = "Linked",
+      label = "Hospital linked",
       number = paste0(sum(vb_data()$p[vb_data()$linkgrp]),"%"),
       tooltipText = "Proportion of COVID-19 cases linked to a hospital record"
     )
@@ -294,7 +336,7 @@ function(input, output, session) {
       label = "CO",
       number = paste0(ifelse(any(vb_data()$hcai_group == "CO"),
         vb_data()$link_p[vb_data()$hcai_group == "CO"],0),"%"),
-      tooltipText = "Proportion of linked cases which are Community Onset (CO)"
+      tooltipText = "Proportion of linked cases which are community-onset"
     )
   })
 
@@ -303,7 +345,7 @@ function(input, output, session) {
       label = "HO.iHA",
       number = paste0(ifelse(any(vb_data()$hcai_group == "HO.iHA"),
         vb_data()$link_p[vb_data()$hcai_group == "HO.iHA"],0),"%"),
-      tooltipText = "Proportion of linked cases which are Hospital-Onset Indeterminate Healthcare-Associated (HO.iHA)"
+      tooltipText = "Proportion of linked cases which are hospital-onset indeterminate healthcare-associated"
     )
   })
 
@@ -312,7 +354,7 @@ function(input, output, session) {
       label = "HO.pHA",
       number = paste0(ifelse(any(vb_data()$hcai_group == "HO.pHA"),
         vb_data()$link_p[vb_data()$hcai_group == "HO.pHA"],0),"%"),
-      tooltipText = "Proportion of linked cases which are Hospital-Onset Probable Healthcare-Associated (HO.pHA)"
+      tooltipText = "Proportion of linked cases which are hospital-onset probable healthcare-associated"
     )
   })
 
@@ -321,17 +363,21 @@ function(input, output, session) {
       label = "HO.HA",
       number = paste0(ifelse(any(vb_data()$hcai_group == "HO.HA"),
         vb_data()$link_p[vb_data()$hcai_group == "HO.HA"],0),"%"),
-      tooltipText = "Proportion of linked cases which are Hospital-Onset Healthcare-Associated (HO.HA)"
+      tooltipText = "Proportion of linked cases which are hospital-onset definite healthcare-associated"
     )
   })
 
   output$valuebox_ecds <- renderUI({
     valueBox(
       label = "A&E attendance data",
-      number = format(ecds_reporting(),"%d %b %Y"),
+      number = ifelse(
+        isTruthy(ecds_reporting()),
+        format(ecds_reporting(),"%d %b %Y"),
+        "Insufficient data"
+        ),
       tooltipText = ifelse(
         input$trust_code=="ALL",
-        "75% of Trusts reporting ECDS A&E data",
+        "75% of trusts reporting ECDS A&E data",
         "Most recent ECDS A&E data submission"
         )
     )
@@ -339,10 +385,14 @@ function(input, output, session) {
   output$valuebox_sus <- renderUI({
     valueBox(
       label = "Admitted patient data",
-      number = format(sus_reporting(),"%d %b %Y"),
+      number = ifelse(
+        isTruthy(ecds_reporting()),
+        format(sus_reporting(),"%d %b %Y"),
+        "Insufficient data"
+        ),
       tooltipText = ifelse(
         input$trust_code=="ALL",
-        "75% of Trusts reporting SUS hospital inpatient data",
+        "75% of trusts reporting SUS hospital inpatient data",
         "Most recent SUS hospital inpatient data submission"
       )
     )
@@ -370,8 +420,15 @@ function(input, output, session) {
 
   #### OUTPUT: PROPORTIONS GRAPH ################################################
 
+  no_data_msg <- "There is no data for this selection; please change your filters."
+
   output$plotly_proportion <-
+
     renderPlotly({
+
+      validate(
+        need(nrow(data()) > 0, no_data_msg)
+      )
 
       plot_prop <- data() %>%
         group_by(wk_start, hcai_group) %>%
@@ -393,6 +450,11 @@ function(input, output, session) {
   #### OUTPUT: DATA TABLE #######################################################
   output$data_table <-
     DT::renderDataTable({
+
+      validate(
+        need(nrow(data()) > 0, no_data_msg)
+      )
+
       dt <- data() %>%
         group_by(wk_start, wk, hcai_group, provider_code) %>%
         summarise(n = sum(n),.groups="keep") %>%
@@ -442,28 +504,33 @@ function(input, output, session) {
   #### TEXT STRING FOR DISPLAY ##################################################
   output$data_for_text <- renderText({
 
-    t <- paste(
-      "Data for",
-      case_when(
-        input$trust_name == "ALL" & input$trust_type == "ALL" ~ "all Providers",
-        input$trust_name == "ALL" & input$trust_type != "ALL" ~
-          paste("all",input$trust_type,"Providers"),
-        TRUE ~ input$trust_name
-      ),
-      "in",
-      case_when(
-        input$nhs_region == "LONDON" ~ input$nhs_region,
-        input$nhs_region != "ALL" ~ paste("the",input$nhs_region),
-        TRUE ~ "England"
-      )
-      )
+    if(input$rows>0){
 
-    t <- stringr::str_to_title(t)
+      t <- paste(
+        "Data for",
+        case_when(
+          input$trust_name == "ALL" & input$trust_type == "ALL" ~ "all Providers",
+          input$trust_name == "ALL" & input$trust_type != "ALL" ~
+            paste("all",input$trust_type,"Providers"),
+          TRUE ~ input$trust_name
+        ),
+        "in",
+        case_when(
+          input$nhs_region == "LONDON" ~ input$nhs_region,
+          input$nhs_region != "ALL" ~ paste("the",input$nhs_region),
+          TRUE ~ "England"
+        )
+        )
 
-    t <- stringr::str_replace_all(t,"Nhs","NHS")
+      t <- stringr::str_to_title(t)
 
-    for(lower in c("All","Of","The","For","In")) {
-      t <- stringr::str_replace_all(t,lower,stringr::str_to_lower(lower))
+      t <- stringr::str_replace_all(t,"Nhs","NHS")
+
+      for(lower in c("All","Of","The","For","In","Providers")) {
+        t <- stringr::str_replace_all(t,lower,stringr::str_to_lower(lower))
+      }
+    } else {
+      t <- "No data available for the current selection; please revise your filters."
     }
 
     HTML(t)
@@ -484,5 +551,15 @@ function(input, output, session) {
 
   })
 
-}
+  #### ShowHide data based on rows #############################################
+  observeEvent(input$rows,{
+    if(input$rows > 0){
+      showTab("dataPanels","Chart")
+      showTab("dataPanels","Data")
+    }else{
+      hideTab("dataPanels","Chart")
+      hideTab("dataPanels","Data")
+    }
+  })
 
+}

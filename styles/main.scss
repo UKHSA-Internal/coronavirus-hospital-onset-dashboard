@@ -1,6 +1,5 @@
 @import 'govuk/all';
 @import 'partials/variables';
-@import 'partials/header';
 @import 'partials/side-navigation';
 @import 'partials/dashboard';
 @import 'partials/filter';
@@ -11,6 +10,7 @@
 @import 'partials/data-table';
 @import 'partials/aria-tooltip';
 @import 'partials/cookie-banner';
+@import 'partials/loader';
 
 html {
     // Overriding bootstrap default of 10px
@@ -21,4 +21,12 @@ a {
     // Overriding bootstrap default
     cursor: pointer;
     text-decoration: underline;
+}
+
+// Hide non-js content if we have js
+.non-js {
+    display: block;
+    .js & {
+        display: none;
+    }
 }

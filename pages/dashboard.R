@@ -169,7 +169,7 @@ dashboard <- function(title, content) {
     ),
     # Show a plot of the generated distribution
     tags$div(
-      class="dashboard-panel govuk-!-padding-5",
+      class="dashboard-panel",
       h2(
         class="govuk-heading-m govuk-!-margin-bottom-2",
         "Number and proportion of COVID-19 cases by onset category"

@@ -1,0 +1,22 @@
+/* Non javascript styling
+*/
+
+// Hide non-js content if we have js
+.non-js {
+    display: block;
+    .js & {
+        display: none;
+    }
+
+    // Reduce with of site and center it
+    .govuk-width-container {
+        max-width: 960px;
+        margin: 0 auto;
+    }
+
+    // Hide loading spinner
+    .loader {
+        background: none;
+    }
+}
+

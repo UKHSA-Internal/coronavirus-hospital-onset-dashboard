@@ -31,6 +31,15 @@ footer <- function(full = FALSE){
                     href="#!/cookies",
                     "Cookies"
                   )
+                ),
+                tags$li(
+                  class="govuk-footer__inline-list-item",
+                  tags$a(
+                    class="govuk-footer__link js-gototop",
+                    href="https://raw.githubusercontent.com/publichealthengland/coronavirus-hospital-onset-dashboard/development/data/hcai.csv",
+                    target="_blank",
+                    "Download the data"
+                  )
                 )
               ),
               tags$div(

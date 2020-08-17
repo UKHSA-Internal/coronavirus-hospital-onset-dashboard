@@ -11,6 +11,7 @@
 @import 'partials/aria-tooltip';
 @import 'partials/cookie-banner';
 @import 'partials/loader';
+@import 'partials/non-js';
 
 html {
     // Overriding bootstrap default of 10px
@@ -21,12 +22,4 @@ a {
     // Overriding bootstrap default
     cursor: pointer;
     text-decoration: underline;
-}
-
-// Hide non-js content if we have js
-.non-js {
-    display: block;
-    .js & {
-        display: none;
-    }
 }

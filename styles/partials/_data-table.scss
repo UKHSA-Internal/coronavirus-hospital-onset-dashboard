@@ -1,10 +1,65 @@
-/* Data Table
+/* Data Table and Pagination
 */
+
+// This is forcing the GDS styling. Loads of lovely importants :)
+.datatables {
+    font-family: "GDS Transport", Arial, sans-serif;
+
+    .dataTables_info {
+        @extend %govuk-body-m;
+        @include govuk-media-query($until: desktop) {
+            text-align: left !important;
+            margin-bottom: 0;
+        }
+    }
+
+    .dataTables_wrapper .dataTables_paginate {
+        padding-top: 0.755em;
+        @include govuk-media-query($until: desktop) {
+            text-align: left !important;
+        }
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        @extend %govuk-link;
+        @include govuk-link-style-text;
+        color: $govuk-link-colour !important;
+        padding: 0;
+        margin: 0 4px;
+        font-size: 19px;
+        text-decoration: underline !important;
+        border: none !important;
+        min-width: 20px;
+        border-radius: 0;
+        @include govuk-media-query($until: tablet) {
+            font-size: 16px;
+        }
+        &:hover, &:active {
+            color: $govuk-link-hover-colour !important;
+            border: none;
+            background: transparent;
+        }
+        &:focus {
+            background: $govuk-focus-colour !important;
+        }
+        &.current {
+            background: transparent !important;
+            text-decoration: none !important;
+            &:focus {
+                background: $govuk-focus-colour !important;
+            }
+        }
+        &.previous.disabled, &.next.disabled  {
+            visibility: hidden;
+            @include govuk-media-query($until: desktop) {
+                display: none;
+            }
+        }
+    }
+
+}
 
 // Containing the table
 .table-container {
     overflow-x: scroll;
-    table {
-        font-family: "GDS Transport", Arial, sans-serif;
-    }
 }

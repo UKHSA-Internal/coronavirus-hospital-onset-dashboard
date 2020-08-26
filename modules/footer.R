@@ -36,7 +36,7 @@ footer <- function(full = FALSE){
                   class="govuk-footer__inline-list-item",
                   tags$a(
                     class="govuk-footer__link js-gototop",
-                    href="https://raw.githubusercontent.com/publichealthengland/coronavirus-hospital-onset-dashboard/development/data/hcai.csv",
+                    href="https://coronavirus-hospital-onset-data.s3.eu-west-2.amazonaws.com/ho_covid_wk_counts.csv",
                     target="_blank",
                     "Download the data"
                   )

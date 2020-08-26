@@ -19,8 +19,9 @@ library(plotly, warn.conflicts = FALSE)
 library(DT, warn.conflicts = FALSE)
 
 ## load data
-github_data <- "https://raw.githubusercontent.com/publichealthengland/coronavirus-hospital-onset-dashboard/master/data/hcai.csv"
-hcai <- readr::read_csv(url(github_data), col_types = cols())
+# github_data <- url("https://raw.githubusercontent.com/publichealthengland/coronavirus-hospital-onset-dashboard/master/data/hcai.csv")
+data_s3_bucket <- "https://coronavirus-hospital-onset-data.s3.eu-west-2.amazonaws.com/ho_covid_wk_counts.csv"
+hcai <- readr::read_csv(data_s3_bucket, col_types = cols())
 
 #### UI AND NAV ELEMENTS ########################################################
 # Setting up modules

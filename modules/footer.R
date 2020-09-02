@@ -76,7 +76,7 @@ footer <- function(full = FALSE){
                 tags$a(
                   class = "govuk-footer__link",
                   href = "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-                  rel = "license",
+                  rel = "LISCENSE",
                   "Open Government Licence v3.0"
                 ),
                 ", except where otherwise stated"

@@ -1,0 +1,14 @@
+name: coronavirus-hospital-onset-dashboard-dev2
+title: coronavirus-hospital-onset-dashboard-dev
+username: alex.bhattacharya
+account: alex.bhattacharya
+server: reports.contact-tracing.phe.gov.uk
+hostUrl: https://reports.contact-tracing.phe.gov.uk/__api__
+appId: 20
+bundleId: 53
+url: https://reports.contact-tracing.phe.gov.uk/content/20/
+when: 1598449050.84736
+lastSyncTime: 1598449050.84737
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .Rprofile|data/hcai.csv

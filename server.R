@@ -42,7 +42,7 @@ function(input, output, session) {
 
     ## deal with linked/unlinked data
     if (input$link == 0) {
-      d <- d %>% filter(hcai_group != unlinked)
+      d <- d %>% filter(onset_category != unlinked)
 
     } else {
       d <- d
@@ -261,8 +261,8 @@ function(input, output, session) {
 
     ## group up data
     vb <- vb %>%
-      mutate(linkgrp = hcai_group != unlinked) %>%
-      group_by(linkgrp, hcai_group) %>%
+      mutate(linkgrp = onset_category != unlinked) %>%
+      group_by(linkgrp, onset_category) %>%
       summarise(n = sum(n),.groups="drop") %>%
       group_by(linkgrp) %>%
       mutate(link_t = sum(n),
@@ -334,8 +334,8 @@ function(input, output, session) {
   output$valuebox_co <- renderUI({
     valueBox(
       label = "CO",
-      number = paste0(ifelse(any(vb_data()$hcai_group == "CO"),
-        vb_data()$link_p[vb_data()$hcai_group == "CO"],0),"%"),
+      number = paste0(ifelse(any(vb_data()$onset_category == "CO"),
+        vb_data()$link_p[vb_data()$onset_category == "CO"],0),"%"),
       tooltipText = "Proportion of linked cases which are community-onset"
     )
   })
@@ -343,8 +343,8 @@ function(input, output, session) {
   output$valuebox_hoiha <- renderUI({
     valueBox(
       label = "HO.iHA",
-      number = paste0(ifelse(any(vb_data()$hcai_group == "HO.iHA"),
-        vb_data()$link_p[vb_data()$hcai_group == "HO.iHA"],0),"%"),
+      number = paste0(ifelse(any(vb_data()$onset_category == "HO.iHA"),
+        vb_data()$link_p[vb_data()$onset_category == "HO.iHA"],0),"%"),
       tooltipText = "Proportion of linked cases which are hospital-onset indeterminate healthcare-associated"
     )
   })
@@ -352,8 +352,8 @@ function(input, output, session) {
   output$valuebox_hopha <- renderUI({
     valueBox(
       label = "HO.pHA",
-      number = paste0(ifelse(any(vb_data()$hcai_group == "HO.pHA"),
-        vb_data()$link_p[vb_data()$hcai_group == "HO.pHA"],0),"%"),
+      number = paste0(ifelse(any(vb_data()$onset_category == "HO.pHA"),
+        vb_data()$link_p[vb_data()$onset_category == "HO.pHA"],0),"%"),
       tooltipText = "Proportion of linked cases which are hospital-onset probable healthcare-associated"
     )
   })
@@ -361,8 +361,8 @@ function(input, output, session) {
   output$valuebox_hoha <- renderUI({
     valueBox(
       label = "HO.HA",
-      number = paste0(ifelse(any(vb_data()$hcai_group == "HO.HA"),
-        vb_data()$link_p[vb_data()$hcai_group == "HO.HA"],0),"%"),
+      number = paste0(ifelse(any(vb_data()$onset_category == "HO.HA"),
+        vb_data()$link_p[vb_data()$onset_category == "HO.HA"],0),"%"),
       tooltipText = "Proportion of linked cases which are hospital-onset definite healthcare-associated"
     )
   })
@@ -404,11 +404,11 @@ function(input, output, session) {
     renderPlotly({
 
       plot_count <- data() %>%
-        group_by(wk_start, hcai_group) %>%
+        group_by(wk_start, onset_category) %>%
         summarise(n = sum(n),.groups="drop") %>%
         pivot_wider(
           id_cols = c(wk_start),
-          names_from = hcai_group,
+          names_from = onset_category,
           values_from = n,
           values_fill = 0,
           values_fn = sum
@@ -431,13 +431,13 @@ function(input, output, session) {
       )
 
       plot_prop <- data() %>%
-        group_by(wk_start, hcai_group) %>%
+        group_by(wk_start, onset_category) %>%
         summarise(n = sum(n),.groups="keep") %>%
-        ungroup(hcai_group) %>%
+        ungroup(onset_category) %>%
         mutate(p=n/sum(n)) %>%
         pivot_wider(
           id_cols = c(wk_start),
-          names_from = hcai_group,
+          names_from = onset_category,
           values_from = p,
           values_fill = 0,
           values_fn = sum
@@ -456,15 +456,15 @@ function(input, output, session) {
       )
 
       dt <- data() %>%
-        group_by(wk_start, wk, hcai_group, provider_code) %>%
+        group_by(wk_start, wk, onset_category, provider_code) %>%
         summarise(n = sum(n),.groups="keep") %>%
         group_by(wk, wk_start) %>%
         mutate(wT = sum(n),
           p = n / wT) %>%
-        arrange(hcai_group) %>%
+        arrange(onset_category) %>%
         pivot_wider(
           id_cols = c(wk, wk_start, wT),
-          names_from = hcai_group,
+          names_from = onset_category,
           values_from = c(n, p),
           values_fill = list(n = 0, p = 0)
         ) %>%

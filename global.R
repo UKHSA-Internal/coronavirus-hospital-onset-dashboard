@@ -70,11 +70,11 @@ unlinked <- "No hospital record"
 
 # Transform and prep
 hcai <- hcai %>%
-  mutate(hcai_group=ifelse(hcai_group=="Unlinked",unlinked,hcai_group)) %>%
+  mutate(onset_category=ifelse(onset_category=="Unlinked",unlinked,onset_category)) %>%
   mutate(wk_start=ymd(wk_start),
     ecds_last_update=ymd(ecds_last_update),
     sus_last_update=ymd(sus_last_update),
-    hcai_group=factor(hcai_group,
+    onset_category=factor(onset_category,
       levels = c(
         "CO",
         "HO.iHA",
@@ -101,7 +101,7 @@ hcai <- hcai %>%
     trust_name=fct_explicit_na(factor(trust_name),"Unknown"),
     trust_type=fct_explicit_na(factor(trust_type),"Unknown"),
     nhs_region=fct_explicit_na(factor(nhs_region),"Unknown"),
-    hcai_group=fct_explicit_na(hcai_group,unlinked)
+    onset_category=fct_explicit_na(onset_category,unlinked)
   )
 
 
@@ -112,7 +112,7 @@ plotly_graph <- function(data) {
 
   p <- plot_ly(type='bar')
 
-  for(col in levels(hcai$hcai_group)) {
+  for(col in levels(hcai$onset_category)) {
     if(col %in% names(data)) {
       p <- p %>%
         add_trace(x=data$wk_start,
